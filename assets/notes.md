@@ -20,3 +20,18 @@ Sizes:
     - Content:
 
 Style:
+
+
+Attributes Required in JSON File:
+- Background Character Animation (Image)
+- Character Name
+- Dialogue
+
+Attributes in View:
+- Background Character Animation (Image)
+- Character Name
+- Dialogue
+- Options
+- Next Button...
+
+JSON Formatting:

@@ -1,1 +1,10 @@
-{}
+{
+    title: "Story Title",
+    scene_00: {
+        character_sprite: "character.png",
+        background: "background.png",
+        lighting: "dim/bright/halo/normal/none",
+        sound: "sound.mp3",
+        dialogue: "Hello, world!"
+    }
+}
