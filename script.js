@@ -5,6 +5,7 @@ const dialogueText = document.getElementById("dialogue-text");
 const background = document.getElementById('background');
 
 let typingInterval;
+let currentScene = 0;
 
 // Start Game Method
 startGame.addEventListener('click', () => {
@@ -12,7 +13,7 @@ startGame.addEventListener('click', () => {
     dialogueContainer.classList.toggle('translate');
     typeText("Welcome to the game! Pressing 'enter', 'right-arrow' or 'spacebar' will advance the dialogue.");
     zoomIn();
-    parseStory();
+    setScene();
 });
 
 // TypeText effect using an iterative approach with proper interruption
@@ -41,7 +42,8 @@ document.addEventListener('keydown', (event) => {
         case "Enter":
         case "ArrowRight":
         case " ":
-            typeText("This is the next line of dialogue.");
+            currentScene+=1
+            setScene();
             break;
         case "Escape":
             sideBar.classList.toggle('translate');
@@ -63,12 +65,19 @@ function changeBackground(newBackground) {
     background.style.backgroundImage = `url(${newBackground})`;
 }
 
-// Fetch the story and parse through it
-function parseStory() {
+// Fetch to fetch the current scene
+async function setScene(currScene = currentScene) {
     fetch('./assets/story.json')
         .then(response => response.json())
-        .then(data => {
-            console.log(data)
+        .then(data => { 
+            scenes = data["scenes"]
+            sceneLength = Object.keys(scenes).length
+
+            if (currScene >= sceneLength) {
+                typeText(scenes[`scene_${sceneLength-1}`]["dialogue"])
+            } else {
+                typeText(scenes[`scene_${currScene}`]["dialogue"])
+            }
         })
         .catch(error => console.error('Error fetching JSON:', error));
 }

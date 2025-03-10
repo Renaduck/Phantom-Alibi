@@ -1,10 +1,29 @@
 {
-    title: "Story Title",
-    scene_00: {
-        character_sprite: "character.png",
-        background: "background.png",
-        lighting: "dim/bright/halo/normal/none",
-        sound: "sound.mp3",
-        dialogue: "Hello, world!"
+    "title": "Story Title",
+    "scenes": {
+        "scene_0": {
+            "character_name": "???",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "Huff... huff... Looks like I finally made it. Just a train, two buses, and a scenic hike through nowhere."
+        },
+        "scene_1": {
+            "character_name": "???",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "your mama so big, she squished the eiffel tower. boom."
+        },
+        "scene_2": {
+            "character_name": "???",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "I just saw two raccoons "
+        }
     }
 }

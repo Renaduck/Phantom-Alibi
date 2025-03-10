@@ -35,3 +35,5 @@ Attributes in View:
 - Next Button...
 
 JSON Formatting:
+
+-- Allow for user to go back on previously displayed dialogue
