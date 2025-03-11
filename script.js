@@ -5,6 +5,14 @@ const dialogueText = document.getElementById("dialogue-text");
 const background = document.getElementById('background');
 const spriteContainer = document.getElementById('sprite_container')
 
+// Sound Settings Constants
+const soundButton = document.getElementById('sound');
+const soundSettings = document.getElementById('sound-settings');
+const closeSoundSettings = document.getElementById('close-sound-settings');
+const overlay = document.getElementById('overlay');
+const volumeSlider = document.getElementById('volume-slider');
+const volumeValue = document.getElementById('volume-value');
+
 let typingInterval;
 let currentScene = 0;
 
@@ -97,3 +105,25 @@ async function setScene(action) {
         })
         .catch(error => console.error('Error fetching JSON:', error));
 }
+// show sound settings
+soundButton.addEventListener('click', () => {
+    soundSettings.classList.add('show');
+    overlay.classList.add('show');
+});
+
+// close sound settings
+closeSoundSettings.addEventListener('click', () => {
+    soundSettings.classList.remove('show');
+    overlay.classList.remove('show');
+});
+
+overlay.addEventListener('click', () => {
+    soundSettings.classList.remove('show');
+    overlay.classList.remove('show');
+});
+
+// volume level with slider
+volumeSlider.addEventListener('input', (event) => {
+    const volume = event.target.value;
+    volumeValue.textContent = `${volume}%`;
+});
