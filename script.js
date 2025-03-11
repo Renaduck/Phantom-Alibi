@@ -3,6 +3,7 @@ const sideBar = document.getElementById('sidebar');
 const dialogueContainer = document.getElementById('dialogue-container');
 const dialogueText = document.getElementById("dialogue-text");
 const background = document.getElementById('background');
+const spriteContainer = document.getElementById('sprite_container')
 
 let typingInterval;
 let currentScene = 0;
@@ -13,7 +14,7 @@ startGame.addEventListener('click', () => {
     dialogueContainer.classList.toggle('translate');
     typeText("Welcome to the game! Pressing 'enter', 'right-arrow' or 'spacebar' will advance the dialogue.");
     zoomIn();
-    setScene();
+    setScene("next");
 });
 
 // TypeText effect using an iterative approach with proper interruption
@@ -42,13 +43,16 @@ document.addEventListener('keydown', (event) => {
         case "Enter":
         case "ArrowRight":
         case " ":
-            currentScene+=1
-            setScene();
+            setScene("next");
             break;
         case "Escape":
+            spriteContainer.classList.toggle("show");
             sideBar.classList.toggle('translate');
             dialogueContainer.classList.toggle('translate');
             toggleZoom();
+            break;
+        case "ArrowLeft":
+            setScene("prev");
             break;
         default:
             break;
@@ -66,17 +70,29 @@ function changeBackground(newBackground) {
 }
 
 // Fetch to fetch the current scene
-async function setScene(currScene = currentScene) {
+async function setScene(action) {
     fetch('./assets/story.json')
         .then(response => response.json())
-        .then(data => { 
+        .then(data => {
             scenes = data["scenes"]
             sceneLength = Object.keys(scenes).length
+            spriteContainer.classList.add("show");
 
-            if (currScene >= sceneLength) {
-                typeText(scenes[`scene_${sceneLength-1}`]["dialogue"])
-            } else {
-                typeText(scenes[`scene_${currScene}`]["dialogue"])
+            if (action === "next") {
+                if (currentScene >= sceneLength - 1) {
+                    typeText(scenes[`scene_${currentScene}`]["dialogue"])
+                } else {
+                    typeText(scenes[`scene_${currentScene}`]["dialogue"])
+                    currentScene += 1
+                }
+
+            } else if (action === "prev") {
+                if (currentScene == 0) {
+                    typeText(scenes[`scene_${currentScene}`]["dialogue"])
+                } else {
+                    typeText(scenes[`scene_${currentScene}`]["dialogue"])
+                    currentScene -= 1
+                }
             }
         })
         .catch(error => console.error('Error fetching JSON:', error));

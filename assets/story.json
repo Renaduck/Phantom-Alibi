@@ -15,7 +15,7 @@
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
-            "dialogue": "your mama so big, she squished the eiffel tower. boom."
+            "dialogue": "I don't know why Rina picked her summer cabin of all places for a birthday party. Kind of a pain making everyone commute all the way out here. "
         },
         "scene_2": {
             "character_name": "???",
@@ -23,7 +23,127 @@
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
-            "dialogue": "I just saw two raccoons "
+            "dialogue": "But I guess I'll never understand rich people...."
+        },
+        "scene_3": {
+            "character_name": "???",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "Sora! Right on brand—last one here, as always. There she is—Rina. Once my quiet childhood friend, now a social butterfly who throws parties in the middle of the woods."
+        },
+        "scene_4": {
+            "character_name": "Sora",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "Oh yeah, thanks for the warm and totally not sarcastic welcome."
+        },
+        "scene_5": {
+            "character_name": "Rina",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "Come on, let me introduce you to everyone! She gestures toward a grumpy-looking girl who clearly didn't want to be here."
+        },
+        "scene_6": {
+            "character_name": "Rina",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "This is Hana!"
+        },
+        "scene_7": {
+            "character_name": "Hana",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "(arms crossed, unimpressed) Nice to meet you. Rina talks about you all the time. I've even heard some of your bathtime stories."
+        },
+        "scene_8": {
+            "character_name": "Sora",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "Wow. Fantastic. Just what I wanted to hear."
+        },
+        "scene_9": {
+            "character_name": "Rina",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "(grinning) Oh, come on, you used to be so cute back then! Back when you weren't such a buzzkill. If I knew this party was going to be a roast, I would've stayed home. I shift my gaze to the corner of the room, where a studious-looking guy stands stiffly. Didn't peg Rina for the type to date bookworms, but we haven't talked in a year. Ever since she transferred to that fancy private school, we kind of… fell apart."
+        },
+        "scene_10": {
+            "character_name": "Rina",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "Oh! That's Ken, our class president. If you're ever in trouble, he's the guy to go to."
+        },
+        "scene_11": {
+            "character_name": "Sora",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "Noted. Standing next to him is… trouble. The kind of guy your parents warn you about."
+        },
+        "scene_12": {
+            "character_name": "???",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "(smirks) Hey there, sweetheart. You can just ask me out instead of staring."
+        },
+        "scene_13": {
+            "character_name": "Ken",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "(sighs, already exhausted) Ren, for the love of everything decent, please stop harassing people."
+        },
+        "scene_14": {
+            "character_name": "Ren",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "(grinning, clearly not sorry) What? It's called charisma. Yeah. This is gonna be a long night."
+        },
+        "scene_15": {
+            "character_name": "Rina",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "(hands on hips, teasing smirk) Oh, you boys. Behave, or I'll feed you to the wolves. They'd be happy to eat a meathead like Ren."
+        },
+        "scene_16": {
+            "character_name": "Ren",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "(grinning) Bold of you to assume they'd pick me first."
+        },
+        "scene_17": {
+            "character_name": "Ken",
+            "character_sprite": "test_sprite.png",
+            "background": "entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "(sighs) They would. No contest."
         }
     }
 }

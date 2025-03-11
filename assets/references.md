@@ -1,3 +1,6 @@
+## GDD
+https://docs.google.com/document/d/10U1WhMyGgY0fueviNLBBK4crK1ls931KnFdATJ5khZ4/edit?tab=t.0
+
 ## Images
 - Mansion
 https://pixabay.com/illustrations/gothic-mansion-full-moon-vintage-7853937/
