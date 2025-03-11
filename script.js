@@ -1,7 +1,7 @@
-const startGame = document.getElementById('start-game');
 const sideBar = document.getElementById('sidebar');
-const dialogueContainer = document.getElementById('dialogue-container');
-const dialogueText = document.getElementById("dialogue-text");
+const playGame = document.getElementById('play-game');
+const restartGame = document.getElementById('restart-game')
+
 const background = document.getElementById('background');
 const spriteContainer = document.getElementById('sprite_container')
 
@@ -13,16 +13,21 @@ const overlay = document.getElementById('overlay');
 const volumeSlider = document.getElementById('volume-slider');
 const volumeValue = document.getElementById('volume-value');
 
+const dialogueContainer = document.getElementById('dialogue-container');
+const dialogueTitle = document.getElementById('dialogue-title')
+const dialogueText = document.getElementById("dialogue-text");
+
 let typingInterval;
 let currentScene = 0;
 
 // Start Game Method
-startGame.addEventListener('click', () => {
+playGame.addEventListener('click', () => {
     sideBar.classList.toggle('translate');
     dialogueContainer.classList.toggle('translate');
-    typeText("Welcome to the game! Pressing 'enter', 'right-arrow' or 'spacebar' will advance the dialogue.");
+    playGame.innerHTML = "Continue ?";
     zoomIn();
-    setScene("next");
+    setScene("curr");
+    // typeText("Welcome to the game! Pressing 'enter', 'right-arrow' or 'spacebar' will advance the dialogue.");
 });
 
 // TypeText effect using an iterative approach with proper interruption
@@ -79,32 +84,32 @@ function changeBackground(newBackground) {
 
 // Fetch to fetch the current scene
 async function setScene(action) {
-    fetch('./assets/story.json')
-        .then(response => response.json())
-        .then(data => {
-            scenes = data["scenes"]
-            sceneLength = Object.keys(scenes).length
-            spriteContainer.classList.add("show");
+    // Get Scene metadata from JSON
+    const response = await fetch("assets/story.json");
+    const data = await response.json();
+    scenes = data["scenes"]
+    sceneLength = Object.keys(scenes).length
 
-            if (action === "next") {
-                if (currentScene >= sceneLength - 1) {
-                    typeText(scenes[`scene_${currentScene}`]["dialogue"])
-                } else {
-                    typeText(scenes[`scene_${currentScene}`]["dialogue"])
-                    currentScene += 1
-                }
+    spriteContainer.classList.add("show");
 
-            } else if (action === "prev") {
-                if (currentScene == 0) {
-                    typeText(scenes[`scene_${currentScene}`]["dialogue"])
-                } else {
-                    typeText(scenes[`scene_${currentScene}`]["dialogue"])
-                    currentScene -= 1
-                }
-            }
-        })
-        .catch(error => console.error('Error fetching JSON:', error));
+    // Handle scene change by moving to the next or previous scene position
+    if (action === "curr") currentScene = currentScene;
+    else if (action === "next" && currentScene <= sceneLength - 1) currentScene += 1;
+    else if (action === "prev" && currentScene != 0) currentScene -= 1;
+
+    // Update the dialogue box -- present in parts if dialogue exceeds box word lmit
+    dialogueTitle.innerHTML = ' &#x2746; &nbsp; ' + scenes[`scene_${currentScene}`]['character_name'] + ' '
+
+    dialogue = scenes[`scene_${currentScene}`]['dialogue']
+    typeText(dialogue, dialogueText);
 }
+
+// Restart Game Method
+restartGame.addEventListener('click', () => {
+    playGame.innerHTML = "Start Game";
+    currentScene = 0;
+});
+
 // show sound settings
 soundButton.addEventListener('click', () => {
     soundSettings.classList.add('show');

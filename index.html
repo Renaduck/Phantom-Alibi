@@ -13,19 +13,19 @@
       <h1>Adventure & Click</h1>
       <div id="sidebar">
         <div id="side-container">
-          <div id="start-game">Start Game</div>
+          <div id="play-game">Start Game</div>
           <div id="sound">Sound</div>
-          <div id="lighting">Lighting</div>
           <div id="settings">Settings</div>
+          <div id="restart-game">Restart</div>
         </div>
       </div>
       <div id="sprite_container">
-        <div id="sprite_1"></div>
+        <div id="sprite_1"><img src="./character_sprites/sora_talking.PNG" alt="sora_talking"/></div>
         <div id="sprite_2"><img src="./character_sprites/sora_talking.PNG" alt="sora_talking"/></div>
-        <div id="sprite_3"></div>
+        <div id="sprite_3"><img src="./character_sprites/sora_talking.PNG" alt="sora_talking"/></div>
       </div>
       <div id="dialogue-container">
-        <div id="dialogue-title">Name</div>
+        <div id="dialogue-title"></div>
         <div id="dialogue-text"></div>
         <div id="dialogue-options"></div>
       </div>
@@ -47,9 +47,11 @@
       <div id="overlay"></div>
       <div id='sound-settings'>
         <h2>Sound Settings</h2>
-        <label for="volume-slider">Volume:</label>
-        <input type="range" id="volume-slider" min="0" max="100" value="50">
-        <span id="volume-value">50%</span>
+        <div id="volume-container">
+          <label for="volume-slider">Volume: </label>
+          <input type="range" id="volume-slider" min="0" max="100" value="50">
+          <span id="volume-value">50%</span>
+        </div>
         <button id="close-sound-settings">Close</button>
       </div>
     </div>
