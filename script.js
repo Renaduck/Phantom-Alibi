@@ -2,8 +2,13 @@ const sideBar = document.getElementById('sidebar');
 const playGame = document.getElementById('play-game');
 const restartGame = document.getElementById('restart-game')
 
+// Background Constants
 const background = document.getElementById('background');
-const spriteContainer = document.getElementById('sprite_container')
+const spriteContainer = document.getElementById('sprite-container')
+
+const sprite1 = document.getElementById('sprite-1')
+const sprite2 = document.getElementById('sprite-2')
+const sprite3 = document.getElementById('sprite-3')
 
 // Sound Settings Constants
 const soundButton = document.getElementById('sound');
@@ -13,6 +18,7 @@ const overlay = document.getElementById('overlay');
 const volumeSlider = document.getElementById('volume-slider');
 const volumeValue = document.getElementById('volume-value');
 
+// Dialogue Constants
 const dialogueContainer = document.getElementById('dialogue-container');
 const dialogueTitle = document.getElementById('dialogue-title')
 const dialogueText = document.getElementById("dialogue-text");
@@ -27,6 +33,7 @@ playGame.addEventListener('click', () => {
     playGame.innerHTML = "Continue ?";
     zoomIn();
     setScene("curr");
+    sprite2.classList.toggle('show');
     // typeText("Welcome to the game! Pressing 'enter', 'right-arrow' or 'spacebar' will advance the dialogue.");
 });
 
@@ -59,7 +66,7 @@ document.addEventListener('keydown', (event) => {
             setScene("next");
             break;
         case "Escape":
-            spriteContainer.classList.toggle("show");
+            sprite2.classList.toggle('show');
             sideBar.classList.toggle('translate');
             dialogueContainer.classList.toggle('translate');
             toggleZoom();
@@ -110,13 +117,13 @@ restartGame.addEventListener('click', () => {
     currentScene = 0;
 });
 
-// show sound settings
+// Show sound settings
 soundButton.addEventListener('click', () => {
     soundSettings.classList.add('show');
     overlay.classList.add('show');
 });
 
-// close sound settings
+// Close sound settings
 closeSoundSettings.addEventListener('click', () => {
     soundSettings.classList.remove('show');
     overlay.classList.remove('show');
@@ -127,7 +134,7 @@ overlay.addEventListener('click', () => {
     overlay.classList.remove('show');
 });
 
-// volume level with slider
+// Volume level with slider
 volumeSlider.addEventListener('input', (event) => {
     const volume = event.target.value;
     volumeValue.textContent = `${volume}%`;

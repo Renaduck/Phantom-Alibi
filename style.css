@@ -152,8 +152,8 @@ body {
     flex-direction: column;
     background: rgb(116, 137, 147, 75%);
     color: white;
-    font-size: 20px;
-    padding: 20px;
+    font-size: 22px;
+    padding: 30px 20px;
     bottom: 50px;
     height: 200px;
     left: -100%;
@@ -206,7 +206,7 @@ body {
 }
 
 /* Sprite Container Styling */
-#sprite_container {
+#sprite-container {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -215,22 +215,26 @@ body {
     z-index: 0
 }
 
-#sprite_container div {
+#sprite-container div {
     display: flex;
     width: 33%;
     height: 100%;
     z-index: 1;
+    transform: translate(+50%, 0);
+    transition: transform 0.3s ease;
+}
+
+#sprite-container img {
+    height: 100%;
+    width: auto;
 }
 
 /* Individual Sprite Styling */
-#sprite_1 img {
-    display: none;
-}
+#sprite-1 { display: none;}
+#sprite-1.show { display: block; }
 
-#sprite_2 img {
-    display: none;
-}
+#sprite-2 { display: none; }
+#sprite-2.show { display: block;}
 
-#sprite_3 img {
-    display: none;
-}
+#sprite-3 { display: none;}
+#sprite-3.show { display: block;}
