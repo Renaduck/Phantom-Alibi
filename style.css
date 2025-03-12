@@ -136,6 +136,10 @@ body {
     transition: background 0.3s ease;
 }
 
+#close-settings-menu {
+    font-size: 20px; 
+}
+
 #settings-menu, #restart-confirmation button:hover {
     background: #4b5a67;
 }
@@ -204,6 +208,10 @@ body {
     text-align: center;
     border-radius: 5px;
     transition: background 0.3s ease;
+}
+
+#sound-settings button {
+    font-size: 20px;
 }
 
 #sound-settings button:hover {
