@@ -62,8 +62,8 @@ function typeText(
     }, speed);
 }
 
-// Keydown event listener
-document.addEventListener('keydown', (event) => {
+// Toggle events that happen 
+function toggleEvents(event) {
     switch (event.key) {
         case "Enter":
         case "ArrowRight":
@@ -82,7 +82,10 @@ document.addEventListener('keydown', (event) => {
         default:
             break;
     }
-});
+}
+
+// Keydown event listener
+document.addEventListener('keydown', (event) => {toggleEvents(event)});
 
 // Methods for zooming in and out of the background
 function zoomIn() { background.classList.add('zoom'); }
@@ -124,19 +127,17 @@ restartGame.addEventListener('click', () => {
 
 // Show settings menu
 settingsButton.addEventListener('click', () => {
+    // Temporarily disable keypresses during menu usage 
+    document.removeEventListener('keydown', toggleEvents)
     settingsMenu.classList.add('show')
     overlay.classList.add('show')
 });
 
-// CLose settings menu 
+// Close settings menu 
 closeSettingsMenu.addEventListener('click', () => {
     settingsMenu.classList.remove('show')
     overlay.classList.remove('show')
-});
-
-overlay.addEventListener('click', () => {
-    settingsMenu.classList.remove('show')
-    overlay.classList.remove('show')
+    document.addEventListener('keydown', (event) => {toggleEvents(event)})
 })
 
 // Show sound settings
@@ -147,11 +148,6 @@ soundButton.addEventListener('click', () => {
 
 // Close sound settings
 closeSoundSettings.addEventListener('click', () => {
-    soundSettings.classList.remove('show');
-    overlay.classList.remove('show');
-});
-
-overlay.addEventListener('click', () => {
     soundSettings.classList.remove('show');
     overlay.classList.remove('show');
 });
