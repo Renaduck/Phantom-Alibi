@@ -102,6 +102,45 @@ body {
     z-index: 5;
 }
 
+/* TODO: Change this so not match sound settings*/
+#settings-menu {
+    display: none;
+    position: fixed;
+    min-width: 300px;
+    width: 32%;
+    padding: 20px 40px;
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    border-radius: 10px;
+    background: #748993;
+    color: #ffff;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease;
+    z-index: 5;
+}
+
+#settings-menu.show {
+    display: block; 
+    opacity: 1; 
+}
+
+#close-settings-menu {
+    width: 100%;
+    padding: 10px;
+    background: #5f6d7a;
+    border: none;
+    color: #ffff;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+#settings-menu button:hover {
+    background: #4b5a67;
+}
+
 #sound-settings.show {
     display: block;
     opacity: 1;

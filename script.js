@@ -18,6 +18,11 @@ const overlay = document.getElementById('overlay');
 const volumeSlider = document.getElementById('volume-slider');
 const volumeValue = document.getElementById('volume-value');
 
+// Settings Menu Constants 
+const settingsButton = document.getElementById('settings')
+const settingsMenu = document.getElementById('settings-menu')
+const closeSettingsMenu = document.getElementById('close-settings-menu')
+
 // Dialogue Constants
 const dialogueContainer = document.getElementById('dialogue-container');
 const dialogueTitle = document.getElementById('dialogue-title')
@@ -116,6 +121,23 @@ restartGame.addEventListener('click', () => {
     playGame.innerHTML = "Start Game";
     currentScene = 0;
 });
+
+// Show settings menu
+settingsButton.addEventListener('click', () => {
+    settingsMenu.classList.add('show')
+    overlay.classList.add('show')
+});
+
+// CLose settings menu 
+closeSettingsMenu.addEventListener('click', () => {
+    settingsMenu.classList.remove('show')
+    overlay.classList.remove('show')
+});
+
+overlay.addEventListener('click', () => {
+    settingsMenu.classList.remove('show')
+    overlay.classList.remove('show')
+})
 
 // Show sound settings
 soundButton.addEventListener('click', () => {
