@@ -57,12 +57,19 @@
       <div id="settings-menu">
         <!-- TODO: Fill out settings menu -->
         <h2>Settings</h2>
+        <div id="type-text-container">
+          <label for="type-text-slider">Typing Speed: </label>
+          <input type="range" id="type-text-slider" min="0" max="100" value="50">
+          <span id="type-text-value">50%</span>
+        </div>
         <button id="close-settings-menu">Close</button>
       </div>
       <div id="restart-confirmation">
         <h2>Are you sure you want to restart the game?</h2>
-        <button id="yes-restart">Yes</button>
-        <button id="no-restart">Back</button>
+        <div>
+          <button id="no-restart">Back</button>
+          <button id="yes-restart">Yes</button>
+        </div>
       </div>
     </div>
     <script src="script.js"></script>

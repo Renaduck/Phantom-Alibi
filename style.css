@@ -68,7 +68,7 @@ body {
     cursor: pointer;
 }
 
-/* dark overlay */
+/* Settings Overlay */
 #overlay {
     display: none;
     position: fixed;
@@ -84,8 +84,10 @@ body {
     display: block;
 }
 
-/* Sound settings popup */
-#sound-settings {
+/* Settings popups */
+#sound-settings,
+#settings-menu,
+#restart-confirmation {
     display: none;
     position: fixed;
     min-width: 300px;
@@ -102,29 +104,32 @@ body {
     z-index: 5;
 }
 
-#settings-menu {
-    display: none;
-    position: fixed;
-    min-width: 300px;
-    width: 32%;
-    padding: 20px 40px;
-    left: 50%;
-    top: 50%;
-    text-align: center;
-    border-radius: 10px;
-    background: #748993;
-    color: #ffff;
-    transform: translate(-50%, -50%);
-    transition: transform 0.3s ease;
-    z-index: 5;
+#restart-confirmation {
+    width: fit-content;
+    padding: 25px 40px;
+    gap: 20px;
 }
 
-#settings-menu.show, #restart-confirmation.show {
-    display: block; 
-    opacity: 1; 
+#sound-settings.show,
+#settings-menu.show,
+#restart-confirmation.show {
+    display: block;
+    opacity: 1;
 }
 
-#close-settings-menu, #yes-restart, #no-restart {
+#sound-settings h2,
+#settings-menu h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+#restart-confirmation h2 {
+    margin-bottom: 20px;
+}
+
+#close-settings-menu,
+#yes-restart,
+#no-restart {
     width: 100%;
     padding: 10px;
     background: #5f6d7a;
@@ -133,71 +138,55 @@ body {
     cursor: pointer;
     text-align: center;
     border-radius: 5px;
-    transition: background 0.3s ease;
+    /* transition: background 0.3s ease; */
 }
 
 #close-settings-menu {
-    font-size: 20px; 
+    font-size: 20px;
 }
 
-#settings-menu, #restart-confirmation button:hover {
+#restart-confirmation button:hover {
     background: #4b5a67;
 }
 
-#sound-settings.show {
-    display: block;
-    opacity: 1;
-}
-
-#sound-settings h2 {
-    font-size: 22px;
-    margin-bottom: 15px;
-}
-
-#restart-confirmation {
-    display: none;
-    position: fixed;
-    min-width: 300px;
-    width: 42%;
-    padding: 20px 40px;
-    left: 50%;
-    top: 50%;
-    text-align: center;
-    border-radius: 10px;
-    background: #748993;
-    color: #ffff;
-    transform: translate(-50%, -50%);
-    transition: transform 0.3s ease;
-    z-index: 5;
-}
-
-#restart-confirmation h2 {
-    padding: 20px; 
-}
-
 #restart-confirmation button {
-    font-size: 20px; 
+    font-size: 20px;
     width: 40%;
-    display: inline; 
+    display: inline;
 }
 
-/* Volume Slider */
-#volume-container {
+#restart-confirmation div {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Sliders */
+#volume-container,
+#type-text-container {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
     gap: 10px;
 }
 
-#volume-slider {
+#volume-container label,
+#type-text-container label {
+    min-width: fit-content;
+}
+
+#volume-slider,
+#type-text-slider {
     width: calc(100% - 112.5px);
     cursor: pointer;
 }
 
-#volume-value {
+#volume-value,
+#type-text-value {
     font-weight: bold;
 }
 
+/* Sound Settings Buttons */
 #close-sound-settings {
     width: 100%;
     padding: 10px;
@@ -303,11 +292,26 @@ body {
 }
 
 /* Individual Sprite Styling */
-#sprite-1 { display: none;}
-#sprite-1.show { display: block; }
+#sprite-1 {
+    display: none;
+}
 
-#sprite-2 { display: none; }
-#sprite-2.show { display: block;}
+#sprite-1.show {
+    display: block;
+}
 
-#sprite-3 { display: none;}
-#sprite-3.show { display: block;}
+#sprite-2 {
+    display: none;
+}
+
+#sprite-2.show {
+    display: block;
+}
+
+#sprite-3 {
+    display: none;
+}
+
+#sprite-3.show {
+    display: block;
+}

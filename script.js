@@ -70,6 +70,20 @@ function typeText(
 
 // Keydown event listener
 document.addEventListener('keydown', (event) => {
+    // Functionality to not do anything if settings is displayed
+    if (!sideBar.classList.contains('translate')) {
+        // Functionality to exit overlay if overlay is displayed and escape is pressed
+        if (event.key === "Escape" && overlay.classList.contains('show')) {
+            settingsMenu.classList.remove('show');
+            soundSettings.classList.remove('show');
+            overlay.classList.remove('show');
+            closeRestartConfirmationMenu();
+            return;
+        }
+        return;
+    }
+
+    // Functionality to handle the keyboard shortcuts while in the game
     switch (event.key) {
         case "Enter":
         case "ArrowRight":
@@ -112,7 +126,7 @@ async function setScene(action) {
 
     // Handle scene change by moving to the next or previous scene position
     if (action === "curr") currentScene = currentScene;
-    else if (action === "next" && currentScene <= sceneLength - 1) currentScene += 1;
+    else if (action === "next" && currentScene <= sceneLength - 2) currentScene += 1;
     else if (action === "prev" && currentScene != 0) currentScene -= 1;
 
     // Update the dialogue box -- present in parts if dialogue exceeds box word lmit
@@ -142,7 +156,7 @@ yesRestart.addEventListener('click', () => {
 });
 
 // Don't restart the game and exit back to menu 
-noRestart.addEventListener('click', closeRestartConfirmationMenu) 
+noRestart.addEventListener('click', closeRestartConfirmationMenu)
 
 // Show settings menu
 settingsButton.addEventListener('click', () => {
@@ -172,4 +186,12 @@ closeSoundSettings.addEventListener('click', () => {
 volumeSlider.addEventListener('input', (event) => {
     const volume = event.target.value;
     volumeValue.textContent = `${volume}%`;
+});
+
+// Close the overlay if clicked outside the settings menus
+overlay.addEventListener('click', () => {
+    settingsMenu.classList.remove('show');
+    soundSettings.classList.remove('show');
+    overlay.classList.remove('show');
+    closeRestartConfirmationMenu()
 });
