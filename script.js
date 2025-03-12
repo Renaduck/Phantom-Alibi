@@ -23,6 +23,12 @@ const settingsButton = document.getElementById('settings')
 const settingsMenu = document.getElementById('settings-menu')
 const closeSettingsMenu = document.getElementById('close-settings-menu')
 
+// Restart Confirmation Constants
+const restartButton = document.getElementById('restart-game')
+const restartConfirmationMenu = document.getElementById('restart-confirmation')
+const yesRestart = document.getElementById('yes-restart')
+const noRestart = document.getElementById('no-restart')
+
 // Dialogue Constants
 const dialogueContainer = document.getElementById('dialogue-container');
 const dialogueTitle = document.getElementById('dialogue-title')
@@ -62,8 +68,8 @@ function typeText(
     }, speed);
 }
 
-// Toggle events that happen 
-function toggleEvents(event) {
+// Keydown event listener
+document.addEventListener('keydown', (event) => {
     switch (event.key) {
         case "Enter":
         case "ArrowRight":
@@ -82,10 +88,7 @@ function toggleEvents(event) {
         default:
             break;
     }
-}
-
-// Keydown event listener
-document.addEventListener('keydown', (event) => {toggleEvents(event)});
+});
 
 // Methods for zooming in and out of the background
 function zoomIn() { background.classList.add('zoom'); }
@@ -119,16 +122,30 @@ async function setScene(action) {
     typeText(dialogue, dialogueText);
 }
 
-// Restart Game Method
-restartGame.addEventListener('click', () => {
+// Close the Restart Confirmation Menu 
+function closeRestartConfirmationMenu() {
+    restartConfirmationMenu.classList.remove('show')
+    overlay.classList.remove('show')
+}
+
+// Show Restart Confirmation Menu 
+restartButton.addEventListener('click', () => {
+    restartConfirmationMenu.classList.add('show')
+    overlay.classList.add('show')
+})
+
+// Restart the game and clear progress 
+yesRestart.addEventListener('click', () => {
     playGame.innerHTML = "Start Game";
     currentScene = 0;
+    closeRestartConfirmationMenu()
 });
+
+// Don't restart the game and exit back to menu 
+noRestart.addEventListener('click', closeRestartConfirmationMenu) 
 
 // Show settings menu
 settingsButton.addEventListener('click', () => {
-    // Temporarily disable keypresses during menu usage 
-    document.removeEventListener('keydown', toggleEvents)
     settingsMenu.classList.add('show')
     overlay.classList.add('show')
 });
@@ -137,7 +154,6 @@ settingsButton.addEventListener('click', () => {
 closeSettingsMenu.addEventListener('click', () => {
     settingsMenu.classList.remove('show')
     overlay.classList.remove('show')
-    document.addEventListener('keydown', (event) => {toggleEvents(event)})
 })
 
 // Show sound settings
