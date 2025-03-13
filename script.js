@@ -10,18 +10,15 @@ const sprite1 = document.getElementById('sprite-1')
 const sprite2 = document.getElementById('sprite-2')
 const sprite3 = document.getElementById('sprite-3')
 
-// Sound Settings Constants
-const soundButton = document.getElementById('sound');
-const soundSettings = document.getElementById('sound-settings');
-const closeSoundSettings = document.getElementById('close-sound-settings');
-const overlay = document.getElementById('overlay');
-const volumeSlider = document.getElementById('volume-slider');
-const volumeValue = document.getElementById('volume-value');
-
 // Settings Menu Constants 
 const settingsButton = document.getElementById('settings')
 const settingsMenu = document.getElementById('settings-menu')
-const closeSettingsMenu = document.getElementById('close-settings-menu')
+const closeSettingsMenu = document.getElementById('close-settings-btn')
+
+// Volume Settings Constants
+const overlay = document.getElementById('overlay');
+const volumeSlider = document.getElementById('volume-slider');
+const volumeValue = document.getElementById('volume-value');
 
 // Restart Confirmation Constants
 const restartButton = document.getElementById('restart-game')
@@ -160,18 +157,6 @@ closeSettingsMenu.addEventListener('click', () => {
     overlay.classList.remove('show')
 })
 
-// Show sound settings
-soundButton.addEventListener('click', () => {
-    soundSettings.classList.add('show');
-    overlay.classList.add('show');
-});
-
-// Close sound settings
-closeSoundSettings.addEventListener('click', () => {
-    soundSettings.classList.remove('show');
-    overlay.classList.remove('show');
-});
-
 // Volume level with slider
 volumeSlider.addEventListener('input', (event) => {
     const volume = event.target.value;
@@ -180,9 +165,7 @@ volumeSlider.addEventListener('input', (event) => {
 
 // Close the overlay if clicked outside the settings menus
 overlay.addEventListener('click', () => {
-    settingsMenu.classList.remove('show');
-    soundSettings.classList.remove('show');
-    overlay.classList.remove('show');
+    closeOverlays();
 });
 
 // Toggle sidebar
@@ -194,7 +177,6 @@ function toggleSidebar() {
 // Check menu overlay status
 function containsOverlay() {
     if (settingsMenu.classList.contains('show')) return true;
-    else if (soundSettings.classList.contains('show')) return true;
     else if (overlay.classList.contains('show')) return true;
     else if (restartConfirmationMenu.classList.contains('show')) return true;
     else if (overlay.classList.contains('show')) return true;
@@ -204,7 +186,6 @@ function containsOverlay() {
 // Close any overlayed menus
 function closeOverlays() {
     settingsMenu.classList.remove('show');
-    soundSettings.classList.remove('show');
     overlay.classList.remove('show');
     restartConfirmationMenu.classList.remove('show');
     overlay.classList.remove('show');
