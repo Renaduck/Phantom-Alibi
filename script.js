@@ -39,9 +39,8 @@ let currentScene = 0;
 
 // Start Game Method
 playGame.addEventListener('click', () => {
-    sideBar.classList.toggle('translate');
-    dialogueContainer.classList.toggle('translate');
     playGame.innerHTML = "Continue ?";
+    toggleSidebar();
     zoomIn();
     setScene("curr");
     sprite2.classList.toggle('show');
@@ -70,17 +69,15 @@ function typeText(
 
 // Keydown event listener
 document.addEventListener('keydown', (event) => {
-    // Functionality to not do anything if settings is displayed
-    if (!sideBar.classList.contains('translate')) {
-        // Functionality to exit overlay if overlay is displayed and escape is pressed
-        if (event.key === "Escape" && overlay.classList.contains('show')) {
-            settingsMenu.classList.remove('show');
-            soundSettings.classList.remove('show');
-            overlay.classList.remove('show');
-            closeRestartConfirmationMenu();
+    // Functionality to return early and not handle keyboard shortcuts if sidebar is in view
+    if (!sideBar.classList.contains('translate') && playGame.innerHTML == "Start Game" || containsOverlay() && playGame.innerHTML == "Continue ?") {
+        // Exit overlay if overlay is displayed and escape is pressed
+        if (event.key == "Escape" && containsOverlay()) {
+            closeOverlays();
             return;
         }
-        return;
+
+        return
     }
 
     // Functionality to handle the keyboard shortcuts while in the game
@@ -92,8 +89,7 @@ document.addEventListener('keydown', (event) => {
             break;
         case "Escape":
             sprite2.classList.toggle('show');
-            sideBar.classList.toggle('translate');
-            dialogueContainer.classList.toggle('translate');
+            toggleSidebar();
             toggleZoom();
             break;
         case "ArrowLeft":
@@ -136,27 +132,21 @@ async function setScene(action) {
     typeText(dialogue, dialogueText);
 }
 
-// Close the Restart Confirmation Menu 
-function closeRestartConfirmationMenu() {
-    restartConfirmationMenu.classList.remove('show')
-    overlay.classList.remove('show')
-}
-
 // Show Restart Confirmation Menu 
 restartButton.addEventListener('click', () => {
-    restartConfirmationMenu.classList.add('show')
-    overlay.classList.add('show')
+    restartConfirmationMenu.classList.add('show');
+    overlay.classList.add('show');
 })
 
 // Restart the game and clear progress 
 yesRestart.addEventListener('click', () => {
     playGame.innerHTML = "Start Game";
     currentScene = 0;
-    closeRestartConfirmationMenu()
+    closeOverlays();
 });
 
 // Don't restart the game and exit back to menu 
-noRestart.addEventListener('click', closeRestartConfirmationMenu)
+noRestart.addEventListener('click', closeOverlays)
 
 // Show settings menu
 settingsButton.addEventListener('click', () => {
@@ -193,5 +183,46 @@ overlay.addEventListener('click', () => {
     settingsMenu.classList.remove('show');
     soundSettings.classList.remove('show');
     overlay.classList.remove('show');
-    closeRestartConfirmationMenu()
 });
+
+// Toggle sidebar
+function toggleSidebar() {
+    sideBar.classList.toggle('translate');
+    dialogueContainer.classList.toggle('translate');
+}
+
+// Check menu overlay status
+function containsOverlay() {
+    if (settingsMenu.classList.contains('show')) return true;
+    else if (soundSettings.classList.contains('show')) return true;
+    else if (overlay.classList.contains('show')) return true;
+    else if (restartConfirmationMenu.classList.contains('show')) return true;
+    else if (overlay.classList.contains('show')) return true;
+    else return false;
+}
+
+// Close any overlayed menus
+function closeOverlays() {
+    settingsMenu.classList.remove('show');
+    soundSettings.classList.remove('show');
+    overlay.classList.remove('show');
+    restartConfirmationMenu.classList.remove('show');
+    overlay.classList.remove('show');
+}
+
+// Class to generate clickable items for a scene
+class PointItemEnv {
+    constructor() {
+        // Item List 
+        this.itemList = []
+    }
+
+    // Adds item to playing area 
+    addItem() {
+        thisitem.itemList.add
+    }
+
+    pushItem() {
+        console.log(item)
+    }
+}
