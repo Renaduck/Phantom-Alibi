@@ -41,6 +41,12 @@ playGame.addEventListener('click', () => {
     zoomIn();
     setScene("curr");
     sprite2.classList.toggle('show');
+
+    // Create an item and add it to the play area
+    const pointItemEnv = new PointItemEnv();
+    pointItemEnv.addItem("circle", 200, 200);
+    pointItemEnv.removeItem();
+
     // typeText("Welcome to the game! Pressing 'enter', 'right-arrow' or 'spacebar' will advance the dialogue.");
 });
 
@@ -92,6 +98,7 @@ document.addEventListener('keydown', (event) => {
         case "ArrowLeft":
             setScene("prev");
             break;
+
         default:
             break;
     }
@@ -115,8 +122,6 @@ async function setScene(action) {
     scenes = data["scenes"]
     sceneLength = Object.keys(scenes).length
 
-    spriteContainer.classList.add("show");
-
     // Handle scene change by moving to the next or previous scene position
     if (action === "curr") currentScene = currentScene;
     else if (action === "next" && currentScene <= sceneLength - 2) currentScene += 1;
@@ -124,8 +129,11 @@ async function setScene(action) {
 
     // Update the dialogue box -- present in parts if dialogue exceeds box word lmit
     dialogueTitle.innerHTML = ' &#x2746; &nbsp; ' + scenes[`scene_${currentScene}`]['character_name'] + ' '
-
     dialogue = scenes[`scene_${currentScene}`]['dialogue']
+
+    // Display the character to the screen 
+    sprite2.src = scenes[`scene_${currentScene}`]['character_sprite']
+    sprite2.classList.add("show");
     typeText(dialogue, dialogueText);
 }
 
@@ -194,16 +202,47 @@ function closeOverlays() {
 // Class to generate clickable items for a scene
 class PointItemEnv {
     constructor() {
-        // Item List 
-        this.itemList = []
+        this.items = {}
     }
 
-    // Adds item to playing area 
-    addItem() {
-        thisitem.itemList.add
+    // Adds item to playing area, hotspot
+    addItem(name, x, y, r) {
+        // Create element
+        let element = document.createElement("div");
+        element.setAttribute("id", name)
+
+        element.style.border = "3px solid yellow";
+        element.style.borderRadius = `10px`;
+        element.style.height = "20px";
+        element.style.width = "20px";
+        element.style.zIndex = "10";
+
+        element.style.position = "absolute";
+        element.style.top = `${x}px`;
+        element.style.left = `${y}px`;
+
+        document.body.appendChild(element);
+
+        this.items[name] = {
+            name: name,
+            el: element,
+        }
     }
 
-    pushItem() {
-        console.log(item)
+    // Remove the item from the screen
+    removeItem(name) {
+        setTimeout(() => {
+            this.items["circle"].el.style.display = "none";
+        }, 3000)
+    }
+
+    // Give the player the item clicked on
+    retrieveItem() {
+
+    }
+
+    // Print the items to the screen 
+    printInventory() {
+
     }
 }

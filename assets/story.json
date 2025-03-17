@@ -3,7 +3,7 @@
     "scenes": {
         "scene_0": {
             "character_name": "???",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./character_sprites/sora_talking.PNG",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
@@ -11,7 +11,7 @@
         },
         "scene_1": {
             "character_name": "???",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./character_sprites/sora_talking.PNG",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
@@ -19,7 +19,7 @@
         },
         "scene_2": {
             "character_name": "???",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./character_sprites/sora_talking.PNG",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
@@ -27,7 +27,7 @@
         },
         "scene_3": {
             "character_name": "???",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./character_sprites/sora_talking.PNG",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
@@ -35,7 +35,7 @@
         },
         "scene_4": {
             "character_name": "Sora",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./character_sprites/sora_talking.PNG",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
@@ -43,7 +43,7 @@
         },
         "scene_5": {
             "character_name": "Rina",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./character_sprites/rina_scared.PNG",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
@@ -51,7 +51,7 @@
         },
         "scene_6": {
             "character_name": "Rina",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./character_sprites/rina_scared.PNG",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
@@ -59,7 +59,7 @@
         },
         "scene_7": {
             "character_name": "Hana",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./assets/test_sprite.png",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
@@ -67,7 +67,7 @@
         },
         "scene_8": {
             "character_name": "Sora",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./assets/test_sprite.png",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
@@ -75,7 +75,7 @@
         },
         "scene_9": {
             "character_name": "Rina",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./assets/test_sprite.png",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
@@ -83,7 +83,7 @@
         },
         "scene_10": {
             "character_name": "Rina",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./assets/test_sprite.png",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
@@ -91,7 +91,7 @@
         },
         "scene_11": {
             "character_name": "Sora",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./assets/test_sprite.png",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
@@ -99,7 +99,7 @@
         },
         "scene_12": {
             "character_name": "???",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./assets/test_sprite.png",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
@@ -107,7 +107,7 @@
         },
         "scene_13": {
             "character_name": "Ken",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./character_sprites/ken_talking.PNG",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
@@ -115,7 +115,7 @@
         },
         "scene_14": {
             "character_name": "Ren",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./character_sprites/ren_normal.PNG",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
@@ -123,7 +123,7 @@
         },
         "scene_15": {
             "character_name": "Rina",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./character_sprites/rina_scared.PNG",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
@@ -131,7 +131,7 @@
         },
         "scene_16": {
             "character_name": "Ren",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./character_sprites/ren_normal.PNG",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
@@ -139,7 +139,7 @@
         },
         "scene_17": {
             "character_name": "Ken",
-            "character_sprite": "test_sprite.png",
+            "character_sprite": "./character_sprites/ken_talking.PNG",
             "background": "entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
