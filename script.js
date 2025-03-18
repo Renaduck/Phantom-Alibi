@@ -37,6 +37,7 @@ let currentScene = 0;
 // Start Game Method
 playGame.addEventListener('click', () => {
     playGame.innerHTML = "Continue ?";
+    restartButton.removeAttribute("hidden")
     toggleSidebar();
     zoomIn();
     setScene("curr");
@@ -146,6 +147,7 @@ restartButton.addEventListener('click', () => {
 // Restart the game and clear progress 
 yesRestart.addEventListener('click', () => {
     playGame.innerHTML = "Start Game";
+    restartButton.setAttribute("hidden", "hidden")
     currentScene = 0;
     closeOverlays();
 });
