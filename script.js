@@ -21,7 +21,8 @@ const volumeSlider = document.getElementById('volume-slider');
 const volumeValue = document.getElementById('volume-value');
 
 // Audio class 
-const audio = new Audio("./audio/vine-boom.mp3")
+const buttonAudio = new Audio("./audio/vine-boom.mp3")
+const backgroundAudio = new Audio("./audio/audio/08. Title (Wii Sports).mp3")
 
 // Restart Confirmation Constants
 const restartButton = document.getElementById('restart-game')
@@ -256,9 +257,9 @@ class PointItemEnv {
 
 // TODO: BOOMMMM
 function toggleSound() {
-    if (audio.paused) {
-        audio.play()
+    if (buttonAudio.paused) {
+        buttonAudio.play()
     } else {
-        audio.currentTime = 0
+        buttonAudio.currentTime = 0
     }
 }
