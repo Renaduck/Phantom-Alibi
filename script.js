@@ -22,7 +22,8 @@ const volumeValue = document.getElementById('volume-value');
 
 // Audio class 
 const buttonAudio = new Audio("./audio/vine-boom.mp3")
-const backgroundAudio = new Audio("./audio/audio/08. Title (Wii Sports).mp3")
+const backgroundAudio = new Audio("./audio/08. Title (Wii Sports).mp3")
+backgroundAudio.play() 
 
 // Restart Confirmation Constants
 const restartButton = document.getElementById('restart-game')
@@ -45,12 +46,12 @@ playGame.addEventListener('click', () => {
     zoomIn();
     setScene("curr");
     sprite2.classList.toggle('show');
-    
+
     // Create an item and add it to the play area
     const pointItemEnv = new PointItemEnv();
     pointItemEnv.addItem("circle", 200, 200);
-    pointItemEnv.removeItem();
-    
+    pointItemEnv.removeItem("circle");
+
     // typeText("Welcome to the game! Pressing 'enter', 'right-arrow' or 'spacebar' will advance the dialogue.");
 });
 
@@ -102,7 +103,7 @@ document.addEventListener('keydown', (event) => {
             restartButton.removeAttribute("hidden")
             break;
         case "ArrowLeft":
-            toggleSound(); 
+            toggleSound();
             setScene("prev");
             break;
 
@@ -115,11 +116,11 @@ document.addEventListener('keydown', (event) => {
 function zoomIn() { background.classList.add('zoom'); }
 function zoomOut() { background.classList.remove('zoom'); }
 function toggleZoom() { background.classList.toggle('zoom'); }
- 
+
 // Method for changing the background (i.e. Location)
 function changeBackground(newBackground) {
     background.style.backgroundImage = `url(${newBackground})`;
-}   
+}
 
 // Fetch to fetch the current scene
 async function setScene(action) {
@@ -209,9 +210,7 @@ function closeOverlays() {
 
 // Class to generate clickable items for a scene
 class PointItemEnv {
-    constructor() {
-        this.items = {}
-    }
+    constructor() { }
 
     // Adds item to playing area, hotspot
     addItem(name, x, y, r) {
@@ -230,17 +229,12 @@ class PointItemEnv {
         element.style.left = `${y}px`;
 
         document.body.appendChild(element);
-
-        this.items[name] = {
-            name: name,
-            el: element,
-        }
     }
 
     // Remove the item from the screen
     removeItem(name) {
         setTimeout(() => {
-            this.items["circle"].el.style.display = "none";
+            document.getElementById(name).style.display = "none";
         }, 3000)
     }
 
