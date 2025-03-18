@@ -20,6 +20,9 @@ const overlay = document.getElementById('overlay');
 const volumeSlider = document.getElementById('volume-slider');
 const volumeValue = document.getElementById('volume-value');
 
+// Audio class 
+const audio = new Audio("./audio/vine-boom.mp3")
+
 // Restart Confirmation Constants
 const restartButton = document.getElementById('restart-game')
 const restartConfirmationMenu = document.getElementById('restart-confirmation')
@@ -88,6 +91,7 @@ document.addEventListener('keydown', (event) => {
         case "Enter":
         case "ArrowRight":
         case " ":
+            toggleSound();
             setScene("next");
             break;
         case "Escape":
@@ -97,6 +101,7 @@ document.addEventListener('keydown', (event) => {
             restartButton.removeAttribute("hidden")
             break;
         case "ArrowLeft":
+            toggleSound(); 
             setScene("prev");
             break;
 
@@ -109,7 +114,7 @@ document.addEventListener('keydown', (event) => {
 function zoomIn() { background.classList.add('zoom'); }
 function zoomOut() { background.classList.remove('zoom'); }
 function toggleZoom() { background.classList.toggle('zoom'); }
-
+ 
 // Method for changing the background (i.e. Location)
 function changeBackground(newBackground) {
     background.style.backgroundImage = `url(${newBackground})`;
@@ -246,5 +251,14 @@ class PointItemEnv {
     // Print the items to the screen 
     printInventory() {
 
+    }
+}
+
+// TODO: BOOMMMM
+function toggleSound() {
+    if (audio.paused) {
+        audio.play()
+    } else {
+        audio.currentTime = 0
     }
 }
