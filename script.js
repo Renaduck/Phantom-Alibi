@@ -37,17 +37,16 @@ let currentScene = 0;
 // Start Game Method
 playGame.addEventListener('click', () => {
     playGame.innerHTML = "Continue ?";
-    restartButton.removeAttribute("hidden")
     toggleSidebar();
     zoomIn();
     setScene("curr");
     sprite2.classList.toggle('show');
-
+    
     // Create an item and add it to the play area
     const pointItemEnv = new PointItemEnv();
     pointItemEnv.addItem("circle", 200, 200);
     pointItemEnv.removeItem();
-
+    
     // typeText("Welcome to the game! Pressing 'enter', 'right-arrow' or 'spacebar' will advance the dialogue.");
 });
 
@@ -95,6 +94,7 @@ document.addEventListener('keydown', (event) => {
             sprite2.classList.toggle('show');
             toggleSidebar();
             toggleZoom();
+            restartButton.removeAttribute("hidden")
             break;
         case "ArrowLeft":
             setScene("prev");
@@ -113,7 +113,7 @@ function toggleZoom() { background.classList.toggle('zoom'); }
 // Method for changing the background (i.e. Location)
 function changeBackground(newBackground) {
     background.style.backgroundImage = `url(${newBackground})`;
-}
+}   
 
 // Fetch to fetch the current scene
 async function setScene(action) {
