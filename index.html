@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Adventure & Click</title>
+    <link rel="icon" href="assets/test_sprite.png" type="image/png">
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
@@ -16,7 +17,7 @@
           <div id="play-game">Start Game</div>
           <div id="credits">Credits</div>
           <div id="settings">Settings</div>
-          <div id="restart-game" hidden>Restart Game</div>
+          <div id="restart-game" hidden >Restart Game</div>
         </div>
       </div>
       <div id="sprite-container">
@@ -33,9 +34,18 @@
         <div id="dialogue-options"></div>
       </div>
       <div id="carousel">
-        <div id="carousel-images"></div>
-        <div id="carousel-buttons"></div>
-      </div>
+        <span id="carousel-left">&#10094;</span>
+        <div id="carousel-images">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <!-- carousel image divs are inserted here -->
+        </div>
+        <span id="carousel-right">&#10095;</span>
+      </>
       <div id="overlay"></div>
       <div id='sound-settings'>
       </div>

@@ -6,6 +6,7 @@ const restartGame = document.getElementById('restart-game')
 const background = document.getElementById('background');
 const spriteContainer = document.getElementById('sprite-container')
 
+// Sprite Constants
 const sprite1 = document.getElementById('sprite-1')
 const sprite2 = document.getElementById('sprite-2')
 const sprite3 = document.getElementById('sprite-3')
@@ -21,9 +22,9 @@ const volumeSlider = document.getElementById('volume-slider');
 const volumeValue = document.getElementById('volume-value');
 
 // Audio class 
-const buttonAudio = new Audio("./audio/vine-boom.mp3")
-const backgroundAudio = new Audio("./audio/08. Title (Wii Sports).mp3")
-backgroundAudio.play() 
+const buttonAudio = new Audio("./audio/page-flip.mp3")
+const backgroundAudio = new Audio("./audio/ominous.mp3")
+backgroundAudio.play()
 
 // Restart Confirmation Constants
 const restartButton = document.getElementById('restart-game')
@@ -50,7 +51,6 @@ playGame.addEventListener('click', () => {
     // Create an item and add it to the play area
     const pointItemEnv = new PointItemEnv();
     pointItemEnv.addItem("circle", 200, 200);
-    pointItemEnv.removeItem("circle");
 
     // typeText("Welcome to the game! Pressing 'enter', 'right-arrow' or 'spacebar' will advance the dialogue.");
 });
@@ -139,6 +139,9 @@ async function setScene(action) {
     dialogueTitle.innerHTML = ' &#x2746; &nbsp; ' + scenes[`scene_${currentScene}`]['character_name'] + ' '
     dialogue = scenes[`scene_${currentScene}`]['dialogue']
 
+    // Update the background
+    changeBackground(scenes[`scene_${currentScene}`]['background'])
+
     // Display the character to the screen 
     sprite2.src = scenes[`scene_${currentScene}`]['character_sprite']
     sprite2.classList.add("show");
@@ -210,7 +213,9 @@ function closeOverlays() {
 
 // Class to generate clickable items for a scene
 class PointItemEnv {
-    constructor() { }
+    constructor() {
+        this.inventory = [];
+    }
 
     // Adds item to playing area, hotspot
     addItem(name, x, y, r) {
@@ -228,23 +233,32 @@ class PointItemEnv {
         element.style.top = `${x}px`;
         element.style.left = `${y}px`;
 
+        element.addEventListener("click", () => {
+            this.retrieveItem(name);
+        });
+
         document.body.appendChild(element);
     }
 
     // Remove the item from the screen
     removeItem(name) {
-        setTimeout(() => {
-            document.getElementById(name).style.display = "none";
-        }, 3000)
+        document.getElementById(name).style.display = "none";
     }
 
     // Give the player the item clicked on
-    retrieveItem() {
+    retrieveItem(name) {
+        // Add the item to the player's inventory
+        this.inventory.push(name);
 
+        // Remove the item from the screen
+        this.removeItem(name);
+
+        // Print the inventory to the screen
+        this.displayInventory();
     }
 
     // Print the items to the screen 
-    printInventory() {
+    displayInventory() {
 
     }
 }

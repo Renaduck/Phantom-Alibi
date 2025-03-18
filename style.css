@@ -247,8 +247,8 @@ body {
 }
 
 #background.zoom {
-    -webkit-transform: scale(2);
-    transform: scale(2);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
 }
 
 /* Sprite Container Styling */
@@ -298,4 +298,42 @@ body {
 
 #sprite-3.show {
     display: block;
+}
+
+/* Inventory Styling */
+#carousel {
+    background: red;
+    position: absolute;
+    display: flex;
+    width: calc(100% - 100px);
+    height: 150px;
+    top: 25%;
+    left: 50px;
+    z-index: 3;
+    justify-content: center;
+    align-items: center;
+}
+
+#carousel-left,
+#carousel-right {
+    color: #ffff;
+    font-size: 40px;
+    padding: 0px 5px;
+}
+
+#carousel-images {
+    margin: auto;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    background: yellow;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+}
+
+#carousel-images div {
+    width: 80%;
+    height: 80%;
+    background: green;
 }
