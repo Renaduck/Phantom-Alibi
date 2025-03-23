@@ -25,9 +25,11 @@ const volumeLabel = document.getElementById('volume-label');
 const typingSlider = document.getElementById('type-speed-slider');
 const typingLabel = document.getElementById('type-speed-label');
 
-// Audio class 
+// Audio Constants 
 const pageFlipAudio = new Audio("./audio/page-flip.mp3");
 const backgroundAudio = new Audio("./audio/ominous.mp3");
+const itemAcquiredAudio = new Audio("./audio/item-acquired.mp3");
+const swooshAudio = new Audio("./audio/swoosh.mp3");
 
 // Restart Confirmation Constants
 const restartBtn = document.getElementById('restart');
@@ -78,6 +80,7 @@ class Environment {
         element.addEventListener("click", () => {
             this.inventory.push(name);
             const itemMarker = document.getElementById(name)
+            itemAcquiredSound();
 
             // Remove the item from the screen
             itemMarker.remove();
@@ -160,16 +163,19 @@ class Environment {
     toggleCarousel() {
         carousel.classList.toggle('show');
         overlay.classList.add('show');
+        swooshSound();
     }
 
     carouselShow() {
         carousel.classList.add('show');
         overlay.classList.add('show');
+        swooshSound();
     }
 
     carouselHide() {
         carousel.classList.remove('show');
         overlay.classList.remove('show');
+        swooshSound();
     }
 }
 
@@ -181,6 +187,7 @@ playGame.addEventListener('click', () => {
     toggleSidebar();
     zoomIn();
     setScene("curr");
+    swooshSound()
     sprite2.classList.toggle('show');
 });
 
@@ -192,7 +199,7 @@ function typeText(
 ) {
     clearInterval(typingInterval);              // Stop any ongoing typing effect
     element.innerHTML = "";                     // Clear existing text before starting new typing effect
-    speed = currentTypingSpeed / 50 * speed;     // Adjust speed based on user settings
+    speed = currentTypingSpeed / 50 * speed;    // Adjust speed based on user settings
 
     // Start typing effect
     let index = 0;
@@ -211,10 +218,12 @@ dialogueContainer.addEventListener('click', (event) => {
     if (!sideBar.classList.contains('translate')) return;
     if (!event.target.closest('#dialogue-options')) return;
 });
+
 background.addEventListener('click', () => {
     if (!sideBar.classList.contains('translate')) return;
     setScene("next")
 });
+
 spriteContainer.addEventListener('click', () => {
     if (!sideBar.classList.contains('translate')) return;
     setScene("next")
@@ -232,22 +241,17 @@ document.addEventListener('click', () => {
 document.addEventListener('keydown', (event) => {
     // Functionality to return early and not handle keyboard shortcuts if sidebar is in view
     if (!sideBar.classList.contains('translate') && playGame.innerHTML == "Start Game" || containsOverlay() && playGame.innerHTML == "Continue ?") {
+        console.log("I finally ran");
+
         // Exit overlay if overlay is displayed and escape is pressed
-        if (event.key == "Escape" && containsOverlay()) {
+        if (containsOverlay() && event.key == "Escape") {
             closeOverlays();
             return;
-        }
-        return;
+        } else return;
     }
 
     // Functionality to handle the keyboard shortcuts while in the game
     switch (event.key) {
-        case "Enter":
-        case "ArrowRight":
-        case " ":
-            toggleSound();
-            setScene("next");
-            break;
         case "Escape":
             sprite2.classList.toggle("show");
             environment.carouselHide();
@@ -273,16 +277,25 @@ document.addEventListener('keydown', (event) => {
                 }
             }
 
+            // Toggle the item markers on the screen
             const itemMarkers = document.querySelectorAll(".item-marker");
             itemMarkers.forEach((item) => {
                 item.classList.toggle("hide");
             });
+
             break;
         case "ArrowLeft":
-            toggleSound();
+            if (!sideBar.classList.contains('translate')) return;
+            pageFlipSound();
             setScene("prev");
             break;
-
+        case "Enter":
+        case "ArrowRight":
+        case " ":
+            if (!sideBar.classList.contains('translate')) return;
+            pageFlipSound();
+            setScene("next");
+            break;
         default:
             break;
     }
@@ -469,11 +482,14 @@ function containsOverlay() {
     else if (overlay.classList.contains('show')) return true;
     else if (restartConfirmationMenu.classList.contains('show')) return true;
     else if (overlay.classList.contains('show')) return true;
+    else if (carousel.classList.contains('show')) return true;
     else return false;
 }
 
 // Close any overlayed menus
 function closeOverlays() {
+    if (carousel.classList.contains('show')) swooshSound();;
+
     settingsMenu.classList.remove('show');
     overlay.classList.remove('show');
     restartConfirmationMenu.classList.remove('show');
@@ -490,12 +506,33 @@ function updateSettings() {
     closeOverlays();
 }
 
-// Toggle gameplay sound
-function toggleSound() {
+// Page flip sound
+function pageFlipSound() {
     if (pageFlipAudio.paused) {
         pageFlipAudio.volume = (volumeSlider.value / 100) * 0.1;
         pageFlipAudio.play();
     } else {
         pageFlipAudio.currentTime = 0;
+    }
+}
+
+// Item acquired sound
+function itemAcquiredSound() {
+    if (itemAcquiredAudio.paused) {
+        itemAcquiredAudio.volume = (volumeSlider.value / 100) * 0.1;
+        itemAcquiredAudio.play();
+    } else {
+        itemAcquiredAudio.currentTime = 0;
+    }
+}
+
+// Swoosh sound
+function swooshSound() {
+    if (swooshAudio.paused) {
+        swooshAudio.volume = (volumeSlider.value / 100) * 0.5;
+        swooshAudio.playbackRate = 3;
+        swooshAudio.play();
+    } else {
+        swooshAudio.currentTime = 0;
     }
 }
