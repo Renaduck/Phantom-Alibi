@@ -2,6 +2,7 @@ const sideBar = document.getElementById('sidebar');
 const playGame = document.getElementById('play-game');
 
 // Background Constants
+const container = document.getElementById('container');
 const background = document.getElementById('background');
 const spriteContainer = document.getElementById('sprite-container');
 
@@ -14,6 +15,8 @@ const sprite3 = document.getElementById('sprite-3');
 const settingsBtn = document.getElementById('settings');
 const settingsMenu = document.getElementById('settings-menu');
 const closeSettingsMenu = document.getElementById('close-settings-btn');
+const keybinding = document.getElementById('keybinding');
+const keybindingValue = document.getElementById('keybinding-value');
 
 // Volume Settings Constants
 const overlay = document.getElementById('overlay');
@@ -47,15 +50,134 @@ const nextBtn = document.getElementById('next-btn');
 let typingInterval;
 let currentScene = 0;
 
+// Define our environment class for scene items
+class Environment {
+    constructor() {
+        this.inventory = [];
+    }
+
+    // Adds item to playing area, hotspot
+    addItem(name, item) {
+        // Return if the item is already in the inventory
+        if (this.inventory.includes(name)) return;
+
+        // Create element
+        const element = document.createElement("div");
+        element.setAttribute("id", name)
+        element.classList.add('item-marker');
+
+        element.style.position = "absolute";
+        element.style.top = `${item["y"]}%`;
+        element.style.left = `${item["x"]}%`;
+
+        // On click add the item to the player's inventory & retrieve the element
+        element.addEventListener("click", () => {
+            this.inventory.push(name);
+            const itemMarker = document.getElementById(name)
+
+            // Remove the item from the screen
+            itemMarker.remove();
+
+            // Add the item to the carousel on the screen
+            const itemContainer = document.createElement('div');
+            itemContainer.setAttribute("class", "carousel-item");
+
+            const img = document.createElement('img');
+            img.src = 'character_sprites/pikachu.png';
+            itemContainer.appendChild(img);
+
+            carouselItems.appendChild(itemContainer);
+
+            // Animate the item into the carousel
+            img.style.transform = "scale(0)";
+            img.style.opacity = "0";
+            img.style.transition = "transform 0.5s, opacity 0.5s";
+
+            setTimeout(() => {
+                img.style.transform = "scale(1)";
+                img.style.opacity = "1";
+            }, 150);
+
+            // Add a description to the itemContainer div which already has the item img
+            const description = document.createElement('div');
+            description.textContent = item["description"];
+            description.classList.add('item-description');
+            itemContainer.appendChild(description);
+
+            // Add a hover effect transition to the itemContainer (for some reason it's glitchy when I simply do this with css)
+            itemContainer.addEventListener('mouseenter', () => {
+                itemContainer.style.transition = 'transform 0.3s ease-in-out';
+            });
+
+            // Print the inventory to the screen
+            this.carouselShow();
+            this.createPlaceholders(item.offsetWidth);
+        });
+
+
+        document.body.appendChild(element);
+    }
+
+    // Create placeholder items
+    createPlaceholders(itemWidth = 100) {
+        // Clear any previously created placeholders
+        this.clearPlaceholders();
+
+        // Add carousel placeholder elements
+        const carouselWidth = carouselItems.offsetWidth;
+        const placeholderCount = Math.floor(carouselWidth / ((itemWidth + 32) - this.inventory.length));
+
+        for (let i = 0; i <= placeholderCount; i++) {
+            const itemPlaceholder = document.createElement('div');
+            itemPlaceholder.setAttribute("class", "carousel-placeholder");
+            carouselItems.appendChild(itemPlaceholder);
+        }
+    }
+
+    // Clear all the item markers in the scene
+    clearItems() {
+        const itemMarkers = document.querySelectorAll('.item-marker');
+        itemMarkers.forEach((item) => {
+            if (item.classList.contains('item-marker')) {
+                item.remove()
+            }
+        });
+    }
+
+    // Clear all the placeholders in the carousel
+    clearPlaceholders() {
+        const placeholders = document.querySelectorAll('.carousel-placeholder');
+        placeholders.forEach((item) => {
+            item.remove();
+        });
+    }
+
+    // Toggle carousel inventory
+    toggleCarousel() {
+        carousel.classList.toggle('show');
+        overlay.classList.add('show');
+    }
+
+    carouselShow() {
+        carousel.classList.add('show');
+        overlay.classList.add('show');
+    }
+
+    carouselHide() {
+        carousel.classList.remove('show');
+        overlay.classList.remove('show');
+    }
+}
+
 // Start Game Method
+let environment = new Environment();
+
 playGame.addEventListener('click', () => {
     playGame.innerHTML = "Continue ?";
     toggleSidebar();
     zoomIn();
     setScene("curr");
     sprite2.classList.toggle('show');
-
-    // typeText("Welcome to the game! Pressing 'enter', 'right-arrow' or 'spacebar' will advance the dialogue.");
 });
 
 // TypeText effect using an iterative approach with proper interruption
@@ -78,6 +200,20 @@ function typeText(
     }, speed);
 }
 
+// Add event listeners for clicking to go to the next scene  -- ignore in special cases
+dialogueContainer.addEventListener('click', (event) => {
+    if (!sideBar.classList.contains('translate')) return;
+    if (!event.target.closest('#dialogue-options')) return;
+});
+background.addEventListener('click', () => {
+    if (!sideBar.classList.contains('translate')) return;
+    setScene("next")
+});
+spriteContainer.addEventListener('click', () => {
+    if (!sideBar.classList.contains('translate')) return;
+    setScene("next")
+});
+
 // Keydown event listener
 document.addEventListener('keydown', (event) => {
     // Functionality to return early and not handle keyboard shortcuts if sidebar is in view
@@ -87,8 +223,7 @@ document.addEventListener('keydown', (event) => {
             closeOverlays();
             return;
         }
-
-        return
+        return;
     }
 
     // Functionality to handle the keyboard shortcuts while in the game
@@ -101,11 +236,28 @@ document.addEventListener('keydown', (event) => {
             break;
         case "Escape":
             sprite2.classList.toggle("show");
-            carousel.classList.remove("show");
+            environment.carouselHide();
             restartBtn.removeAttribute("hidden")
 
             toggleSidebar();
             toggleZoom();
+
+            // If there is overlay text then toggle it whenever escape is pressed
+            const overlayText = document.querySelector('.overlay-text');
+            if (overlayText) {
+                if (background.style.filter === 'brightness(0)') {
+                    background.style.filter = 'brightness(1)';
+                    overlayText.style.display = 'none';
+                    overlayText.style.opacity = "0";
+                } else if (background.style.filter === 'brightness(1)') {
+                    background.style.filter = 'brightness(0)';
+                    overlayText.style.display = 'flex';
+
+                    setTimeout(() => {
+                        overlayText.style.opacity = "1";
+                    }, 150);
+                }
+            }
 
             const itemMarkers = document.querySelectorAll(".item-marker");
             itemMarkers.forEach((item) => {
@@ -128,11 +280,45 @@ function zoomOut() { background.classList.remove('zoom'); }
 function toggleZoom() { background.classList.toggle('zoom'); }
 
 // Method for changing the background (i.e. Location)
-function changeBackground(newBackground) {
+function changeBackground(newBackground, sceneType, dialogue) {
+    // Remove any existing overlay text
+    const existingOverlayText = document.querySelector('.overlay-text');
+    if (existingOverlayText) {
+        existingOverlayText.remove();
+    }
+
+    if (sceneType == 'overlay_text') {
+        // Create overlay text element
+        background.style.filter = 'brightness(0)';
+        spriteContainer.style.display = "none";
+        dialogueContainer.style.display = "none";
+
+        // Create overlay text element
+        const overlayText = document.createElement('div');
+        overlayText.classList.add('overlay-text');
+        overlayText.style.filter = 'brightness(1)';
+        container.appendChild(overlayText);
+
+        setTimeout(() => {
+            typeText(dialogue, overlayText, 50);
+        }, 100);
+
+
+        // Add a fade-in effect
+        overlayText.style.opacity = "0";
+        overlayText.style.transition = "opacity 0.5s ease-in-out";
+        setTimeout(() => {
+            overlayText.style.opacity = "1";
+        }, 150);
+    } else {
+        background.style.filter = 'brightness(1)';
+        spriteContainer.style.display = "flex";
+        dialogueContainer.style.display = "flex";
+    }
     background.style.backgroundImage = `url(${newBackground})`;
 }
 
-// Fetch to fetch the current scene
+// Method to fetch and update the current scene
 async function setScene(action) {
     // Get Scene metadata from JSON
     const response = await fetch("assets/story.json");
@@ -150,12 +336,18 @@ async function setScene(action) {
     dialogueTitle.innerHTML = ' &#x2746; &nbsp; ' + scenes[`scene_${currentScene}`]['character_name'] + ' ';
     dialogue = scenes[`scene_${currentScene}`]['dialogue'];
 
-    // Update the background
-    changeBackground(scenes[`scene_${currentScene}`]['background'])
+    // Update the scene based on the scene object
+    changeBackground(scenes[`scene_${currentScene}`]['background'], scenes[`scene_${currentScene}`]['type'], scenes[`scene_${currentScene}`]['dialogue']);
+
+    // Update the font color of the dialogue box based on the scene object
+    if (scenes[`scene_${currentScene}`]['type'] == 'inner_monologue') {
+        dialogueText.style.color = 'rgb(144, 238, 144)';
+    } else {
+        dialogueText.style.color = 'whitesmoke';
+    }
 
     // Update the environment play area with the background items
     sceneItems = scenes[`scene_${currentScene}`]['items'];
-    environment = new PointItemEnv();
 
     try {
         // Clear any items from the previous scene
@@ -177,9 +369,8 @@ async function setScene(action) {
 
 // Carousel Controls
 inventoryBtn.addEventListener('click', () => {
-    const pointItemEnv = new PointItemEnv();
-    pointItemEnv.toggleCarousel();
-    pointItemEnv.createPlaceholders();
+    environment.toggleCarousel();
+    environment.createPlaceholders();
 });
 
 carouselRight.addEventListener('click', () => {
@@ -192,8 +383,7 @@ carouselLeft.addEventListener('click', () => {
 
 // On Screen Resize
 addEventListener("resize", (event) => {
-    const pointItemEnv = new PointItemEnv();
-    pointItemEnv.createPlaceholders();
+    environment.createPlaceholders();
 });
 
 // Show Restart Confirmation Menu 
@@ -258,101 +448,6 @@ function closeOverlays() {
     restartConfirmationMenu.classList.remove('show');
     overlay.classList.remove('show');
     carousel.classList.remove('show');
-}
-
-// Class to generate clickable items for a scene
-class PointItemEnv {
-    constructor() {
-        this.inventory = [];
-    }
-
-    // Adds item to playing area, hotspot
-    addItem(name, item) {
-        // Create element
-        const element = document.createElement("div");
-        element.setAttribute("id", name)
-        element.classList.add('item-marker');
-
-        element.style.position = "absolute";
-        element.style.top = `${item["y"]}%`;
-        element.style.left = `${item["x"]}%`;
-
-        element.addEventListener("click", () => {
-            // Add the item to the player's inventory & retrieve the element
-            this.inventory.push(name);
-            const itemMarker = document.getElementById(name)
-
-            // Remove the item from the screen
-            itemMarker.remove();
-
-            // Add the item to the carousel on the screen
-            const item = document.createElement('div');
-            item.setAttribute("class", "carousel-item");
-
-            const img = document.createElement('img');
-            img.src = 'character_sprites/pikachu.png';
-            item.appendChild(img);
-
-            carouselItems.appendChild(item);
-
-            // Animate the item into the carousel
-            img.style.transform = "scale(0)";
-            img.style.opacity = "0";
-            img.style.transition = "transform 1s, opacity 1s";
-
-            setTimeout(() => {
-                img.style.transform = "scale(1)";
-                img.style.opacity = "1";
-            }, 300);
-
-            // Print the inventory to the screen
-            carousel.classList.add('show');
-
-            this.createPlaceholders(item.offsetWidth);
-        });
-
-        document.body.appendChild(element);
-    }
-
-    // Create placeholder items
-    createPlaceholders(itemWidth = 100) {
-        // Clear any previously created placeholders
-        this.clearPlaceholders();
-
-        // Add carousel placeholder elements
-        const carouselWidth = carouselItems.offsetWidth;
-        const placeholderCount = Math.floor(carouselWidth / ((itemWidth + 32) - this.inventory.length));
-
-        for (let i = 0; i <= placeholderCount; i++) {
-            const itemPlaceholder = document.createElement('div');
-            itemPlaceholder.setAttribute("class", "carousel-placeholder");
-            carouselItems.appendChild(itemPlaceholder);
-        }
-    }
-
-    // Clear all the item markers in the scene
-    clearItems() {
-        const itemMarkers = document.querySelectorAll('.item-marker');
-        itemMarkers.forEach((item) => {
-            if (item.classList.contains('item-marker')) {
-                item.remove()
-            }
-        });
-    }
-
-    // Clear all the placeholders in the carousel
-    clearPlaceholders() {
-        const placeholders = document.querySelectorAll('.carousel-placeholder');
-        placeholders.forEach((item) => {
-            item.remove();
-        });
-    }
-
-
-    // Toggle carousel inventory
-    toggleCarousel() {
-        carousel.classList.toggle('show');
-    }
 }
 
 // Toggle gameplay sound

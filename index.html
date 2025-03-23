@@ -31,8 +31,10 @@
         <div id="dialogue-title"></div>
         <div id="dialogue-text"></div>
         <div id="dialogue-options">
-          <div id="next-btn">Next</div>
+          <div id="next-btn" onclick="setScene('next')">Next</div>
           <div id="inventory-btn">Inventory</div>
+          <div id="prev-btn" onclick="setScene('prev')">Prev</div>
+
         </div>
       </div>
       <!-- Carousel is hidden by default -->
@@ -58,19 +60,21 @@
           <input type="range" id="type-text-slider" min="0" max="100" value="50">
           <span id="type-text-value">50%</span>
         </div>
-        <h3>Controls</h3>
-        <div>
-          <span>Next</span>
-          <span>Space</span>
-        </div>
-        <div>
-          <span>Settings</span>
-          <span>Escape</span>
-        </div>
-        <div id="settings-buttons">
-          <button id="close-settings-btn">Close</button>
-          <button id="save-settings-btn">Save</button>
-        </div>
+          <h3 style="margin-bottom: 10px;">Controls</h3>
+          <hr>
+          <div class="keybinding">
+            <span>Toggle Sidebar :</span>
+            <span>Escape</span>
+          </div>
+          <div class="keybinding">
+            <span>Next Dialogue :</span>
+            <span>Space / Right-Arrow / Enter</span>
+          </div>
+          <hr>
+          <div id="settings-buttons">
+            <button id="close-settings-btn">Close</button>
+            <button id="save-settings-btn">Save</button>
+          </div>
       </div>
       <div id="restart-confirmation">
         <h2>Are you sure you want to restart the game?</h2>

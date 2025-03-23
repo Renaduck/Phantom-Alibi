@@ -3,7 +3,7 @@
     "items": {
         "item_1": {
             "img_src": "character_sprites/pikachu.png",
-            "description": "pikachu collectible 1",
+            "description": "pikachu collectible 1 this is a super duper duper duper long description",
             "x": "30",
             "y": "20"
         },
@@ -28,16 +28,16 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Welcome to the game! Pressing 'enter', 'right-arrow' or 'spacebar' will advance the dialogue.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "overlay_text"
         },
         "scene_1": {
             "character_name": "???",
             "character_sprite": "./character_sprites/sora_talking.PNG",
-            "background": "./assets/entrance.png",
+            "background": "./assets/exterior.jpg",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Huff... huff... Looks like I finally made it. Just a train, two buses, and a scenic hike through nowhere.",
-            "type": "overlay_text / dialogue / inner_monologue",
+            "type": "dialogue",
             "items": [
                 "item_1",
                 "item_2"
@@ -50,7 +50,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "I don't know why Rina picked her summer cabin of all places for a birthday party. Kind of a pain making everyone commute all the way out here. ",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "inner_monologue"
         },
         "scene_3": {
             "character_name": "???",
