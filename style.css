@@ -199,7 +199,7 @@ body {
 
 /* Sliders */
 #volume-container,
-#type-text-container {
+#type-speed-container {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
@@ -207,18 +207,18 @@ body {
 }
 
 #volume-container label,
-#type-text-container label {
+#type-speed-container label {
     min-width: fit-content;
 }
 
 #volume-slider,
-#type-text-slider {
+#type-speed-slider {
     width: calc(100% - 112.5px);
     cursor: pointer;
 }
 
 #volume-value,
-#type-text-value {
+#type-speed-value {
     font-weight: bold;
 }
 
@@ -437,6 +437,7 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
+    padding: 0px 5px;
     overflow: hidden;
     transition: transform 0.3s ease;
 }

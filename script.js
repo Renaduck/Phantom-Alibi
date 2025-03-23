@@ -21,7 +21,9 @@ const keybindingValue = document.getElementById('keybinding-value');
 // Volume Settings Constants
 const overlay = document.getElementById('overlay');
 const volumeSlider = document.getElementById('volume-slider');
-const volumeValue = document.getElementById('volume-value');
+const volumeLabel = document.getElementById('volume-label');
+const typingSlider = document.getElementById('type-speed-slider');
+const typingLabel = document.getElementById('type-speed-label');
 
 // Audio class 
 const pageFlipAudio = new Audio("./audio/page-flip.mp3");
@@ -46,9 +48,11 @@ const carouselLeft = document.getElementById('carousel-left');
 const inventoryBtn = document.getElementById('inventory-btn');
 const nextBtn = document.getElementById('next-btn');
 
-let typingInterval;
-let currentVolume = 1;
+// Global values for the game
+let currentTypingSpeed = typingSlider.value;
+let currentVolume = volumeSlider.value;
 let currentScene = 0;
+let typingInterval; // Keep track of the typing interval identifier in order to clear it when needed
 
 // Define our environment class for scene items
 class Environment {
@@ -186,9 +190,11 @@ function typeText(
     element = dialogueText,
     speed = 15
 ) {
-    clearInterval(typingInterval);  // Stop any ongoing typing effect
-    element.innerHTML = "";         // Clear existing text before starting new typing effect
+    clearInterval(typingInterval);              // Stop any ongoing typing effect
+    element.innerHTML = "";                     // Clear existing text before starting new typing effect
+    speed = currentTypingSpeed / 50 * speed;     // Adjust speed based on user settings
 
+    // Start typing effect
     let index = 0;
     typingInterval = setInterval(() => {
         if (index < content.length) {
@@ -217,6 +223,7 @@ spriteContainer.addEventListener('click', () => {
 // Play Background Music on First User Interaction
 document.addEventListener('click', () => {
     if (backgroundAudio) {
+        backgroundAudio.volume = volumeSlider.value / 100;
         backgroundAudio.play();
     }
 });
@@ -412,20 +419,37 @@ noRestart.addEventListener('click', closeOverlays)
 
 // Show settings menu
 settingsBtn.addEventListener('click', () => {
-    settingsMenu.classList.add('show')
-    overlay.classList.add('show')
+    settingsMenu.classList.add('show');
+    overlay.classList.add('show');
+
+    // Store the current settings
+    const currentVolume = volumeSlider.value;
+    const currentTypingSpeed = typingSlider.value;
 });
+
+// Restore default settings
+function restoreDefaultSettings() {
+    volumeSlider.value = currentVolume;
+    typingSlider.value = currentTypingSpeed;
+    volumeLabel.textContent = `${currentVolume}%`;
+    typingLabel.textContent = `${currentTypingSpeed}%`;
+}
 
 // Close settings menu 
 closeSettingsMenu.addEventListener('click', () => {
-    settingsMenu.classList.remove('show')
-    overlay.classList.remove('show')
+    settingsMenu.classList.remove('show');
+    overlay.classList.remove('show');
+    restoreDefaultSettings();
 })
 
 // Volume level with slider
 volumeSlider.addEventListener('input', (event) => {
-    const volume = event.target.value;
-    volumeValue.textContent = `${volume}%`;
+    volumeLabel.textContent = `${event.target.value}%`;
+});
+
+// Type Speed level with slider
+typingSlider.addEventListener('input', (event) => {
+    typingLabel.textContent = `${event.target.value}%`;
 });
 
 // Close the overlay if clicked outside the settings menus
@@ -455,12 +479,21 @@ function closeOverlays() {
     restartConfirmationMenu.classList.remove('show');
     overlay.classList.remove('show');
     carousel.classList.remove('show');
+
+    restoreDefaultSettings();
+}
+
+// Update the default settings
+function updateSettings() {
+    currentVolume = volumeSlider.value;
+    currentTypingSpeed = typingSlider.value;
+    closeOverlays();
 }
 
 // Toggle gameplay sound
 function toggleSound() {
     if (pageFlipAudio.paused) {
-        pageFlipAudio.volume = currentVolume * 0.1;
+        pageFlipAudio.volume = (volumeSlider.value / 100) * 0.1;
         pageFlipAudio.play();
     } else {
         pageFlipAudio.currentTime = 0;
