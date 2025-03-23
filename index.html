@@ -5,44 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Adventure & Click</title>
-    <link rel="icon" href="assets/test_sprite.png" type="image/png">
+    <link rel="icon" href="character_sprites/pikachu.png" type="image/png">
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
     <div id="container">
       <div id="background"></div>
-      <h1>Adventure & Click</h1>
       <div id="sidebar">
         <div id="side-container">
+          <h2>Adventure & Click</h2>
           <div id="play-game">Start Game</div>
+          <div id="restart" hidden>Restart</div>
           <div id="credits">Credits</div>
           <div id="settings">Settings</div>
-          <div id="restart-game" hidden >Restart Game</div>
         </div>
       </div>
       <div id="sprite-container">
-        <div><img id="sprite-1" src="" alt=""/></div>
-        <div><img id="sprite-2" src="" alt=""/></div>
-        <div><img id="sprite-3" src="" alt=""/></div>
+        <div><img id="sprite-1" src=""/></div>
+        <div><img id="sprite-2" src=""/></div>
+        <div><img id="sprite-3" src=""/></div>
       </div>
-      <div id="click-container">
         
       </div>
       <div id="dialogue-container">
         <div id="dialogue-title"></div>
         <div id="dialogue-text"></div>
-        <div id="dialogue-options"></div>
+        <div id="dialogue-options">
+          <div id="next-btn">Next</div>
+          <div id="inventory-btn">Inventory</div>
+        </div>
       </div>
       <!-- Carousel is hidden by default -->
       <div id="carousel" style="display: none;">
         <span id="carousel-left">&#10094;</span>
-        <div id="carousel-images">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+        <div id="carousel-items">
           <!-- carousel image divs are inserted here -->
         </div>
         <span id="carousel-right">&#10095;</span>

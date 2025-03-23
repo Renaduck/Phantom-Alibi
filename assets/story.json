@@ -1,17 +1,23 @@
 {
     "title": "Story Title",
-    "objects": {
+    "items": {
         "item_1": {
-            "img_src": "",
-            "description": ""
+            "img_src": "character_sprites/pikachu.png",
+            "description": "pikachu collectible 1",
+            "x": "30",
+            "y": "20"
         },
         "item_2": {
-            "img_src": "",
-            "description": ""
+            "img_src": "character_sprites/pikachu.png",
+            "description": "pikachu collectible 2",
+            "x": "73",
+            "y": "37"
         },
         "item_3": {
-            "img_src": "",
-            "description": ""
+            "img_src": "character_sprites/pikachu.png",
+            "description": "pikachu collectible 3",
+            "x": "0",
+            "y": "0"
         }
     },
     "scenes": {
@@ -31,7 +37,11 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Huff... huff... Looks like I finally made it. Just a train, two buses, and a scenic hike through nowhere.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "overlay_text / dialogue / inner_monologue",
+            "items": [
+                "item_1",
+                "item_2"
+            ]
         },
         "scene_2": {
             "character_name": "???",
