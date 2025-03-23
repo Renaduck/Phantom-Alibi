@@ -24,9 +24,8 @@ const volumeSlider = document.getElementById('volume-slider');
 const volumeValue = document.getElementById('volume-value');
 
 // Audio class 
-const buttonAudio = new Audio("./audio/page-flip.mp3");
+const pageFlipAudio = new Audio("./audio/page-flip.mp3");
 const backgroundAudio = new Audio("./audio/ominous.mp3");
-// backgroundAudio.play();
 
 // Restart Confirmation Constants
 const restartBtn = document.getElementById('restart');
@@ -48,6 +47,7 @@ const inventoryBtn = document.getElementById('inventory-btn');
 const nextBtn = document.getElementById('next-btn');
 
 let typingInterval;
+let currentVolume = 1;
 let currentScene = 0;
 
 // Define our environment class for scene items
@@ -212,6 +212,13 @@ background.addEventListener('click', () => {
 spriteContainer.addEventListener('click', () => {
     if (!sideBar.classList.contains('translate')) return;
     setScene("next")
+});
+
+// Play Background Music on First User Interaction
+document.addEventListener('click', () => {
+    if (backgroundAudio) {
+        backgroundAudio.play();
+    }
 });
 
 // Keydown event listener
@@ -452,9 +459,10 @@ function closeOverlays() {
 
 // Toggle gameplay sound
 function toggleSound() {
-    if (buttonAudio.paused) {
-        // buttonAudio.play();
+    if (pageFlipAudio.paused) {
+        pageFlipAudio.volume = currentVolume * 0.1;
+        pageFlipAudio.play();
     } else {
-        buttonAudio.currentTime = 0;
+        pageFlipAudio.currentTime = 0;
     }
 }
