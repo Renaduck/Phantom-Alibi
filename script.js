@@ -377,7 +377,7 @@ async function setScene(action) {
     // Update the dialogue box -- present in parts if dialogue exceeds box word lmit
     dialogueTitle.innerHTML = ' &#x2746; &nbsp; ' + scenes[`scene_${currentScene}`]['character_name'] + ' ';
     dialogue = scenes[`scene_${currentScene}`]['dialogue'];
-
+    
     // Update the scene based on the scene object
     changeBackground(scenes[`scene_${currentScene}`]['background'], scenes[`scene_${currentScene}`]['type'], scenes[`scene_${currentScene}`]['dialogue']);
 
