@@ -92,7 +92,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Sora! Right on brand—last one here, as always.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "overlay_text"
         },
         {
             "character_name": "Sora",
@@ -110,7 +110,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Oh yeah, thanks for the warm and totally not sarcastic welcome.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "dialogue"
         },
         {
             "character_name": "Rina",
@@ -119,7 +119,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Come on, let me introduce you to everyone! She gestures toward a grumpy-looking girl who clearly didn't want to be here.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "dialogue"
         },
         {
             "character_name": "Rina",
@@ -128,7 +128,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "This is Hana!",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "dialogue"
         },
         {
             "character_name": "Hana",
@@ -137,7 +137,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(arms crossed, unimpressed) Nice to meet you. Rina talks about you all the time. I've even heard some of your bathtime stories.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "dialogue"
         },
         {
             "character_name": "Sora",
@@ -146,7 +146,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Wow. Fantastic. Just what I wanted to hear.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "dialogue"
         },
         {
             "character_name": "Rina",
@@ -155,7 +155,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(grinning) Oh, come on, you used to be so cute back then! Back when you weren't such a buzzkill. If I knew this party was going to be a roast, I would've stayed home. I shift my gaze to the corner of the room, where a studious-looking guy stands stiffly. Didn't peg Rina for the type to date bookworms, but we haven't talked in a year. Ever since she transferred to that fancy private school, we kind of… fell apart.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "dialogue"
         },
         {
             "character_name": "Rina",
@@ -164,7 +164,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Oh! That's Ken, our class president. If you're ever in trouble, he's the guy to go to.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "dialogue"
         },
         {
             "character_name": "Sora",
@@ -173,7 +173,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Noted. Standing next to him is… trouble. The kind of guy your parents warn you about.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "inner_monologue"
         },
         {
             "character_name": "???",
@@ -182,7 +182,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(smirks) Hey there, sweetheart. You can just ask me out instead of staring.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "dialogue"
         },
         {
             "character_name": "Ken",
@@ -191,7 +191,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(sighs, already exhausted) Ren, for the love of everything decent, please stop harassing people.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "dialogue"
         },
         {
             "character_name": "Ren",
@@ -200,7 +200,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(grinning, clearly not sorry) What? It's called charisma. Yeah. This is gonna be a long night.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "dialogue"
         },
         {
             "character_name": "Rina",
@@ -209,7 +209,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(hands on hips, teasing smirk) Oh, you boys. Behave, or I'll feed you to the wolves. They'd be happy to eat a meathead like Ren.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "dialogue"
         },
         {
             "character_name": "Ren",
@@ -218,7 +218,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(grinning) Bold of you to assume they'd pick me first.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "dialogue"
         },
         {
             "character_name": "Ken",
@@ -227,7 +227,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(sighs) They would. No contest.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "dialogue"
         },
         {
             "character_name": "Rina",
@@ -236,7 +236,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(ignoring them, turning to Sora) Come on, let me show you to your room before you get sucked into their nonsense.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "dialogue"
         },
         {
             "character_name": "Rina",
@@ -245,7 +245,7 @@
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "This one's yours! Get comfy—dinner's in 30 minutes, so take your time.",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "dialogue"
         },
         {
             "character_name": "Sora",

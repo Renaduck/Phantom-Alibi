@@ -60,6 +60,7 @@ function App() {
                     setHasCharacterSprite(hasSprite);
 
                     // Properly handle multi-type formats like "overlay_text / dialogue / inner_monologue"
+                    // This logic is kept in case we encounter slash-delimited types in the future
                     if (type.includes('/')) {
                         // Split by slash and trim each type
                         const types = type.split('/').map(t => t.trim());
