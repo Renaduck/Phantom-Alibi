@@ -77,19 +77,21 @@
             "type": "dialogue"
         },
         "scene_1": {
-            "character_name": "",
+            "character_name": "???",
             "character_sprite": "",
-            "background": "./assets/scenes/exterior.jpg",
+            "background": "./assets/scenes/exterior.jpg./assets/scenes/exterior.jpg",
             "lighting": "",
             "sound": "",
             "dialogue": "I-It wasn't supposed to be like this. It was just a game",
             "type": "overlay_text"
         },
         "scene_2": {
-            "character_name": "",
+            "character_name": "???",
             "character_sprite": "",
-            "background": "./assets/scenes/exterior.jpg",
+            "background": "./assets/scenes/exterior.jpg./assets/scenes/exterior.jpg",
             "lighting": "",
+            "sound": "",
+            "dialogue": "He can't really be dead… right?",
             "sound": "",
             "dialogue": "He can't really be dead… right?", 
             "type": "overlay_text"
