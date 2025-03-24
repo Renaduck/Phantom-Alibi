@@ -2,7 +2,12 @@ import { soundEffectsSlider, volumeSlider } from './constants.js';
 
 // Audio Constants 
 export const pageFlipAudio = new Audio("./assets/audio/page-flip.mp3");
+
+// Background music setup
 export const backgroundAudio = new Audio("./assets/audio/ominous.mp3");
+// Set loop to true for continuous playback throughout the game
+backgroundAudio.loop = true;
+
 export const itemAcquiredAudio = new Audio("./assets/audio/item-acquired.mp3");
 export const swooshAudio = new Audio("./assets/audio/swoosh.mp3");
 
@@ -41,6 +46,16 @@ export function swooshSound() {
 export function playBackgroundMusic() {
     if (backgroundAudio) {
         backgroundAudio.volume = volumeSlider.value / 100;
-        backgroundAudio.play();
+        
+        // Browser autoplay policy fix:
+        // Audio.play() returns a promise that may be rejected if autoplay is blocked
+        // This pattern handles the rejection gracefully instead of throwing an uncaught exception
+        const playPromise = backgroundAudio.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log("Audio playback was prevented by the browser. Click to play.");
+            });
+        }
     }
 } 

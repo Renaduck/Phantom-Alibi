@@ -517,3 +517,39 @@ body {
 #credits-menu span a:hover {
     color: rgb(119, 196, 255);
 }
+
+/* Click-to-play overlay styling */
+#click-to-play-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.click-to-play-content {
+    text-align: center;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.click-to-play-content h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.click-to-play-content p {
+    font-size: 1.5rem;
+}
+
+/* Hide overlay when clicked */
+#click-to-play-overlay.hidden {
+    display: none;
+}

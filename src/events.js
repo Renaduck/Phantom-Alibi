@@ -15,6 +15,7 @@ export function setupDOMListeners() {
         zoomIn();
         setScene("curr");
         swooshSound();
+        
         sprite2.classList.toggle('show');
     });
 

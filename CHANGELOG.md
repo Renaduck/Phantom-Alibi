@@ -27,6 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed potential issues with settings not being properly initialized
 - Improved initialization of game state values from DOM elements
 - Added missing event listeners for navigation buttons
+- Added click-to-play overlay to handle browser autoplay restrictions for background music
+- Implemented promise-based error handling for audio playback to prevent uncaught exceptions
 
 ## [0.1.0]
 

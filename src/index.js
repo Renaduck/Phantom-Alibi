@@ -4,10 +4,24 @@ import './ui/carousel.js';
 import './ui/overlay.js';
 import { playBackgroundMusic } from './audio.js';
 
+// Handle the click-to-play overlay
+function setupClickToPlayOverlay() {
+  const clickToPlayOverlay = document.getElementById('click-to-play-overlay');
+  
+  // Add click event to the overlay
+  clickToPlayOverlay.addEventListener('click', () => {
+    // Play background music when user first interacts with the page
+    playBackgroundMusic();
+    
+    // Hide the overlay
+    clickToPlayOverlay.classList.add('hidden');
+  });
+}
+
 // Initialize the game on load
 document.addEventListener('DOMContentLoaded', () => {
+  setupClickToPlayOverlay();
   setupDOMListeners();
-  playBackgroundMusic();
 });
 
 // Export global game state for modules that need it
