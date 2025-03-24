@@ -9,6 +9,7 @@ import {
     helpMenu,
     noRestart, 
     overlay, 
+    playGame,
     restartBtn, 
     restartConfirmationMenu, 
     settingsBtn, 
@@ -16,7 +17,9 @@ import {
     typingLabel, 
     typingSlider, 
     volumeLabel, 
-    volumeSlider, 
+    volumeSlider,
+    saveGameBtn,
+    loadGameBtn,
     yesRestart 
 } from '../constants.js';
 import { gameState } from '../index.js';
@@ -36,6 +39,7 @@ export function containsOverlay() {
     else if (carousel.classList.contains('show')) return true;
     else if (creditsMenu.classList.contains('show')) return true;
     else if (helpMenu.classList.contains('show')) return true;
+    else if (document.getElementById('save-list-menu').classList.contains('show')) return true;
     else return false;
 }
 
@@ -86,6 +90,11 @@ export function setupOverlayListeners() {
     // Restart the game and clear progress 
     yesRestart.addEventListener('click', () => {
         gameState.currentScene = 0;
+        // Reset the game UI
+        playGame.innerHTML = "Start Game";
+        restartBtn.hidden = true;
+        saveGameBtn.hidden = true;
+        loadGameBtn.hidden = true;
         closeOverlays();
     });
 

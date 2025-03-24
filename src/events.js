@@ -1,4 +1,4 @@
-import { background, carousel, carouselItems, dialogueContainer, nextBtn, playGame, prevBtn, restartBtn, saveSettingsBtn, sideBar, sprite2, spriteContainer } from './constants.js';
+import { background, carousel, carouselItems, dialogueContainer, nextBtn, playGame, prevBtn, restartBtn, saveSettingsBtn, sideBar, sprite2, spriteContainer, saveGameBtn, loadGameBtn, loadMenu } from './constants.js';
 import { environment } from './environment.js';
 import { gameState } from './index.js';
 import { pageFlipSound, swooshSound } from './audio.js';
@@ -6,18 +6,57 @@ import { setScene, toggleZoom, zoomIn } from './scene.js';
 import { toggleSidebar } from './ui/sidebar.js';
 import { containsOverlay, closeOverlays, updateSettings } from './ui/overlay.js';
 import { completeTypingAnimation } from './ui/dialogue.js';
+import { saveGame, showSaveList, initSaveLoad } from './saveload.js';
 
 // Setup all event listeners
 export function setupDOMListeners() {
+    // Initialize save/load functionality
+    initSaveLoad();
+    
     // Start game button
     playGame.addEventListener('click', () => {
-        playGame.innerHTML = "Continue ?";
-        toggleSidebar();
-        zoomIn();
-        setScene("curr");
-        swooshSound();
-        
-        sprite2.classList.toggle('show');
+        if (playGame.textContent === "Start Game") {
+            playGame.innerHTML = "Continue Game";
+            toggleSidebar();
+            zoomIn();
+            setScene("curr");
+            swooshSound();
+            
+            sprite2.classList.toggle('show');
+            
+            // Show game-related buttons after game start
+            restartBtn.hidden = false;
+            saveGameBtn.hidden = false;
+            loadGameBtn.hidden = false;
+        } else if (playGame.textContent === "Load Game") {
+            // Show load menu if "Load Game" is clicked
+            showSaveList('load');
+        } else {
+            // Otherwise just toggle sidebar
+            toggleSidebar();
+        }
+    });
+
+    // Save game button
+    saveGameBtn.addEventListener('click', () => {
+        if (!containsOverlay()) {
+            saveGame();
+            toggleSidebar();
+        }
+    });
+
+    // Load game button
+    loadGameBtn.addEventListener('click', () => {
+        if (!containsOverlay()) {
+            showSaveList('load');
+        }
+    });
+
+    // Load menu button
+    loadMenu.addEventListener('click', () => {
+        if (!containsOverlay()) {
+            showSaveList('load');
+        }
     });
 
     // Add event listeners for clicking to go to the next scene -- ignore in special cases
@@ -148,7 +187,13 @@ function handleKeyDown(event) {
 function handleEscapeKey() {
     sprite2.classList.toggle("show");
     environment.carouselHide();
-    restartBtn.removeAttribute("hidden")
+    
+    // Only ensure these buttons are visible if game has started
+    if (playGame.textContent !== "Start Game") {
+        restartBtn.hidden = false;
+        saveGameBtn.hidden = false;
+        loadGameBtn.hidden = false;
+    }
 
     toggleSidebar();
     toggleZoom();

@@ -1,6 +1,7 @@
 // DOM Elements
 export const sideBar = document.getElementById('sidebar');
 export const playGame = document.getElementById('play-game');
+export const loadMenu = document.getElementById('load-menu');
 
 // Credits Constants
 export const creditsBtn = document.getElementById('credits');
@@ -58,4 +59,8 @@ export const carouselRight = document.getElementById('carousel-right');
 export const carouselLeft = document.getElementById('carousel-left');
 export const inventoryBtn = document.getElementById('inventory-btn');
 export const nextBtn = document.getElementById('next-btn');
-export const prevBtn = document.getElementById('prev-btn'); 
+export const prevBtn = document.getElementById('prev-btn');
+
+// Save/Load Constants
+export const saveGameBtn = document.getElementById('save-game');
+export const loadGameBtn = document.getElementById('load-game'); 
