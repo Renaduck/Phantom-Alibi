@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Migrated from vanilla JavaScript to React with TypeScript
+  - Added type safety with TypeScript interfaces for game state
+  - Implemented Zustand for state management
+  - Created modular React components for each game element
+  - Properly handled assets with Vite's bundling system
+  - Improved code maintainability with React patterns and hooks
 - Added persistent help button in top-left corner
   - Implemented using Iconify for scalable vector icons
   - Added smooth fade-in and hover animations
@@ -28,6 +34,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Refactored codebase architecture for React/TypeScript
+  - Organized code into React components with clear responsibilities
+  - Moved application state to Zustand store
+  - Used React hooks for component logic
+  - Leveraged TypeScript for type safety
+  - Implemented proper error handling and fallbacks
 - Refactored scene storage from object-based to array-based structure
   - Changed story.json to use an array of scene objects instead of numbered keys
   - Updated scene navigation to use array indexing
@@ -66,6 +78,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Fixed infinite update loops in React components using selective state selectors
+- Properly handled asset imports with Vite's ES module system
+- Added type declarations for media files to support TypeScript
+- Fixed circular dependencies in the codebase
 - Fixed potential issues with settings not being properly initialized
 - Improved initialization of game state values from DOM elements
 - Added missing event listeners for navigation buttons
