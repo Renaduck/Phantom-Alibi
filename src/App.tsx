@@ -15,46 +15,37 @@ import Carousel from './components/Carousel'
 import './App.css'
 
 function App() {
-  const { 
-    updateLoadButtonState,
-    setupKeyboardListeners,
-    cleanupKeyboardListeners
-  } = useStore(state => ({
-    updateLoadButtonState: state.updateLoadButtonState,
-    setupKeyboardListeners: state.setupKeyboardListeners,
-    cleanupKeyboardListeners: state.cleanupKeyboardListeners
-  }));
+    // Use individual selectors instead of destructuring multiple properties
+    const setupKeyboardListeners = useStore(state => state.setupKeyboardListeners);
+    const cleanupKeyboardListeners = useStore(state => state.cleanupKeyboardListeners);
 
-  // Set up event listeners on mount
-  useEffect(() => {
-    // Check for saved games to update load button state
-    updateLoadButtonState();
-    
-    // Set up keyboard event listeners
-    setupKeyboardListeners();
-    
-    // Clean up event listeners on unmount
-    return () => {
-      cleanupKeyboardListeners();
-    };
-  }, [updateLoadButtonState, setupKeyboardListeners, cleanupKeyboardListeners]);
+    // Set up event listeners on mount
+    useEffect(() => {
+        // Set up keyboard event listeners
+        setupKeyboardListeners();
 
-  return (
-    <div id="container">
-      <Background />
-      <Sidebar />
-      <Sprites />
-      <Dialogue />
-      <Carousel />
-      <Overlay />
-      <ClickToPlay />
-      <SaveListMenu />
-      <SettingsMenu />
-      <CreditsMenu />
-      <HelpMenu />
-      <RestartConfirmation />
-    </div>
-  )
+        // Clean up event listeners on unmount
+        return () => {
+            cleanupKeyboardListeners();
+        };
+    }, [setupKeyboardListeners, cleanupKeyboardListeners]);
+
+    return (
+        <div id="container">
+            <Background />
+            <Sidebar />
+            <Sprites />
+            <Dialogue />
+            <Carousel />
+            <Overlay />
+            <ClickToPlay />
+            <SaveListMenu />
+            <SettingsMenu />
+            <CreditsMenu />
+            <HelpMenu />
+            <RestartConfirmation />
+        </div>
+    )
 }
 
 export default App

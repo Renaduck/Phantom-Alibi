@@ -1,152 +1,161 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState, useCallback, memo, useEffect } from 'react';
 import useStore from '../store';
 import { fetchStoryData } from '../utils/scene';
-import { typeText } from '../utils/dialogue';
+import { Scene } from '../types';
+import TypedText from './TypedText';
 
-const Dialogue = () => {
-  // Use individual selectors instead of destructuring multiple properties at once
-  const currentScene = useStore(state => state.currentScene);
-  const dialogueVisible = useStore(state => state.dialogueVisible);
-  const setScene = useStore(state => state.setScene);
-  const completeTypingAnimation = useStore(state => state.completeTypingAnimation);
-  const typingInterval = useStore(state => state.typingInterval);
-  const setTypingInterval = useStore(state => state.setTypingInterval);
-  const currentTypingSpeed = useStore(state => state.currentTypingSpeed);
-  const playPageFlipSound = useStore(state => state.playPageFlipSound);
-  const toggleCarousel = useStore(state => state.toggleCarousel);
+// Use memo to prevent unnecessary re-renders
+const Dialogue = memo(() => {
+    // Use individual selectors instead of destructuring multiple properties at once
+    const currentScene = useStore(state => state.currentScene);
+    const dialogueVisible = useStore(state => state.dialogueVisible);
+    const setScene = useStore(state => state.setScene);
+    const playPageFlipSound = useStore(state => state.playPageFlipSound);
+    const toggleCarousel = useStore(state => state.toggleCarousel);
+    const currentTypingSpeed = useStore(state => state.currentTypingSpeed);
 
-  const [characterName, setCharacterName] = useState('');
-  // We need dialogueType for styles but not dialogueContent since it's typed directly
-  const [, setDialogueContent] = useState('');
-  const [dialogueType, setDialogueType] = useState('');
-  
-  const dialogueTextRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+    // Local state
+    const [characterName, setCharacterName] = useState('');
+    const [dialogueContent, setDialogueContent] = useState('');
+    const [dialogueType, setDialogueType] = useState('');
+    const [shouldCompleteTyping, setShouldCompleteTyping] = useState(false);
+    const [isTypingComplete, setIsTypingComplete] = useState(false);
 
-  // Fetch and update dialogue when scene changes
-  useEffect(() => {
-    let isMounted = true;
-    
-    const getSceneData = async () => {
-      try {
-        const { scenes } = await fetchStoryData();
-        if (!isMounted || !scenes || !scenes[currentScene]) return;
-        
-        const scene = scenes[currentScene];
-        
+    // Cache story data to prevent multiple fetches
+    const [cachedScenes, setCachedScenes] = useState<Scene[]>([]);
+
+    // Fetch story data once and cache it
+    useEffect(() => {
+        let isMounted = true;
+
+        const loadStoryData = async () => {
+            try {
+                if (cachedScenes.length === 0) {
+                    const { scenes } = await fetchStoryData();
+                    if (isMounted && scenes) {
+                        setCachedScenes(scenes);
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading story data:', error);
+            }
+        };
+
+        loadStoryData();
+
+        return () => {
+            isMounted = false;
+        };
+    }, [cachedScenes.length]);
+
+    // Update scene data when current scene changes
+    useEffect(() => {
+        // Only proceed if we have cached scenes
+        if (!cachedScenes || !cachedScenes[currentScene]) return;
+
+        const scene = cachedScenes[currentScene];
+
+        // Reset typing state
+        setShouldCompleteTyping(false);
+        setIsTypingComplete(false);
+
+        // Update state with scene data
         setCharacterName(scene.character_name || '');
         setDialogueContent(scene.dialogue || '');
         setDialogueType(scene.type || '');
-        
-        // Start typing animation for dialogue
-        if (dialogueTextRef.current) {
-          // Store element in the store for external access
-          useStore.setState({
-            currentDialogueElement: dialogueTextRef.current,
-            currentDialogueContent: scene.dialogue
-          }, false); // false prevents notifications/re-renders
-          
-          // Clear any existing typing interval
-          if (typingInterval !== null) {
-            window.clearInterval(typingInterval);
-            setTypingInterval(null);
-          }
-          
-          // Start new typing animation
-          const interval = typeText(
-            scene.dialogue,
-            dialogueTextRef.current,
-            currentTypingSpeed,
-            () => {
-              // Clear interval once typing is complete
-              setTypingInterval(null);
-            }
-          );
-          
-          setTypingInterval(interval);
+
+    }, [currentScene, cachedScenes]);
+
+    // Handle typing completion
+    const handleTypingComplete = useCallback(() => {
+        setIsTypingComplete(true);
+    }, []);
+
+    // Handle click to advance scene
+    const handleClick = useCallback((e: React.MouseEvent) => {
+        // Don't trigger for clicks on dialogue options or when sidebar is not visible
+        if (
+            e.target instanceof HTMLElement &&
+            e.target.closest('#dialogue-options') ||
+            !dialogueVisible
+        ) {
+            return;
         }
-      } catch (error) {
-        console.error('Error loading dialogue:', error);
-      }
-    };
 
-    getSceneData();
-    
-    // Cleanup function to prevent state updates after unmount
-    return () => {
-      isMounted = false;
-      
-      // Clear typing interval on unmount
-      if (typingInterval !== null) {
-        window.clearInterval(typingInterval);
-      }
-    };
-  }, [currentScene, currentTypingSpeed, setTypingInterval, typingInterval]);
+        // If text is still typing, complete it immediately
+        if (!isTypingComplete) {
+            setShouldCompleteTyping(true);
+        } else {
+            playPageFlipSound();
+            setScene('next');
+        }
+    }, [dialogueVisible, isTypingComplete, playPageFlipSound, setScene]);
 
-  // Handle click to advance scene
-  const handleClick = (e: React.MouseEvent) => {
-    // Don't trigger for clicks on dialogue options or when sidebar is not visible
-    if (
-      e.target instanceof HTMLElement && 
-      e.target.closest('#dialogue-options') ||
-      !dialogueVisible
-    ) {
-      return;
+    // Handle next button click
+    const handleNextClick = useCallback(() => {
+        if (!dialogueVisible) return;
+
+        if (!isTypingComplete) {
+            setShouldCompleteTyping(true);
+        } else {
+            playPageFlipSound();
+            setScene('next');
+        }
+    }, [dialogueVisible, isTypingComplete, playPageFlipSound, setScene]);
+
+    // Handle prev button click
+    const handlePrevClick = useCallback(() => {
+        if (!dialogueVisible) return;
+        playPageFlipSound();
+        setScene('prev');
+    }, [dialogueVisible, playPageFlipSound, setScene]);
+
+    // Handle inventory button click
+    const handleInventoryClick = useCallback(() => {
+        toggleCarousel();
+    }, [toggleCarousel]);
+
+    // If no scenes are loaded yet
+    if (cachedScenes.length === 0) {
+        return <div>Loading...</div>;
     }
-    
-    // If text is currently typing, complete it immediately
-    if (typingInterval !== null) {
-      completeTypingAnimation();
-    } else {
-      playPageFlipSound();
-      setScene('next');
-    }
-  };
 
-  // Handle next button click
-  const handleNextClick = () => {
-    if (!dialogueVisible) return;
-    playPageFlipSound();
-    setScene('next');
-  };
+    return (
+        <div
+            id="dialogue-container"
+            className={dialogueVisible ? 'translate' : ''}
+            onClick={handleClick}
+            style={{
+                display: dialogueType === 'none' ? 'none' : 'flex',
+                translate: dialogueType === 'none' ? '-100vw' : '0'
+            }}
+        >
+            <div id="dialogue-title">
+                &#x2746; &nbsp; {characterName}
+            </div>
 
-  // Handle prev button click
-  const handlePrevClick = () => {
-    if (!dialogueVisible) return;
-    playPageFlipSound();
-    setScene('prev');
-  };
+            <div
+                id="dialogue-text"
+                style={{
+                    color: dialogueType === 'inner_monologue' ? 'rgb(144, 238, 144)' : 'whitesmoke'
+                }}
+            >
+                <TypedText
+                    content={dialogueContent}
+                    typingSpeed={currentTypingSpeed}
+                    color={dialogueType === 'inner_monologue' ? 'rgb(144, 238, 144)' : 'whitesmoke'}
+                    onComplete={handleTypingComplete}
+                    shouldComplete={shouldCompleteTyping}
+                />
+            </div>
 
-  return (
-    <div 
-      id="dialogue-container" 
-      ref={containerRef}
-      className={dialogueVisible ? 'translate' : ''}
-      onClick={handleClick}
-      style={{ 
-        display: dialogueType === 'none' ? 'none' : 'flex',
-        translate: dialogueType === 'none' ? '-100vw' : '0' 
-      }}
-    >
-      <div id="dialogue-title">
-        &#x2746; &nbsp; {characterName} 
-      </div>
-      
-      <div 
-        id="dialogue-text" 
-        ref={dialogueTextRef}
-        style={{ 
-          color: dialogueType === 'inner_monologue' ? 'rgb(144, 238, 144)' : 'whitesmoke' 
-        }}
-      />
-      
-      <div id="dialogue-options">
-        <div id="next-btn" onClick={handleNextClick}>Next</div>
-        <div id="inventory-btn" onClick={toggleCarousel}>Inventory</div>
-        <div id="prev-btn" onClick={handlePrevClick}>Prev</div>
-      </div>
-    </div>
-  );
-};
+            <div id="dialogue-options">
+                <div id="next-btn" onClick={handleNextClick}>Next</div>
+                <div id="inventory-btn" onClick={handleInventoryClick}>Inventory</div>
+                <div id="prev-btn" onClick={handlePrevClick}>Prev</div>
+            </div>
+        </div>
+    );
+});
 
 export default Dialogue; 

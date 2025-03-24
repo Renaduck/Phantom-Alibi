@@ -31,6 +31,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Implemented two-step interaction (first click completes text, second advances scene)
   - Fixed overlay text click handling for centered text elements
   - Applied consistent behavior across all input methods (clicks, keyboard)
+- Created dedicated TypedText component for text animations
+  - Implemented React-based typing animation without DOM manipulation
+  - Added support for variable typing speeds
+  - Enabled forced completion of typing animation
+  - Used proper React state management for animation state
 
 ### Changed
 
@@ -40,6 +45,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Used React hooks for component logic
   - Leveraged TypeScript for type safety
   - Implemented proper error handling and fallbacks
+- Replaced fetch-based story loading with direct JSON import
+  - Leveraged Vite's built-in JSON import capabilities
+  - Removed timestamp-based cache busting logic
+  - Simplified story data loading process
+  - Improved performance by eliminating network request
 - Refactored scene storage from object-based to array-based structure
   - Changed story.json to use an array of scene objects instead of numbered keys
   - Updated scene navigation to use array indexing
@@ -79,7 +89,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fixed infinite update loops in React components using selective state selectors
-- Properly handled asset imports with Vite's ES module system
+  - Used individual state selectors instead of object destructuring in all components
+  - Applied React.memo to prevent unnecessary re-renders
+  - Added proper dependency arrays to useEffect and useCallback hooks
+  - Separated data fetching from render operations in components
+- Eliminated direct DOM manipulation in favor of React state management
+  - Replaced imperative DOM updates with declarative React patterns
+  - Created dedicated TypedText component for typing animations
+  - Used component state instead of direct DOM element manipulation
+  - Fixed dialogue text handling to use React's rendering system
+- Optimized state management to prevent cyclic updates
+  - Removed unnecessary state updates during render
+  - Cached scene data to prevent redundant fetches
+  - Used proper cleanup in useEffect hooks to prevent memory leaks
+  - Added defensive programming with null/undefined checks
+- Fixed memory leaks with proper interval cleanup in useEffect hooks
+- Properly handled assets with Vite's ES module system
 - Added type declarations for media files to support TypeScript
 - Fixed circular dependencies in the codebase
 - Fixed potential issues with settings not being properly initialized

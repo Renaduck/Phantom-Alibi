@@ -1,85 +1,92 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useState, useRef, memo } from 'react';
 import useStore from '../store';
 
-const Carousel = () => {
-  const { 
-    carouselVisible, 
-    inventory,
-    hideCarousel
-  } = useStore(state => ({
-    carouselVisible: state.carouselVisible,
-    inventory: state.inventory,
-    hideCarousel: state.hideCarousel
-  }));
+// Using memo to prevent unnecessary rerenders
+const Carousel = memo(() => {
+    const carouselVisible = useStore(state => state.carouselVisible);
+    const inventory = useStore(state => state.inventory);
 
-  const carouselItemsRef = useRef<HTMLDivElement>(null);
+    // Track placeholders in local state instead of DOM manipulation
+    const [placeholderCount, setPlaceholderCount] = useState(0);
+    const carouselItemsRef = useRef<HTMLDivElement>(null);
 
-  // Create placeholders for empty inventory slots
-  useEffect(() => {
-    const createPlaceholders = () => {
-      if (!carouselItemsRef.current || !carouselVisible) return;
-      
-      // Clear any previously created placeholders
-      const existingPlaceholders = carouselItemsRef.current.querySelectorAll('.carousel-placeholder');
-      existingPlaceholders.forEach(item => item.remove());
-      
-      // Calculate and add new placeholders based on available space
-      const carouselWidth = carouselItemsRef.current.offsetWidth;
-      const itemWidth = 100; // Standard item width in pixels
-      const placeholderCount = Math.floor(carouselWidth / ((itemWidth + 32) - inventory.length));
-      
-      for (let i = 0; i <= placeholderCount; i++) {
-        const placeholder = document.createElement('div');
-        placeholder.className = 'carousel-placeholder';
-        carouselItemsRef.current.appendChild(placeholder);
-      }
-    };
-    
-    createPlaceholders();
-    
-    // Recreate placeholders on window resize
-    window.addEventListener('resize', createPlaceholders);
-    return () => window.removeEventListener('resize', createPlaceholders);
-  }, [carouselVisible, inventory]);
+    // Calculate placeholder count based on viewport, safely separated from render cycle
+    const calculatePlaceholders = useCallback(() => {
+        if (!carouselItemsRef.current || !carouselVisible) return;
 
-  // Handle carousel navigation
-  const handleScrollLeft = () => {
-    if (carouselItemsRef.current) {
-      carouselItemsRef.current.scrollBy({ 
-        left: -carouselItemsRef.current.offsetWidth, 
-        behavior: 'smooth' 
-      });
+        const carouselWidth = carouselItemsRef.current.offsetWidth;
+        const itemWidth = 100; // Standard item width in pixels
+        // Safe calculation that avoids negative values
+        const maxItems = Math.max(1, Math.floor(carouselWidth / itemWidth));
+        const needed = Math.max(0, maxItems - inventory.length);
+
+        setPlaceholderCount(needed);
+    }, [carouselVisible, inventory.length]);
+
+    // Handle window resize
+    useEffect(() => {
+        if (!carouselVisible) return;
+
+        // Initial calculation
+        calculatePlaceholders();
+
+        // Set up resize handler
+        window.addEventListener('resize', calculatePlaceholders);
+        return () => window.removeEventListener('resize', calculatePlaceholders);
+    }, [carouselVisible, calculatePlaceholders]);
+
+    // Handle carousel navigation
+    const handleScrollLeft = useCallback(() => {
+        if (carouselItemsRef.current) {
+            carouselItemsRef.current.scrollBy({
+                left: -carouselItemsRef.current.offsetWidth,
+                behavior: 'smooth'
+            });
+        }
+    }, []);
+
+    const handleScrollRight = useCallback(() => {
+        if (carouselItemsRef.current) {
+            carouselItemsRef.current.scrollBy({
+                left: carouselItemsRef.current.offsetWidth,
+                behavior: 'smooth'
+            });
+        }
+    }, []);
+
+    // Early return if carousel isn't visible
+    if (!carouselVisible) {
+        return null;
     }
-  };
 
-  const handleScrollRight = () => {
-    if (carouselItemsRef.current) {
-      carouselItemsRef.current.scrollBy({ 
-        left: carouselItemsRef.current.offsetWidth, 
-        behavior: 'smooth' 
-      });
-    }
-  };
+    // Create placeholder array
+    const placeholders = Array.from({ length: placeholderCount }, (_, index) => (
+        <div key={`placeholder-${index}`} className="carousel-placeholder" />
+    ));
 
-  if (!carouselVisible) {
-    return null;
-  }
+    // Default placeholder image path
+    const defaultItemImagePath = "./assets/items/default-item.png";
 
-  return (
-    <div id="carousel" className="show">
-      <span id="carousel-left" onClick={handleScrollLeft}>&#10094;</span>
-      <div id="carousel-items" ref={carouselItemsRef}>
-        {/* Inventory items */}
-        {inventory.map((itemName) => (
-          <div key={itemName} className="carousel-item">
-            <img src="./assets/character_sprites/pikachu.png" alt={itemName} />
-            <div className="item-description">{itemName}</div>
-          </div>
-        ))}
-      </div>
-      <span id="carousel-right" onClick={handleScrollRight}>&#10095;</span>
-    </div>
-  );
-};
+    return (
+        <div id="carousel" className="show">
+            <span id="carousel-left" onClick={handleScrollLeft}>&#10094;</span>
+            <div id="carousel-items" ref={carouselItemsRef}>
+                {/* Inventory items */}
+                {inventory.map((itemName) => (
+                    <div key={itemName} className="carousel-item">
+                        <img
+                            src={defaultItemImagePath}
+                            alt={itemName}
+                        />
+                        <div className="item-description">{itemName}</div>
+                    </div>
+                ))}
+                {/* Placeholders */}
+                {placeholders}
+            </div>
+            <span id="carousel-right" onClick={handleScrollRight}>&#10095;</span>
+        </div>
+    );
+});
 
 export default Carousel; 

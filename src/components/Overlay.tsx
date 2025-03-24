@@ -1,33 +1,35 @@
+import { useCallback, memo } from 'react';
 import useStore from '../store';
 
-const Overlay = () => {
-  const { overlayVisible, hideAllOverlays } = useStore(state => ({
-    overlayVisible: state.overlayVisible,
-    hideAllOverlays: () => {
-      // Hide all overlay-related UI
-      useStore.setState({
-        overlayVisible: false,
-        settingsMenuVisible: false,
-        creditsMenuVisible: false,
-        helpMenuVisible: false,
-        restartConfirmationVisible: false,
-        saveListMenuVisible: false,
-        carouselVisible: false
-      });
+// Using memo to prevent unnecessary re-renders
+const Overlay = memo(() => {
+    const overlayVisible = useStore(state => state.overlayVisible);
+
+    // Create hideAllOverlays outside the render function using useCallback
+    const hideAllOverlays = useCallback(() => {
+        // Hide all overlay-related UI
+        useStore.setState({
+            overlayVisible: false,
+            settingsMenuVisible: false,
+            creditsMenuVisible: false,
+            helpMenuVisible: false,
+            restartConfirmationVisible: false,
+            saveListMenuVisible: false,
+            carouselVisible: false
+        });
+    }, []);
+
+    if (!overlayVisible) {
+        return null;
     }
-  }));
 
-  if (!overlayVisible) {
-    return null;
-  }
-
-  return (
-    <div 
-      id="overlay" 
-      className="show" 
-      onClick={hideAllOverlays}
-    />
-  );
-};
+    return (
+        <div
+            id="overlay"
+            className="show"
+            onClick={hideAllOverlays}
+        />
+    );
+});
 
 export default Overlay; 
