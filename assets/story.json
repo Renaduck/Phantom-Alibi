@@ -5,47 +5,65 @@
             "img_src": "./assets/character_sprites/pikachu.png",
             "description": "paint on the door handle",
             "x": "0",
-            "y": "0"
+            "y": "0",
+            "pickup": "true"
         },
         "door_scratches": {
             "img_src": "./assets/character_sprites/pikachu.png",
             "description": "scratches under the door",
             "x": "0",
-            "y": "0"
+            "y": "0", 
+            "pickup": "true"
         },
         "fishing_wire": {
             "img_src": "./assets/character_sprites/pikachu.png",
             "description": "fishing wire",
             "x": "30",
-            "y": "20"
+            "y": "20",
+            "pickup": "true"
         },
         "neck_bruises": {
             "img_src": "./assets/character_sprites/pikachu.png",
             "description": "neck bruises",
             "x": "73",
-            "y": "37"
+            "y": "37", 
+            "pickup": "true"
         },
         "common_bed": {
             "img_src": "", 
             "description": "", 
             "x": "50", 
-            "y": "50" 
+            "y": "50", 
+            "pickup": "false"
         }, 
 
         "common_desk": {
-
+            "img_src": "",
+            "description": "", 
+            "x": "40", 
+            "y": "40", 
+            "pickup": "false"
         }, 
         "common_corner": {
-
+            "img_src": "",
+            "description": "", 
+            "x": "30", 
+            "y": "30", 
+            "pickup": "false"         
         }, 
         "common_window": {
-
+            "img_src": "",
+            "description": "", 
+            "x": "20", 
+            "y": "20", 
+            "pickup": "false"
         }, 
         "common_pillow": {
             "img_src": "", 
             "description": "", 
-            "x": "50", 
-            "y": "50" 
+            "x": "67", 
+            "y": "56", 
+            "pickup": "true"
         }
     },
     "scenes": {
@@ -341,7 +359,11 @@
             "dialogue": "",
             "type": "none",
             "items": [
-                "common_pillow"
+                "common_pillow",
+                "common_bed",
+                "common_corner",
+                "common_desk", 
+                "common_window"
             ]
         }
     }

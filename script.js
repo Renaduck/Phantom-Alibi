@@ -65,6 +65,13 @@ let currentSoundEffects = soundEffectsSlider.value;
 let currentScene = 0;
 let typingInterval; // Keep track of the typing interval identifier in order to clear it when needed
 
+// Function to fetch the json at any moment 
+async function fetchJSONData() {
+    const response = await fetch('./assets/story.json')
+    const data = await response.json()
+    return data 
+}
+
 // Define our environment class for scene items
 class Environment {
     constructor() {
@@ -74,7 +81,7 @@ class Environment {
     // Adds item to playing area, hotspot
     addItem(name, item) {
         // Return if the item is already in the inventory
-        if (this.inventory.includes(name)) return;
+        if (this.inventory.includes(name) && item["pickup"] == "true") return;
 
         // Create element
         const element = document.createElement("div");
@@ -85,52 +92,67 @@ class Environment {
         element.style.top = `${item["y"]}%`;
         element.style.left = `${item["x"]}%`;
 
-        // On click add the item to the player's inventory & retrieve the element
-        element.addEventListener("click", () => {
-            this.inventory.push(name);
-            const itemMarker = document.getElementById(name)
-            itemAcquiredSound();
+        // Differentiate between items the player can pick up vs. not 
+        if (item["pickup"] == "true") {
+            // On click add the item to the player's inventory & retrieve the element
+            element.addEventListener("click", () => {
+                this.inventory.push(name);
+                const itemMarker = document.getElementById(name)
+                itemAcquiredSound();
 
-            // Remove the item from the screen
-            itemMarker.remove();
+                // Remove the item from the screen
+                itemMarker.remove();
 
-            // Add the item to the carousel on the screen
-            const itemContainer = document.createElement('div');
-            itemContainer.setAttribute("class", "carousel-item");
+                // Add the item to the carousel on the screen
+                const itemContainer = document.createElement('div');
+                itemContainer.setAttribute("class", "carousel-item");
 
-            const img = document.createElement('img');
-            img.src = './assets/character_sprites/pikachu.png';
-            itemContainer.appendChild(img);
+                const img = document.createElement('img');
+                img.src = './assets/character_sprites/pikachu.png';
+                itemContainer.appendChild(img);
 
-            carouselItems.appendChild(itemContainer);
+                carouselItems.appendChild(itemContainer);
 
-            // Animate the item into the carousel
-            img.style.transform = "scale(0)";
-            img.style.opacity = "0";
-            img.style.transition = "transform 0.5s, opacity 0.5s";
+                // Animate the item into the carousel
+                img.style.transform = "scale(0)";
+                img.style.opacity = "0";
+                img.style.transition = "transform 0.5s, opacity 0.5s";
 
-            setTimeout(() => {
-                img.style.transform = "scale(1)";
-                img.style.opacity = "1";
-            }, 150);
+                setTimeout(() => {
+                    img.style.transform = "scale(1)";
+                    img.style.opacity = "1";
+                }, 150);
 
-            // Add a description to the itemContainer div which already has the item img
-            const description = document.createElement('div');
-            description.textContent = item["description"];
-            description.classList.add('item-description');
-            itemContainer.appendChild(description);
+                // Add a description to the itemContainer div which already has the item img
+                const description = document.createElement('div');
+                description.textContent = item["description"];
+                description.classList.add('item-description');
+                itemContainer.appendChild(description);
 
-            // Add a hover effect transition to the itemContainer (for some reason it's glitchy when I simply do this with css)
-            itemContainer.addEventListener('mouseenter', () => {
-                itemContainer.style.transition = 'transform 0.3s ease-in-out';
+                // Add a hover effect transition to the itemContainer (for some reason it's glitchy when I simply do this with css)
+                itemContainer.addEventListener('mouseenter', () => {
+                    itemContainer.style.transition = 'transform 0.3s ease-in-out';
+                });
+
+                // Print the inventory to the screen
+                this.carouselShow();
+                this.createPlaceholders(item.offsetWidth);
             });
+        } else {
+            element.addEventListener("click", () => {
 
-            // Print the inventory to the screen
-            this.carouselShow();
-            this.createPlaceholders(item.offsetWidth);
-        });
+                // Acquire the item 
+                const itemMarker = document.getElementById(name)
+                itemAcquiredSound();
 
+                // Remove the item from the screen
+                itemMarker.remove(); 
 
+                // Remove the item from the JSON when clicked 
+                const jason = fetchJSONData()
+                console.log(jason)
+            });
+        }
         document.body.appendChild(element);
     }
 
@@ -365,6 +387,7 @@ async function setScene(action) {
     // Get Scene metadata from JSON
     const response = await fetch("./assets/story.json");
     const data = await response.json();
+    console.log(data)
     scenes = data["scenes"];
     itemCatalogue = data["items"];
     sceneLength = Object.keys(scenes).length
