@@ -33,7 +33,7 @@
             "background": "",
             "lighting": "",
             "sound": "",
-            "dialogue": "I-It wasn't supposed to be like this. It was just a game",
+            "dialogue": "I-It wasn't supposed to be like this.",
             "type": "overlay_text"
         },
         {
@@ -41,7 +41,17 @@
             "character_sprite": "",
             "background": "",
             "lighting": "",
-            "sound": "He can't really be dead… right?",
+            "sound": "",
+            "dialogue": "It was just a game",
+            "type": "overlay_text"
+        },
+        {
+            "character_name": "",
+            "character_sprite": "",
+            "background": "",
+            "lighting": "",
+            "sound": "",
+            "dialogue": "He can't really be dead… right?",
             "type": "overlay_text"
         },
         {

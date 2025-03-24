@@ -73,6 +73,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Implemented promise-based error handling for audio playback to prevent uncaught exceptions
 - Fixed background color for overlay text scenes, ensuring proper black background instead of bluish-grey
 - Fixed browser caching issue with story.json by adding a timestamp parameter to fetch requests
+- Fixed overlay text not displaying in the third scene by moving text from the sound field to the dialogue field
 
 ## [0.1.0]
 
