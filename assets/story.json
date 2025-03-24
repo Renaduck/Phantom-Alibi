@@ -31,22 +31,22 @@
             "type": "overlay_text"
         },
         "scene_1": {
-            "character_name": "", 
-            "character_sprite": "", 
-            "background": "", 
-            "lighting": "", 
-            "sound": "", 
+            "character_name": "",
+            "character_sprite": "",
+            "background": "",
+            "lighting": "",
+            "sound": "",
             "dialogue": "I-It wasn't supposed to be like this. It was just a game",
             "type": "overlay_text"
-        }, 
+        },
         "scene_2": {
-            "character_name": "", 
-            "character_sprite": "", 
-            "background": "", 
-            "lighting": "", 
-            "sound": "He can’t really be dead… right?", 
+            "character_name": "",
+            "character_sprite": "",
+            "background": "",
+            "lighting": "",
+            "sound": "He can’t really be dead… right?",
             "type": "overlay_text"
-        }, 
+        },
         "scene_3": {
             "character_name": "???",
             "character_sprite": "./character_sprites/sora_talking.PNG",
@@ -89,13 +89,13 @@
         },
         "scene_7": {
             "character_name": "Sora",
-            "character_sprite": "", 
+            "character_sprite": "",
             "background": "./assets/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "There she is—Rina. Once my quiet childhood friend, now a social butterfly who throws parties in the middle of the woods.",
             "type": "inner_monologue"
-        }, 
+        },
         "scene_8": {
             "character_name": "Sora",
             "character_sprite": "./character_sprites/sora_talking.PNG",
@@ -248,23 +248,23 @@
             "sound": "sound.mp3",
             "dialogue": "The door clicks shut behind her, and I take a look around. Pretty plain. Not what I expected from a mansion, but at least it’s quiet.",
             "type": "inner_monologue"
-        }, 
+        },
         "scene_25": {
             "character_name": "Sora",
-            "character_sprite": "", 
-            "background": "./assets/common_space.webp", 
-            "lighting": "dim/bright/halo/normal/none", 
-            "sound": "sound.mp3", 
-            "dialogue": "Guess I should explore a bit...", 
+            "character_sprite": "",
+            "background": "./assets/common_space.webp",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "Guess I should explore a bit...",
             "type": "inner_monologue"
-        }, 
+        },
         "scene_26": {
             "character_name": "",
-            "character_sprite": "", 
-            "background": "", 
-            "lighting": "", 
-            "sound": "", 
-            "dialogue": "", 
+            "character_sprite": "",
+            "background": "",
+            "lighting": "",
+            "sound": "",
+            "dialogue": "",
             "type": ""
         }
     }

@@ -24,10 +24,12 @@ const closeSettingsMenu = document.getElementById('close-settings-btn');
 const keybinding = document.getElementById('keybinding');
 const keybindingValue = document.getElementById('keybinding-value');
 
-// Volume Settings Constants
+// Volume / Sound Effects / Typing Speed Setting Constants
 const overlay = document.getElementById('overlay');
 const volumeSlider = document.getElementById('volume-slider');
+const soundEffectsSlider = document.getElementById('sound-effects-slider');
 const volumeLabel = document.getElementById('volume-label');
+const soundEffectsLabel = document.getElementById('sound-effects-label');
 const typingSlider = document.getElementById('type-speed-slider');
 const typingLabel = document.getElementById('type-speed-label');
 
@@ -59,6 +61,7 @@ const nextBtn = document.getElementById('next-btn');
 // Global values for the game
 let currentTypingSpeed = typingSlider.value;
 let currentVolume = volumeSlider.value;
+let currentSoundEffects = soundEffectsSlider.value;
 let currentScene = 0;
 let typingInterval; // Keep track of the typing interval identifier in order to clear it when needed
 
@@ -535,7 +538,7 @@ function updateSettings() {
 // Page flip sound
 function pageFlipSound() {
     if (pageFlipAudio.paused) {
-        pageFlipAudio.volume = (volumeSlider.value / 100) * 0.1;
+        pageFlipAudio.volume = (soundEffectsSlider.value / 100) * 0.2;
         pageFlipAudio.play();
     } else {
         pageFlipAudio.currentTime = 0;
@@ -545,7 +548,7 @@ function pageFlipSound() {
 // Item acquired sound
 function itemAcquiredSound() {
     if (itemAcquiredAudio.paused) {
-        itemAcquiredAudio.volume = (volumeSlider.value / 100) * 0.1;
+        itemAcquiredAudio.volume = (soundEffectsSlider.value / 100) * 0.1;
         itemAcquiredAudio.play();
     } else {
         itemAcquiredAudio.currentTime = 0;
@@ -555,7 +558,7 @@ function itemAcquiredSound() {
 // Swoosh sound
 function swooshSound() {
     if (swooshAudio.paused) {
-        swooshAudio.volume = (volumeSlider.value / 100) * 0.5;
+        swooshAudio.volume = (soundEffectsSlider.value / 100) * 0.5;
         swooshAudio.playbackRate = 3;
         swooshAudio.play();
     } else {

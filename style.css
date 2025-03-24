@@ -203,6 +203,7 @@ body {
 
 /* Sliders */
 #volume-container,
+#sound-effects-container,
 #type-speed-container {
     display: flex;
     align-items: center;
@@ -211,17 +212,20 @@ body {
 }
 
 #volume-container label,
+#sound-effects-container label,
 #type-speed-container label {
     min-width: fit-content;
 }
 
 #volume-slider,
+#sound-effects-slider,
 #type-speed-slider {
     width: calc(100% - 112.5px);
     cursor: pointer;
 }
 
 #volume-value,
+#sound-effectsvalue,
 #type-speed-value {
     font-weight: bold;
 }
