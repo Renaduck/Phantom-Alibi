@@ -1,42 +1,46 @@
+/* Import all modular CSS files from styles directory */
+@import '../styles/main.css';
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: absolute;
+  background-color: black;
+}
+
+#root img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #121212;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+/* Basic elements for the game interface */
+.continue-marker {
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Overlay Text Styling */
+.overlay-text {
+  display: flex;
+  width: 50%;
+  height: 80%;
+  margin: auto;
   text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+  font-size: 28px;
 }

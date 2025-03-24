@@ -1,4 +1,5 @@
-import { useEffect } from 'react'
+import { useEffect, Fragment } from 'react'
+import './App.css'
 import useStore from './store'
 import Background from './components/Background'
 import Sidebar from './components/Sidebar'
@@ -12,7 +13,6 @@ import CreditsMenu from './components/CreditsMenu'
 import HelpMenu from './components/HelpMenu'
 import RestartConfirmation from './components/RestartConfirmation'
 import Carousel from './components/Carousel'
-import './App.css'
 
 function App() {
     // Use individual selectors instead of destructuring multiple properties
@@ -31,7 +31,7 @@ function App() {
     }, [setupKeyboardListeners, cleanupKeyboardListeners]);
 
     return (
-        <div id="container">
+        <Fragment>
             <Background />
             <Sidebar />
             <Sprites />
@@ -44,7 +44,7 @@ function App() {
             <CreditsMenu />
             <HelpMenu />
             <RestartConfirmation />
-        </div>
+        </Fragment>
     )
 }
 

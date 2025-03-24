@@ -1,8 +1,9 @@
 import { useState, useCallback, memo, useEffect } from 'react';
-import useStore from '../store';
-import { fetchStoryData } from '../utils/scene';
-import { Scene } from '../types';
-import TypedText from './TypedText';
+import useStore from '../../store';
+import { fetchStoryData } from '../../utils/scene';
+import { Scene } from '../../types';
+import TypedText from '../TypedText';
+import './Dialogue.css';
 
 // Use memo to prevent unnecessary re-renders
 const Dialogue = memo(() => {

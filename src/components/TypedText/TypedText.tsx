@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, memo } from 'react';
+import './TypedText.css';
 
 interface TypedTextProps {
     content: string;
@@ -85,8 +86,9 @@ const TypedText = memo(({ content, typingSpeed, color = 'whitesmoke', onComplete
     }, [shouldComplete, isComplete, content, displayedText, onComplete]);
 
     return (
-        <div style={{ color }}>
+        <div className="typed-text" style={{ color }}>
             {displayedText}
+            {!isComplete && <span className="cursor" />}
         </div>
     );
 });

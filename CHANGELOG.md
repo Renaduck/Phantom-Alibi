@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Created modular React components for each game element
   - Properly handled assets with Vite's bundling system
   - Improved code maintainability with React patterns and hooks
+- Reorganized component structure to follow modern React practices
+  - Colocated CSS with component files in dedicated folders
+  - Each component has its own directory with Component.tsx, Component.css, and index.tsx
+  - Improved maintainability by keeping related files together
+  - Better organization for imports and dependency management
 - Added persistent help button in top-left corner
   - Implemented using Iconify for scalable vector icons
   - Added smooth fade-in and hover animations
@@ -45,6 +50,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Used React hooks for component logic
   - Leveraged TypeScript for type safety
   - Implemented proper error handling and fallbacks
+- Replaced container-based layout with direct React component structure
+  - Removed outdated #container wrapper in favor of React Fragment
+  - Updated component references to use #root instead of #container
+  - Simplified DOM structure for better performance and maintainability
+  - Fixed styling issues caused by incorrect container nesting
 - Replaced fetch-based story loading with direct JSON import
   - Leveraged Vite's built-in JSON import capabilities
   - Removed timestamp-based cache busting logic
@@ -93,6 +103,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Applied React.memo to prevent unnecessary re-renders
   - Added proper dependency arrays to useEffect and useCallback hooks
   - Separated data fetching from render operations in components
+- Fixed text rendering issues in dialogue components
+  - Added blinking cursor during text animation
+  - Improved TypedText component with React-based animation
+  - Enhanced readability with proper word-break and whitespace handling
+  - Fixed styling and positioning of text within dialogue container
 - Eliminated direct DOM manipulation in favor of React state management
   - Replaced imperative DOM updates with declarative React patterns
   - Created dedicated TypedText component for typing animations

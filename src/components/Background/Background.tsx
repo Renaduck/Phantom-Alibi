@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
-import useStore from '../store';
-import exteriorBg from '../assets/scenes/exterior.jpg';
+import useStore from '../../store';
+import exteriorBg from '../../assets/scenes/exterior.jpg';
+import './Background.css';
 
 const Background = () => {
     const backgroundRef = useRef<HTMLDivElement>(null);
