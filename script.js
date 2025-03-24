@@ -378,6 +378,11 @@ async function setScene(action) {
     dialogueTitle.innerHTML = ' &#x2746; &nbsp; ' + scenes[`scene_${currentScene}`]['character_name'] + ' ';
     dialogue = scenes[`scene_${currentScene}`]['dialogue'];
     
+    // Update the current scene to have no dialogue box (if needed) 
+    textType = scenes[`scene_${currentScene}`][`type`]
+    if (textType == "none") {
+        dialogueContainer.style.translate = "-100vw"
+    }
     // Update the scene based on the scene object
     changeBackground(scenes[`scene_${currentScene}`]['background'], scenes[`scene_${currentScene}`]['type'], scenes[`scene_${currentScene}`]['dialogue']);
 
