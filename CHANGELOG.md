@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Implemented continue marker icon for scene transitions
+  - Added animated chevron indicator that appears when text is complete
+  - Integrated Iconify for scalable vector icons via CDN
+  - Created bounce animation to improve visibility
+  - Positioned marker appropriately for different scene types
+  - Marker automatically hides during text typing and appears when ready to continue
+
 ### Changed
 
 - Refactored codebase from a single monolithic script into multiple modular files
@@ -18,6 +27,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `src/scene.js`: Scene management functions
   - `src/events.js`: Event listeners and handlers
   - `src/ui/`: UI-related modules (carousel, dialogue, overlay, sidebar)
+- Modularized CSS into component-based files:
+  - `styles/reset.css`: Basic styles and resets
+  - `styles/layout.css`: Containers and backgrounds
+  - `styles/sidebar.css`: Sidebar components
+  - `styles/dialogue.css`: Dialogue box and options
+  - `styles/overlay.css`: Overlays and settings
+  - `styles/sprites.css`: Character sprites
+  - `styles/inventory.css`: Carousel and items
+  - `styles/credits.css`: Credits section
+  - `styles/main.css`: Imports all style modules
 - Updated HTML to use module imports instead of traditional script tag
 - Removed inline onclick handlers in HTML in favor of proper event listeners
 - Added documentation in src/README.md explaining the new code structure

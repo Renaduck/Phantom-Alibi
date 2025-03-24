@@ -11,6 +11,12 @@ export function typeText(
     element.innerHTML = "";                               // Clear existing text before starting new typing effect
     speed = gameState.currentTypingSpeed / 50 * speed;    // Adjust speed based on user settings
 
+    // Hide continue marker while typing
+    const continueMarker = document.querySelector('.continue-marker');
+    if (continueMarker) {
+        continueMarker.style.visibility = 'hidden';
+    }
+
     // Start typing effect
     let index = 0;
     gameState.typingInterval = setInterval(() => {
@@ -19,6 +25,11 @@ export function typeText(
             index++;
         } else {
             clearInterval(gameState.typingInterval); // Stop when done typing
+            
+            // Show continue marker after typing is complete
+            if (continueMarker) {
+                continueMarker.style.visibility = 'visible';
+            }
         }
     }, speed);
 } 

@@ -122,20 +122,21 @@ function addContinueMarker(textType) {
         existingMarker.remove();
     }
     
-    // Only add marker for regular dialogue or inner monologue
-    if (textType === 'none' || textType === 'overlay_text') {
-        return;
-    }
-
     // Create and add the continue marker with iconify
     const continueMarker = document.createElement('div');
     continueMarker.className = 'continue-marker';
-    continueMarker.innerHTML = '<iconify-icon icon="mdi:chevron-down" width="30" height="30"></iconify-icon>';
+    continueMarker.innerHTML = '<iconify-icon icon="mdi:chevron-double-down" width="30" height="30"></iconify-icon>';
     
     // Add click event listener to advance to the next scene
     continueMarker.addEventListener('click', () => {
         setScene("next");
     });
     
-    dialogueContainer.appendChild(continueMarker);
+    // For overlay text scenes, add to container instead of dialogue container
+    if (textType === 'overlay_text') {
+        container.appendChild(continueMarker);
+    } else if (textType !== 'none') {
+        // For dialogue and inner monologue, add to dialogue container
+        dialogueContainer.appendChild(continueMarker);
+    }
 } 
