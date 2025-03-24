@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, memo } from 'react';
-import useStore from '../store';
-import { fetchStoryData } from '../utils/scene';
+import useStore from '../../store';
+import { fetchStoryData } from '../../utils/scene';
 
 // Using memo to prevent unnecessary re-renders
 const Sprites = memo(() => {

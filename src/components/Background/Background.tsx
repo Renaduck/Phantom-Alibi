@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import useStore from '../../store';
 import './Background.css';
 import { fetchStoryData } from '../../utils/scene';
-import exteriorBg from '../../assets/scenes/exterior.jpg';
+import { getAsset } from '../../utils/assets';
 
 const Background = () => {
     const backgroundRef = useRef<HTMLDivElement>(null);
@@ -18,7 +18,7 @@ const Background = () => {
     useEffect(() => {
         // If game hasn't started yet, use the exterior background for the title screen
         if (!gameStarted) {
-            setBackgroundUrl(exteriorBg);
+            setBackgroundUrl(getAsset('./assets/scenes/exterior.jpg', 'background'));
             return;
         }
 
@@ -28,7 +28,7 @@ const Background = () => {
                 if (scenes && scenes[currentScene]) {
                     const scene = scenes[currentScene];
                     if (scene.background && scene.background.trim() !== '') {
-                        setBackgroundUrl(scene.background);
+                        setBackgroundUrl(getAsset(scene.background, 'background'));
                     } else {
                         // No background specified, will use black background from CSS
                         setBackgroundUrl(null);
