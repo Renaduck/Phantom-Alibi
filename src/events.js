@@ -5,6 +5,7 @@ import { pageFlipSound, swooshSound } from './audio.js';
 import { setScene, toggleZoom, zoomIn } from './scene.js';
 import { toggleSidebar } from './ui/sidebar.js';
 import { containsOverlay, closeOverlays, updateSettings } from './ui/overlay.js';
+import { completeTypingAnimation } from './ui/dialogue.js';
 
 // Setup all event listeners
 export function setupDOMListeners() {
@@ -22,7 +23,14 @@ export function setupDOMListeners() {
     // Add event listeners for clicking to go to the next scene -- ignore in special cases
     dialogueContainer.addEventListener('click', (event) => {
         if (!sideBar.classList.contains('translate')) return;
-        if (!event.target.closest('#dialogue-options')) return;
+        if (event.target.closest('#dialogue-options')) return;
+        
+        // If text is currently typing, complete it immediately instead of advancing the scene
+        if (gameState.typingInterval !== null) {
+            completeTypingAnimation();
+        } else {
+            setScene("next");
+        }
     });
 
     // Next button click to advance scene
@@ -43,13 +51,41 @@ export function setupDOMListeners() {
     // Background click to advance scene
     background.addEventListener('click', () => {
         if (!sideBar.classList.contains('translate')) return;
-        setScene("next");
+        
+        // If text is currently typing, complete it immediately instead of advancing the scene
+        if (gameState.typingInterval !== null) {
+            completeTypingAnimation();
+        } else {
+            setScene("next");
+        }
     });
 
     // Sprite click to advance scene
     spriteContainer.addEventListener('click', () => {
         if (!sideBar.classList.contains('translate')) return;
-        setScene("next");
+        
+        // If text is currently typing, complete it immediately instead of advancing the scene
+        if (gameState.typingInterval !== null) {
+            completeTypingAnimation();
+        } else {
+            setScene("next");
+        }
+    });
+
+    // Add click handler for overlay text (centered text)
+    document.addEventListener('click', (event) => {
+        // Check if we clicked on or within an overlay text element
+        const overlayText = document.querySelector('.overlay-text');
+        if (overlayText && (overlayText.contains(event.target) || event.target === overlayText)) {
+            if (!sideBar.classList.contains('translate')) return;
+            
+            // If text is currently typing, complete it immediately instead of advancing the scene
+            if (gameState.typingInterval !== null) {
+                completeTypingAnimation();
+            } else {
+                setScene("next");
+            }
+        }
     });
 
     // Keydown event listener
@@ -90,8 +126,14 @@ function handleKeyDown(event) {
         case "ArrowRight":
         case " ":
             if (!sideBar.classList.contains('translate')) return;
-            pageFlipSound();
-            setScene("next");
+            
+            // If text is currently typing, complete it immediately instead of advancing the scene
+            if (gameState.typingInterval !== null) {
+                completeTypingAnimation();
+            } else {
+                pageFlipSound();
+                setScene("next");
+            }
             break;
         case "i":
             environment.toggleCarousel();

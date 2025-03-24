@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Created bounce animation to improve visibility
   - Positioned marker appropriately for different scene types
   - Marker automatically hides during text typing and appears when ready to continue
+- Improved dialogue text interaction
+  - Added ability to instantly complete typing animation when clicking
+  - Implemented two-step interaction (first click completes text, second advances scene)
+  - Fixed overlay text click handling for centered text elements
+  - Applied consistent behavior across all input methods (clicks, keyboard)
 
 ### Changed
 

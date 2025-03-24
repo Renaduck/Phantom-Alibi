@@ -10,6 +10,10 @@ export function typeText(
     clearInterval(gameState.typingInterval);              // Stop any ongoing typing effect
     element.innerHTML = "";                               // Clear existing text before starting new typing effect
     speed = gameState.currentTypingSpeed / 50 * speed;    // Adjust speed based on user settings
+    
+    // Store the full content in gameState for later use
+    gameState.currentDialogueContent = content;
+    gameState.currentDialogueElement = element;
 
     // Hide continue marker while typing
     const continueMarker = document.querySelector('.continue-marker');
@@ -25,6 +29,7 @@ export function typeText(
             index++;
         } else {
             clearInterval(gameState.typingInterval); // Stop when done typing
+            gameState.typingInterval = null;         // Reset typing interval
             
             // Show continue marker after typing is complete
             if (continueMarker) {
@@ -32,4 +37,25 @@ export function typeText(
             }
         }
     }, speed);
+}
+
+// Function to immediately complete any ongoing typing animation
+export function completeTypingAnimation() {
+    if (gameState.typingInterval !== null) {
+        clearInterval(gameState.typingInterval);
+        
+        // Set the content immediately to its final state
+        if (gameState.currentDialogueContent && gameState.currentDialogueElement) {
+            gameState.currentDialogueElement.innerHTML = gameState.currentDialogueContent;
+        }
+        
+        // Reset typing interval
+        gameState.typingInterval = null;
+        
+        // Show continue marker after typing is complete
+        const continueMarker = document.querySelector('.continue-marker');
+        if (continueMarker) {
+            continueMarker.style.visibility = 'visible';
+        }
+    }
 } 
