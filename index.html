@@ -25,16 +25,13 @@
         <div><img id="sprite-2" src=""/></div>
         <div><img id="sprite-3" src=""/></div>
       </div>
-        
-      </div>
       <div id="dialogue-container">
         <div id="dialogue-title"></div>
         <div id="dialogue-text"></div>
         <div id="dialogue-options">
-          <div id="next-btn" onclick="setScene('next')">Next</div>
+          <div id="next-btn">Next</div>
           <div id="inventory-btn">Inventory</div>
-          <div id="prev-btn" onclick="setScene('prev')">Prev</div>
-
+          <div id="prev-btn">Prev</div>
         </div>
       </div>
       <!-- Carousel is hidden by default -->
@@ -88,7 +85,7 @@
           <hr>
           <div id="settings-buttons">
             <button id="close-settings-btn">Close</button>
-            <button id="save-settings-btn" onclick="updateSettings()">Save</button>
+            <button id="save-settings-btn">Save</button>
           </div>
       </div>
       <div id="restart-confirmation">
@@ -99,6 +96,6 @@
         </div>
       </div>
     </div>
-    <script src="script.js"></script>
+    <script type="module" src="src/index.js"></script>
   </body>
 </html>
