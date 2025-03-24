@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Refactored scene storage from object-based to array-based structure
+  - Changed story.json to use an array of scene objects instead of numbered keys
+  - Updated scene navigation to use array indexing
+  - Removed initial welcome scene as it's replaced by the help button functionality
+  - Improved maintainability by simplifying scene addition, removal, and reordering
 - Moved controls from settings menu to dedicated help modal
   - Improved accessibility by making controls always available
   - Simplified settings menu to focus on game preferences
@@ -67,6 +72,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added click-to-play overlay to handle browser autoplay restrictions for background music
 - Implemented promise-based error handling for audio playback to prevent uncaught exceptions
 - Fixed background color for overlay text scenes, ensuring proper black background instead of bluish-grey
+- Fixed browser caching issue with story.json by adding a timestamp parameter to fetch requests
 
 ## [0.1.0]
 

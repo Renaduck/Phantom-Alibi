@@ -49,27 +49,32 @@ export function changeBackground(newBackground, sceneType, dialogue) {
 // Method to fetch and update the current scene
 export async function setScene(action) {
     // Get Scene metadata from JSON
-    const response = await fetch("./assets/story.json");
+    // Add timestamp to URL to prevent browser caching of story.json
+    const timestamp = new Date().getTime();
+    const response = await fetch(`./assets/story.json?t=${timestamp}`);
     const data = await response.json();
     const scenes = data["scenes"];
     const itemCatalogue = data["items"];
-    const sceneLength = Object.keys(scenes).length;
+    const sceneLength = scenes.length;
 
     // Handle scene change by moving to the next or previous scene position
     if (action === "curr") {
         // Keep current scene
-    } else if (action === "next" && gameState.currentScene <= sceneLength - 2) {
+    } else if (action === "next" && gameState.currentScene < sceneLength - 1) {
         gameState.currentScene += 1;
-    } else if (action === "prev" && gameState.currentScene != 0) {
+    } else if (action === "prev" && gameState.currentScene > 0) {
         gameState.currentScene -= 1;
     }
 
+    // Get the current scene object
+    const currentScene = scenes[gameState.currentScene];
+
     // Update the dialogue box -- present in parts if dialogue exceeds box word limit
-    dialogueTitle.innerHTML = ' &#x2746; &nbsp; ' + scenes[`scene_${gameState.currentScene}`]['character_name'] + ' ';
-    const dialogue = scenes[`scene_${gameState.currentScene}`]['dialogue'];
+    dialogueTitle.innerHTML = ' &#x2746; &nbsp; ' + currentScene['character_name'] + ' ';
+    const dialogue = currentScene['dialogue'];
 
     // Update the current scene to have no dialogue box (if needed) 
-    const textType = scenes[`scene_${gameState.currentScene}`][`type`];
+    const textType = currentScene['type'];
     if (textType == "none") {
         dialogueContainer.style.translate = "-100vw";
     } else {
@@ -78,13 +83,13 @@ export async function setScene(action) {
 
     // Update the scene based on the scene object
     changeBackground(
-        scenes[`scene_${gameState.currentScene}`]['background'], 
-        scenes[`scene_${gameState.currentScene}`]['type'], 
-        scenes[`scene_${gameState.currentScene}`]['dialogue']
+        currentScene['background'], 
+        currentScene['type'], 
+        currentScene['dialogue']
     );
 
     // Update the font color of the dialogue box based on the scene object
-    if (scenes[`scene_${gameState.currentScene}`]['type'] == 'inner_monologue') {
+    if (currentScene['type'] == 'inner_monologue') {
         dialogueText.style.color = 'rgb(144, 238, 144)';
     } else {
         dialogueText.style.color = 'whitesmoke';
@@ -94,7 +99,7 @@ export async function setScene(action) {
     addContinueMarker(textType);
 
     // Update the environment play area with the background items
-    const sceneItems = scenes[`scene_${gameState.currentScene}`]['items'];
+    const sceneItems = currentScene['items'];
 
     try {
         // Clear any items from the previous scene
@@ -109,7 +114,7 @@ export async function setScene(action) {
     }
 
     // Display the character to the screen 
-    sprite2.src = scenes[`scene_${gameState.currentScene}`]['character_sprite'];
+    sprite2.src = currentScene['character_sprite'];
     sprite2.classList.add("show");
     typeText(dialogue, dialogueText);
 }
