@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added missing event listeners for navigation buttons
 - Added click-to-play overlay to handle browser autoplay restrictions for background music
 - Implemented promise-based error handling for audio playback to prevent uncaught exceptions
+- Fixed background color for overlay text scenes, ensuring proper black background instead of bluish-grey
 
 ## [0.1.0]
 
