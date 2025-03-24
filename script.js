@@ -168,7 +168,7 @@ class Environment {
     // Toggle carousel inventory
     toggleCarousel() {
         carousel.classList.toggle('show');
-        overlay.classList.add('show');
+        overlay.classList.toggle('show');
         swooshSound();
     }
 
@@ -245,15 +245,17 @@ document.addEventListener('click', () => {
 
 // Keydown event listener
 document.addEventListener('keydown', (event) => {
+
     // Functionality to return early and not handle keyboard shortcuts if sidebar is in view
     if (!sideBar.classList.contains('translate') && playGame.innerHTML == "Start Game" || containsOverlay() && playGame.innerHTML == "Continue ?") {
-        console.log("I finally ran");
 
         // Exit overlay if overlay is displayed and escape is pressed
         if (containsOverlay() && event.key == "Escape") {
             closeOverlays();
             return;
-        } else return;
+        } else if (!carousel.classList.contains('show')) {
+            return;
+        }
     }
 
     // Functionality to handle the keyboard shortcuts while in the game
@@ -301,6 +303,10 @@ document.addEventListener('keydown', (event) => {
             if (!sideBar.classList.contains('translate')) return;
             pageFlipSound();
             setScene("next");
+            break;
+        case "i":
+            environment.toggleCarousel();
+            environment.createPlaceholders();
             break;
         default:
             break;
