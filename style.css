@@ -99,7 +99,8 @@ body {
 
 /* Settings popups */
 #settings-menu,
-#restart-confirmation {
+#restart-confirmation,
+#credits-menu {
     display: none;
     position: fixed;
     min-width: 300px;
@@ -163,7 +164,8 @@ body {
 #close-settings-btn,
 #save-settings-btn,
 #yes-restart,
-#no-restart {
+#no-restart,
+#close-credits-btn {
     width: 100%;
     padding: 10px;
     background: rgb(95, 109, 122);
@@ -175,13 +177,15 @@ body {
 }
 
 #close-settings-btn,
-#save-settings-btn {
+#save-settings-btn,
+#close-credits-btn {
     font-size: 16px;
 }
 
 #close-settings-btn:hover,
 #save-settings-btn:hover,
-#restart-confirmation button:hover {
+#restart-confirmation button:hover,
+#close-credits-btn:hover {
     background: rgb(75, 90, 103);
 }
 
@@ -481,4 +485,31 @@ body {
     transform: scale(1.1);
 }
 
-/* Story mode inventory img */
+/* Credits */
+#credits-menu {
+    flex-direction: column;
+    gap: 10px;
+}
+
+#credits-menu.show {
+    display: flex;
+}
+
+#credits-menu hr {
+    margin-bottom: 5px;
+}
+
+#credits-menu span {
+    /* color: rgb(144, 238, 144); */
+    font-weight: bolder;
+}
+
+#credits-menu span a {
+    color: whitesmoke;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+#credits-menu span a:hover {
+    color: rgb(119, 196, 255);
+}

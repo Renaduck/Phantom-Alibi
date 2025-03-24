@@ -1,6 +1,11 @@
 const sideBar = document.getElementById('sidebar');
 const playGame = document.getElementById('play-game');
 
+// Credits Constants
+const creditsBtn = document.getElementById('credits');
+const creditsMenu = document.getElementById('credits-menu');
+const closeCreditsBtn = document.getElementById('close-credits-btn');
+
 // Background Constants
 const container = document.getElementById('container');
 const background = document.getElementById('background');
@@ -15,6 +20,7 @@ const sprite3 = document.getElementById('sprite-3');
 const settingsBtn = document.getElementById('settings');
 const settingsMenu = document.getElementById('settings-menu');
 const closeSettingsMenu = document.getElementById('close-settings-btn');
+
 const keybinding = document.getElementById('keybinding');
 const keybindingValue = document.getElementById('keybinding-value');
 
@@ -430,6 +436,12 @@ yesRestart.addEventListener('click', () => {
 // Don't restart the game and exit back to menu 
 noRestart.addEventListener('click', closeOverlays)
 
+// Show credits menu
+creditsBtn.addEventListener('click', () => {
+    creditsMenu.classList.add('show');
+    overlay.classList.add('show');
+});
+
 // Show settings menu
 settingsBtn.addEventListener('click', () => {
     settingsMenu.classList.add('show');
@@ -453,6 +465,12 @@ closeSettingsMenu.addEventListener('click', () => {
     settingsMenu.classList.remove('show');
     overlay.classList.remove('show');
     restoreDefaultSettings();
+})
+
+// Close Credits Menu
+closeCreditsBtn.addEventListener('click', () => {
+    creditsMenu.classList.remove('show');
+    overlay.classList.remove('show');
 })
 
 // Volume level with slider
@@ -483,6 +501,7 @@ function containsOverlay() {
     else if (restartConfirmationMenu.classList.contains('show')) return true;
     else if (overlay.classList.contains('show')) return true;
     else if (carousel.classList.contains('show')) return true;
+    else if (creditsMenu.classList.contains('show')) return true;
     else return false;
 }
 
@@ -495,6 +514,7 @@ function closeOverlays() {
     restartConfirmationMenu.classList.remove('show');
     overlay.classList.remove('show');
     carousel.classList.remove('show');
+    creditsMenu.classList.remove('show');
 
     restoreDefaultSettings();
 }
