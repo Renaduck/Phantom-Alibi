@@ -31,6 +31,23 @@
             "type": "overlay_text"
         },
         "scene_1": {
+            "character_name": "", 
+            "character_sprite": "", 
+            "background": "", 
+            "lighting": "", 
+            "sound": "", 
+            "dialogue": "I-It wasn't supposed to be like this. It was just a game",
+            "type": "overlay_text"
+        }, 
+        "scene_2": {
+            "character_name": "", 
+            "character_sprite": "", 
+            "background": "", 
+            "lighting": "", 
+            "sound": "He can’t really be dead… right?", 
+            "type": "overlay_text"
+        }, 
+        "scene_1": {
             "character_name": "???",
             "character_sprite": "./character_sprites/sora_talking.PNG",
             "background": "./assets/exterior.jpg",
@@ -46,7 +63,7 @@
         "scene_2": {
             "character_name": "???",
             "character_sprite": "./character_sprites/sora_talking.PNG",
-            "background": "./assets/entrance.png",
+            "background": "./assets/exterior.jpg",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "I don't know why Rina picked her summer cabin of all places for a birthday party. Kind of a pain making everyone commute all the way out here. ",
@@ -55,22 +72,31 @@
         "scene_3": {
             "character_name": "???",
             "character_sprite": "./character_sprites/sora_talking.PNG",
-            "background": "./assets/entrance.png",
+            "background": "./assets/exterior.jpg",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "But I guess I'll never understand rich people....",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "type": "inner_monologue"
         },
         "scene_4": {
             "character_name": "???",
-            "character_sprite": "./character_sprites/sora_talking.PNG",
+            "character_sprite": "",
             "background": "./assets/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
-            "dialogue": "Sora! Right on brand—last one here, as always. There she is—Rina. Once my quiet childhood friend, now a social butterfly who throws parties in the middle of the woods.",
+            "dialogue": "Sora! Right on brand—last one here, as always.",
             "type": "overlay_text / dialogue / inner_monologue"
         },
         "scene_5": {
+            "character_name": "Sora",
+            "character_sprite": "", 
+            "background": "./assets/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "There she is—Rina. Once my quiet childhood friend, now a social butterfly who throws parties in the middle of the woods.",
+            "type": "inner_monologue"
+        }, 
+        "scene_6": {
             "character_name": "Sora",
             "character_sprite": "./character_sprites/sora_talking.PNG",
             "background": "./assets/entrance.png",
@@ -79,7 +105,7 @@
             "dialogue": "Oh yeah, thanks for the warm and totally not sarcastic welcome.",
             "type": "overlay_text / dialogue / inner_monologue"
         },
-        "scene_6": {
+        "scene_7": {
             "character_name": "Rina",
             "character_sprite": "./character_sprites/rina_scared.PNG",
             "background": "./assets/entrance.png",
@@ -88,7 +114,7 @@
             "dialogue": "Come on, let me introduce you to everyone! She gestures toward a grumpy-looking girl who clearly didn't want to be here.",
             "type": "overlay_text / dialogue / inner_monologue"
         },
-        "scene_7": {
+        "scene_8": {
             "character_name": "Rina",
             "character_sprite": "./character_sprites/rina_scared.PNG",
             "background": "./assets/entrance.png",
@@ -97,7 +123,7 @@
             "dialogue": "This is Hana!",
             "type": "overlay_text / dialogue / inner_monologue"
         },
-        "scene_8": {
+        "scene_9": {
             "character_name": "Hana",
             "character_sprite": "./character_sprites/hana_normal.png",
             "background": "./assets/entrance.png",
@@ -106,7 +132,7 @@
             "dialogue": "(arms crossed, unimpressed) Nice to meet you. Rina talks about you all the time. I've even heard some of your bathtime stories.",
             "type": "overlay_text / dialogue / inner_monologue"
         },
-        "scene_9": {
+        "scene_10": {
             "character_name": "Sora",
             "character_sprite": "./character_sprites/sora_talking.png",
             "background": "./assets/entrance.png",
@@ -115,7 +141,7 @@
             "dialogue": "Wow. Fantastic. Just what I wanted to hear.",
             "type": "overlay_text / dialogue / inner_monologue"
         },
-        "scene_10": {
+        "scene_11": {
             "character_name": "Rina",
             "character_sprite": "./character_sprites/rina_evil.png",
             "background": "./assets/entrance.png",
@@ -124,7 +150,7 @@
             "dialogue": "(grinning) Oh, come on, you used to be so cute back then! Back when you weren't such a buzzkill. If I knew this party was going to be a roast, I would've stayed home. I shift my gaze to the corner of the room, where a studious-looking guy stands stiffly. Didn't peg Rina for the type to date bookworms, but we haven't talked in a year. Ever since she transferred to that fancy private school, we kind of… fell apart.",
             "type": "overlay_text / dialogue / inner_monologue"
         },
-        "scene_11": {
+        "scene_12": {
             "character_name": "Rina",
             "character_sprite": "./character_sprites/rina_evil.png",
             "background": "./assets/entrance.png",
@@ -133,7 +159,7 @@
             "dialogue": "Oh! That's Ken, our class president. If you're ever in trouble, he's the guy to go to.",
             "type": "overlay_text / dialogue / inner_monologue"
         },
-        "scene_12": {
+        "scene_13": {
             "character_name": "Sora",
             "character_sprite": "./character_sprites/sora_talking.PNG",
             "background": "./assets/entrance.png",
@@ -142,7 +168,7 @@
             "dialogue": "Noted. Standing next to him is… trouble. The kind of guy your parents warn you about.",
             "type": "overlay_text / dialogue / inner_monologue"
         },
-        "scene_13": {
+        "scene_14": {
             "character_name": "???",
             "character_sprite": "./character_sprites/ren_normal.png",
             "background": "./assets/entrance.png",
@@ -215,13 +241,31 @@
             "type": "overlay_text / dialogue / inner_monologue"
         },
         "scene_21": {
-            "character_name": "Rina",
-            "character_sprite": "./character_sprites/rina_evil.PNG",
+            "character_name": "Sora",
+            "character_sprite": "",
             "background": "./assets/bedroom.jpg",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
-            "dialogue": "<meow>",
-            "type": "overlay_text / dialogue / inner_monologue"
+            "dialogue": "The door clicks shut behind her, and I take a look around. Pretty plain. Not what I expected from a mansion, but at least it’s quiet.",
+            "type": "inner_monologue"
+        }, 
+        "scene_22" : {
+            "character_name": "Sora",
+            "character_sprite": "", 
+            "background": "./assets/common_space.webp", 
+            "lighting": "dim/bright/halo/normal/none", 
+            "sound": "sound.mp3", 
+            "dialogue": "Guess I should explore a bit...", 
+            "type": "inner_monologue"
+        }, 
+        "scene_23" : {
+            "character_name": "",
+            "character_sprite": "", 
+            "background": "", 
+            "lighting": "", 
+            "sound": "", 
+            "dialogue": "", 
+            "type": ""
         }
     }
 }

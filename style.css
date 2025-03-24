@@ -318,8 +318,8 @@ body {
 }
 
 #background.zoom {
-    -webkit-transform: scale(1.5);
-    transform: scale(1.5);
+    -webkit-transform: scale(1);
+    transform: scale(1);
 }
 
 /* Sprite Container Styling */
