@@ -116,6 +116,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Applied React.memo to prevent unnecessary re-renders
   - Added proper dependency arrays to useEffect and useCallback hooks
   - Separated data fetching from render operations in components
+- Fixed asset loading in React+Vite environment
+  - Created assets utility module with filename-based mapping for proper imports
+  - Added support for case-insensitive file extensions (.PNG → .png)
+  - Implemented Sprites component to handle character image loading
+  - Updated Background component to use the asset resolver
+  - Added Vite image type declarations for TypeScript support
 - Fixed text rendering issues in dialogue components
   - Added blinking cursor during text animation
   - Improved TypedText component with React-based animation
