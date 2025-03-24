@@ -1,5 +1,4 @@
 import { useEffect, Fragment } from 'react'
-import './App.css'
 import useStore from './store'
 import Background from './components/Background'
 import Sidebar from './components/Sidebar'
@@ -12,12 +11,15 @@ import SaveListMenu from './components/SaveListMenu'
 import SettingsMenu from './components/SettingsMenu'
 import CreditsMenu from './components/CreditsMenu'
 import HelpMenu from './components/HelpMenu'
-import RestartConfirmation from './components/RestartConfirmation'
+import HelpButton from './components/HelpButton'
+import RestartConfirmation from './components/RestartConfimation'
 import Carousel from './components/Carousel'
 import { useState, useCallback } from 'react'
 import { fetchStoryData } from './utils/scene'
 
-// Immediately log when the App module loads
+import './App.css'
+
+// Immediately log when the App module loads>
 console.log('App module loaded');
 
 function App() {
@@ -138,6 +140,7 @@ function App() {
         <Fragment>
             <Background />
             <Sidebar />
+            <HelpButton />
             {shouldShowSprites && <Sprites />}
             {gameStarted && !isOverlayTextScene && <Dialogue />}
             {gameStarted && isOverlayTextScene && (
@@ -145,11 +148,6 @@ function App() {
                     content={overlayTextContent}
                     onComplete={handleOverlayTextComplete}
                 />
-            )}
-            {!shouldShowSprites && (
-                <div className="debug-message">
-                    Sprites not shown - Scene type: {sceneType || 'none'}, Has sprite: {hasCharacterSprite ? 'yes' : 'no'}
-                </div>
             )}
             <Carousel />
             <Overlay />

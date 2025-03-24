@@ -1,5 +1,12 @@
-/* Import all modular CSS files from styles directory */
-@import '../styles/main.css';
+/* Import global CSS */
+@import './global.css';
+
+/* Continue marker for overlay scenes (specific to App component) */
+.continue-marker {
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
 #root {
   margin: 0;
@@ -23,13 +30,6 @@ body {
   margin: 0;
   padding: 0;
   user-select: none;
-}
-
-/* Basic elements for the game interface */
-.continue-marker {
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 /* Overlay Text Styling */

@@ -1,0 +1,28 @@
+/* Help Button */
+#help-btn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(116, 137, 147);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 9998;
+    color: whitesmoke;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+    opacity: 0;
+}
+
+#help-btn:hover {
+    background: rgb(95, 109, 122);
+    transform: scale(1.1);
+}
+
+#help-btn svg {
+    color: whitesmoke;
+}
