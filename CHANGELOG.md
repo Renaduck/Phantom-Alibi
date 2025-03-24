@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Added persistent help button in top-left corner
+  - Implemented using Iconify for scalable vector icons
+  - Added smooth fade-in and hover animations
+  - Ensured visibility across all game states with proper z-indexing
+  - Created dedicated help modal with game controls
 - Implemented continue marker icon for scene transitions
   - Added animated chevron indicator that appears when text is complete
   - Integrated Iconify for scalable vector icons via CDN
@@ -23,6 +28,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Moved controls from settings menu to dedicated help modal
+  - Improved accessibility by making controls always available
+  - Simplified settings menu to focus on game preferences
+  - Added close button for better UX
+- Removed initial welcome/controls dialog
+  - Game now starts directly with first story scene
+  - Controls accessible via help button instead
 - Refactored codebase from a single monolithic script into multiple modular files
 - Organized code into logical modules with clear responsibilities:
   - `src/index.js`: Main entry point that imports all modules
@@ -41,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `styles/sprites.css`: Character sprites
   - `styles/inventory.css`: Carousel and items
   - `styles/credits.css`: Credits section
+  - `styles/help.css`: Help button and modal styles
   - `styles/main.css`: Imports all style modules
 - Updated HTML to use module imports instead of traditional script tag
 - Removed inline onclick handlers in HTML in favor of proper event listeners

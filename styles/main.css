@@ -22,4 +22,7 @@
 @import 'inventory.css';
 
 /* Import credits styles */
-@import 'credits.css'; 
+@import 'credits.css';
+
+/* Import help styles */
+@import 'help.css'; 

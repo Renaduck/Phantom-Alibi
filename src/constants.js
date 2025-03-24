@@ -7,6 +7,11 @@ export const creditsBtn = document.getElementById('credits');
 export const creditsMenu = document.getElementById('credits-menu');
 export const closeCreditsBtn = document.getElementById('close-credits-btn');
 
+// Help Constants
+export const helpBtn = document.getElementById('help-btn');
+export const helpMenu = document.getElementById('help-menu');
+export const closeHelpBtn = document.getElementById('close-help-btn');
+
 // Background Constants
 export const container = document.getElementById('container');
 export const background = document.getElementById('background');

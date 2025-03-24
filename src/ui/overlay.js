@@ -1,9 +1,12 @@
 import { 
     carousel, 
     closeCreditsBtn, 
+    closeHelpBtn,
     closeSettingsMenu, 
     creditsBtn, 
     creditsMenu, 
+    helpBtn,
+    helpMenu,
     noRestart, 
     overlay, 
     restartBtn, 
@@ -32,6 +35,7 @@ export function containsOverlay() {
     else if (restartConfirmationMenu.classList.contains('show')) return true;
     else if (carousel.classList.contains('show')) return true;
     else if (creditsMenu.classList.contains('show')) return true;
+    else if (helpMenu.classList.contains('show')) return true;
     else return false;
 }
 
@@ -44,6 +48,7 @@ export function closeOverlays() {
     restartConfirmationMenu.classList.remove('show');
     carousel.classList.remove('show');
     creditsMenu.classList.remove('show');
+    helpMenu.classList.remove('show');
 
     restoreDefaultSettings();
 }
@@ -67,6 +72,11 @@ export function updateSettings() {
 
 // Add event listeners
 export function setupOverlayListeners() {
+    // Ensure help button appears correctly on page load
+    setTimeout(() => {
+        helpBtn.style.opacity = '1';
+    }, 500);
+
     // Show Restart Confirmation Menu 
     restartBtn.addEventListener('click', () => {
         restartConfirmationMenu.classList.add('show');
@@ -119,6 +129,18 @@ export function setupOverlayListeners() {
     // Type Speed level with slider
     typingSlider.addEventListener('input', (event) => {
         typingLabel.textContent = `${event.target.value}%`;
+    });
+
+    // Show help menu
+    helpBtn.addEventListener('click', () => {
+        helpMenu.classList.add('show');
+        overlay.classList.add('show');
+    });
+
+    // Close help menu
+    closeHelpBtn.addEventListener('click', () => {
+        helpMenu.classList.remove('show');
+        overlay.classList.remove('show');
     });
 
     // Close the overlay if clicked outside the settings menus

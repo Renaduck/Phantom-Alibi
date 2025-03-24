@@ -18,6 +18,10 @@
       </div>
     </div>
     <div id="container">
+      <!-- Help Button -->
+      <div id="help-btn">
+        <iconify-icon icon="mdi:help-circle" width="32" height="32"></iconify-icon>
+      </div>
       <div id="background"></div>
       <div id="sidebar">
         <div id="side-container">
@@ -59,6 +63,26 @@
         <span>Game Developers: <a href="https://github.com/jfeenfalcon" target="_blank">Jake, </a><a href="" target="_blank">Jayden, </a><a href="" target="_blank">Mauricio</a></span>
         <button id="close-credits-btn">Close</button>
       </div>
+      <!-- Help Modal -->
+      <div id="help-menu">
+        <div class="modal-header">
+          <h2>Controls</h2>
+          <iconify-icon id="close-help-btn" icon="mdi:close" width="24" height="24"></iconify-icon>
+        </div>
+        <hr>
+        <div class="keybinding">
+          <span>Inventory :</span>
+          <span>i</span>
+        </div>
+        <div class="keybinding">
+          <span>Toggle Sidebar :</span>
+          <span>Escape</span>
+        </div>
+        <div class="keybinding">
+          <span>Next Dialogue :</span>
+          <span>Space / Right-Arrow / Enter</span>
+        </div>
+      </div>
       <div id="settings-menu">
         <h2>Settings</h2>
         <div id="volume-container">
@@ -76,21 +100,6 @@
           <input type="range" id="type-speed-slider" min="0" max="100" value="50">
           <span id="type-speed-label">50%</span>
         </div>
-          <h3 style="margin-bottom: 10px;">Controls</h3>
-          <hr>
-          <div class="keybinding">
-            <span>Inventory :</span>
-            <span>i</span>
-          </div>
-          <div class="keybinding">
-            <span>Toggle Sidebar :</span>
-            <span>Escape</span>
-          </div>
-          <div class="keybinding">
-            <span>Next Dialogue :</span>
-            <span>Space / Right-Arrow / Enter</span>
-          </div>
-          <hr>
           <div id="settings-buttons">
             <button id="close-settings-btn">Close</button>
             <button id="save-settings-btn">Save</button>

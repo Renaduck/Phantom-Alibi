@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Export global game state for modules that need it
 export const gameState = {
-  currentScene: 0,
+  currentScene: 1, // Start at scene 1 instead of 0 to skip the welcome message
   typingInterval: null, // Keep track of the typing interval identifier in order to clear it when needed
   currentTypingSpeed: parseInt(document.getElementById('type-speed-slider')?.value) || 50,
   currentVolume: parseInt(document.getElementById('volume-slider')?.value) || 80,
