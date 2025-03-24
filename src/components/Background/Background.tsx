@@ -1,10 +1,10 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, memo } from 'react';
 import useStore from '../../store';
 import './Background.css';
 import { fetchStoryData } from '../../utils/scene';
 import { getAsset } from '../../utils/assets';
 
-const Background = () => {
+const Background = memo(() => {
     const backgroundRef = useRef<HTMLDivElement>(null);
     const [backgroundUrl, setBackgroundUrl] = useState<string | null>(null);
 
@@ -18,7 +18,9 @@ const Background = () => {
     useEffect(() => {
         // If game hasn't started yet, use the exterior background for the title screen
         if (!gameStarted) {
-            setBackgroundUrl(getAsset('./assets/scenes/exterior.jpg', 'background'));
+            const defaultBg = getAsset('exterior.jpg', 'background');
+            console.log('Setting default background:', defaultBg);
+            setBackgroundUrl(defaultBg);
             return;
         }
 
@@ -27,10 +29,17 @@ const Background = () => {
                 const { scenes } = await fetchStoryData();
                 if (scenes && scenes[currentScene]) {
                     const scene = scenes[currentScene];
+                    console.log('Loading background for scene:', scene);
+
                     if (scene.background && scene.background.trim() !== '') {
-                        setBackgroundUrl(getAsset(scene.background, 'background'));
+                        const bgPath = scene.background;
+                        console.log('Background path:', bgPath);
+                        const resolvedBg = getAsset(bgPath, 'background');
+                        console.log('Resolved background:', resolvedBg);
+                        setBackgroundUrl(resolvedBg);
                     } else {
                         // No background specified, will use black background from CSS
+                        console.log('No background specified, using black');
                         setBackgroundUrl(null);
                     }
                 }
@@ -83,6 +92,7 @@ const Background = () => {
         setScene("next");
     };
 
+    console.log('Rendering background with URL:', backgroundUrl);
     return (
         <div
             id="background"
@@ -94,6 +104,6 @@ const Background = () => {
             }}
         />
     );
-};
+});
 
 export default Background; 

@@ -15,9 +15,6 @@
 /* Import overlay and settings styles */
 @import 'overlay.css';
 
-/* Import sprite styles */
-@import 'sprites.css';
-
 /* Import inventory/carousel styles */
 @import 'inventory.css';
 

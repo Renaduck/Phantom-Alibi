@@ -13,7 +13,7 @@
     width: calc(100% - 50px);
     border-radius: 12px;
     transition: transform 0.3s ease;
-    z-index: 2;
+    z-index: 40;
 }
 
 #dialogue-title {

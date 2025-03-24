@@ -1,0 +1,287 @@
+{
+    "title": "Story Title",
+    "items": {
+        "door_paint": {
+            "img_src": "./assets/character_sprites/pikachu.png",
+            "description": "paint on the door handle",
+            "x": "0",
+            "y": "0"
+        },
+        "door_scratches": {
+            "img_src": "./assets/character_sprites/pikachu.png",
+            "description": "scratches under the door",
+            "x": "0",
+            "y": "0"
+        },
+        "fishing_wire": {
+            "img_src": "./assets/character_sprites/pikachu.png",
+            "description": "fishing wire",
+            "x": "30",
+            "y": "20"
+        },
+        "neck_bruises": {
+            "img_src": "./assets/character_sprites/pikachu.png",
+            "description": "neck bruises",
+            "x": "73",
+            "y": "37"
+        }
+    },
+    "scenes": [
+        {
+            "character_name": "",
+            "character_sprite": "",
+            "background": "",
+            "lighting": "",
+            "sound": "",
+            "dialogue": "I-It wasn't supposed to be like this.",
+            "type": "overlay_text"
+        },
+        {
+            "character_name": "",
+            "character_sprite": "",
+            "background": "",
+            "lighting": "",
+            "sound": "",
+            "dialogue": "It was just a game",
+            "type": "overlay_text"
+        },
+        {
+            "character_name": "",
+            "character_sprite": "",
+            "background": "",
+            "lighting": "",
+            "sound": "",
+            "dialogue": "He can't really be dead… right?",
+            "type": "overlay_text"
+        },
+        {
+            "character_name": "???",
+            "character_sprite": "./assets/character_sprites/sora_talking.PNG",
+            "background": "./assets/scenes/exterior.jpg",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "Huff... huff... Looks like I finally made it. Just a train, two buses, and a scenic hike through nowhere.",
+            "type": "dialogue",
+            "items": [
+                "item_1",
+                "item_2"
+            ]
+        },
+        {
+            "character_name": "???",
+            "character_sprite": "./assets/character_sprites/sora_talking.PNG",
+            "background": "./assets/scenes/exterior.jpg",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "I don't know why Rina picked her summer cabin of all places for a birthday party. Kind of a pain making everyone commute all the way out here. ",
+            "type": "inner_monologue"
+        },
+        {
+            "character_name": "???",
+            "character_sprite": "./assets/character_sprites/sora_talking.PNG",
+            "background": "./assets/scenes/exterior.jpg",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "But I guess I'll never understand rich people....",
+            "type": "inner_monologue"
+        },
+        {
+            "character_name": "???",
+            "character_sprite": "",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "Sora! Right on brand—last one here, as always.",
+            "type": "overlay_text / dialogue / inner_monologue"
+        },
+        {
+            "character_name": "Sora",
+            "character_sprite": "",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "There she is—Rina. Once my quiet childhood friend, now a social butterfly who throws parties in the middle of the woods.",
+            "type": "inner_monologue"
+        },
+        {
+            "character_name": "Sora",
+            "character_sprite": "./assets/character_sprites/sora_talking.PNG",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "Oh yeah, thanks for the warm and totally not sarcastic welcome.",
+            "type": "overlay_text / dialogue / inner_monologue"
+        },
+        {
+            "character_name": "Rina",
+            "character_sprite": "./assets/character_sprites/rina_scared.PNG",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "Come on, let me introduce you to everyone! She gestures toward a grumpy-looking girl who clearly didn't want to be here.",
+            "type": "overlay_text / dialogue / inner_monologue"
+        },
+        {
+            "character_name": "Rina",
+            "character_sprite": "./assets/character_sprites/rina_scared.PNG",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "This is Hana!",
+            "type": "overlay_text / dialogue / inner_monologue"
+        },
+        {
+            "character_name": "Hana",
+            "character_sprite": "./assets/character_sprites/hana_normal.png",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "(arms crossed, unimpressed) Nice to meet you. Rina talks about you all the time. I've even heard some of your bathtime stories.",
+            "type": "overlay_text / dialogue / inner_monologue"
+        },
+        {
+            "character_name": "Sora",
+            "character_sprite": "./assets/character_sprites/sora_talking.png",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "Wow. Fantastic. Just what I wanted to hear.",
+            "type": "overlay_text / dialogue / inner_monologue"
+        },
+        {
+            "character_name": "Rina",
+            "character_sprite": "./assets/character_sprites/rina_evil.png",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "(grinning) Oh, come on, you used to be so cute back then! Back when you weren't such a buzzkill. If I knew this party was going to be a roast, I would've stayed home. I shift my gaze to the corner of the room, where a studious-looking guy stands stiffly. Didn't peg Rina for the type to date bookworms, but we haven't talked in a year. Ever since she transferred to that fancy private school, we kind of… fell apart.",
+            "type": "overlay_text / dialogue / inner_monologue"
+        },
+        {
+            "character_name": "Rina",
+            "character_sprite": "./assets/character_sprites/rina_evil.png",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "Oh! That's Ken, our class president. If you're ever in trouble, he's the guy to go to.",
+            "type": "overlay_text / dialogue / inner_monologue"
+        },
+        {
+            "character_name": "Sora",
+            "character_sprite": "./assets/character_sprites/sora_talking.PNG",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "Noted. Standing next to him is… trouble. The kind of guy your parents warn you about.",
+            "type": "overlay_text / dialogue / inner_monologue"
+        },
+        {
+            "character_name": "???",
+            "character_sprite": "./assets/character_sprites/ren_normal.png",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "(smirks) Hey there, sweetheart. You can just ask me out instead of staring.",
+            "type": "overlay_text / dialogue / inner_monologue"
+        },
+        {
+            "character_name": "Ken",
+            "character_sprite": "./assets/character_sprites/ken_talking.PNG",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "(sighs, already exhausted) Ren, for the love of everything decent, please stop harassing people.",
+            "type": "overlay_text / dialogue / inner_monologue"
+        },
+        {
+            "character_name": "Ren",
+            "character_sprite": "./assets/character_sprites/ren_normal.PNG",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "(grinning, clearly not sorry) What? It's called charisma. Yeah. This is gonna be a long night.",
+            "type": "overlay_text / dialogue / inner_monologue"
+        },
+        {
+            "character_name": "Rina",
+            "character_sprite": "./assets/character_sprites/rina_scared.PNG",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "(hands on hips, teasing smirk) Oh, you boys. Behave, or I'll feed you to the wolves. They'd be happy to eat a meathead like Ren.",
+            "type": "overlay_text / dialogue / inner_monologue"
+        },
+        {
+            "character_name": "Ren",
+            "character_sprite": "./assets/character_sprites/ren_normal.PNG",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "(grinning) Bold of you to assume they'd pick me first.",
+            "type": "overlay_text / dialogue / inner_monologue"
+        },
+        {
+            "character_name": "Ken",
+            "character_sprite": "./assets/character_sprites/ken_talking.PNG",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "(sighs) They would. No contest.",
+            "type": "overlay_text / dialogue / inner_monologue"
+        },
+        {
+            "character_name": "Rina",
+            "character_sprite": "./assets/character_sprites/rina_evil.PNG",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "(ignoring them, turning to Sora) Come on, let me show you to your room before you get sucked into their nonsense.",
+            "type": "overlay_text / dialogue / inner_monologue"
+        },
+        {
+            "character_name": "Rina",
+            "character_sprite": "./assets/character_sprites/rina_evil.PNG",
+            "background": "./assets/scenes/entrance.png",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "“This one's yours! Get comfy—dinner's in 30 minutes, so take your time.”",
+            "type": "overlay_text / dialogue / inner_monologue"
+        },
+        {
+            "character_name": "Sora",
+            "character_sprite": "",
+            "background": "./assets/scenes/bedroom.jpg",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "The door clicks shut behind her, and I take a look around. Pretty plain. Not what I expected from a mansion, but at least it's quiet.",
+            "type": "inner_monologue"
+        },
+        {
+            "character_name": "Sora",
+            "character_sprite": "",
+            "background": "./assets/scenes/common_space.webp",
+            "lighting": "dim/bright/halo/normal/none",
+            "sound": "sound.mp3",
+            "dialogue": "Guess I should explore a bit...",
+            "type": "inner_monologue"
+        },
+        {
+            "character_name": "",
+            "character_sprite": "",
+            "background": "./assets/scenes/common_space.webp",
+            "lighting": "",
+            "sound": "",
+            "dialogue": "Click the items on the screen",
+            "type": "dialogue"
+        },
+        {
+            "character_name": "",
+            "character_sprite": "",
+            "background": "./assets/scenes/common_space.webp",
+            "lighting": "",
+            "sound": "",
+            "dialogue": "",
+            "type": "none"
+        }
+    ]
+}

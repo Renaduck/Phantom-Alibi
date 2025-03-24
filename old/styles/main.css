@@ -1,0 +1,31 @@
+/* Main CSS file that imports all modular CSS files */
+
+/* Import basic reset styles */
+@import 'reset.css';
+
+/* Import layout styles */
+@import 'layout.css';
+
+/* Import sidebar styles */
+@import 'sidebar.css';
+
+/* Import dialogue styles */
+@import 'dialogue.css';
+
+/* Import overlay and settings styles */
+@import 'overlay.css';
+
+/* Import sprite styles */
+@import 'sprites.css';
+
+/* Import inventory/carousel styles */
+@import 'inventory.css';
+
+/* Import credits styles */
+@import 'credits.css';
+
+/* Import help styles */
+@import 'help.css';
+
+/* Import save/load styles */
+@import 'saveload.css'; 

@@ -15,7 +15,7 @@ export interface Scene {
     character_name: string;
     dialogue: string;
     background: string;
-    type: 'none' | 'inner_monologue' | 'overlay_text';
+    type: 'none' | 'inner_monologue' | 'overlay_text' | 'dialogue' | string;
     character_sprite: string;
     items: string[];
 }
