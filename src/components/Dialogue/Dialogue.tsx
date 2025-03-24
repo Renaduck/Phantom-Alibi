@@ -4,6 +4,7 @@ import { fetchStoryData } from '../../utils/scene';
 import { Scene } from '../../types';
 import TypedText from '../TypedText';
 import './Dialogue.css';
+import { IconChevronDown } from '@tabler/icons-react';
 
 // Use memo to prevent unnecessary re-renders
 const Dialogue = memo(() => {
@@ -149,6 +150,17 @@ const Dialogue = memo(() => {
                     shouldComplete={shouldCompleteTyping}
                 />
             </div>
+
+            {isTypingComplete && (
+                <div className="continue-marker">
+                    <IconChevronDown
+                        size={18}
+                        stroke={2}
+                        className="bounce"
+                        color={dialogueType === 'inner_monologue' ? 'rgb(144, 238, 144)' : 'whitesmoke'}
+                    />
+                </div>
+            )}
 
             <div id="dialogue-options">
                 <div id="next-btn" onClick={handleNextClick}>Next</div>

@@ -1,18 +1,10 @@
 .typed-text {
   white-space: pre-wrap;
   word-break: break-word;
-}
-
-.cursor {
+  position: relative;
   display: inline-block;
-  width: 2px;
-  height: 1em;
-  background-color: currentColor;
-  margin-left: 2px;
-  animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  line-height: 1.4;
+  padding: 2px 0;
+  min-height: 1.4em;
+  width: 100%;
 } 

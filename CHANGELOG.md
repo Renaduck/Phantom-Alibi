@@ -41,6 +41,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Added support for variable typing speeds
   - Enabled forced completion of typing animation
   - Used proper React state management for animation state
+- Added OverlayText component for centrally positioned text scenes
+  - Created component that displays text in the center of the screen
+  - Added proper styling with semi-transparent background
+  - Implemented fade-in animation for smooth appearance
+  - Ensured proper positioning and responsiveness across screen sizes
+- Integrated @tabler/icons-react for better icon support
+  - Replaced CDN-based Iconify with proper React component library
+  - Improved consistency and performance with native React components
+  - Added better TypeScript support with properly typed icon components
 
 ### Changed
 
@@ -84,7 +93,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Modularized CSS into component-based files:
   - `styles/reset.css`: Basic styles and resets
   - `styles/layout.css`: Containers and backgrounds
-  - `styles/sidebar.css`: Sidebar components
   - `styles/dialogue.css`: Dialogue box and options
   - `styles/overlay.css`: Overlays and settings
   - `styles/sprites.css`: Character sprites
@@ -95,6 +103,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated HTML to use module imports instead of traditional script tag
 - Removed inline onclick handlers in HTML in favor of proper event listeners
 - Added documentation in src/README.md explaining the new code structure
+- Improved typing animation in TypedText component
+  - Simplified speed calculation for more natural typing
+  - Removed blinking cursor during typing for cleaner appearance
+  - Adjusted timing to ensure proper text rendering
+  - Enhanced readability with better text formatting
 
 ### Fixed
 
@@ -130,6 +143,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed background color for overlay text scenes, ensuring proper black background instead of bluish-grey
 - Fixed browser caching issue with story.json by adding a timestamp parameter to fetch requests
 - Fixed overlay text not displaying in the third scene by moving text from the sound field to the dialogue field
+- Fixed missing characters in TypedText component
+  - Updated text rendering approach to avoid truncated text
+  - Improved handling of text state to preserve all characters
+  - Enhanced animation timing to ensure complete text display
+- Fixed continuation marker positioning in dialogue boxes
+  - Moved marker to proper location at the bottom of dialogue container
+  - Adjusted CSS to ensure consistent positioning across scenes
+  - Improved visual clarity with better spacing and alignment
+- Fixed game elements rendering on title screen
+  - Added conditional rendering to only show game components after game start
+  - Prevented dialogue and overlay text from appearing on title screen
+  - Ensured proper background handling for title screen vs. in-game scenes
 
 ## [0.1.0]
 

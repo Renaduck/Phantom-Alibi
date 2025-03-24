@@ -1,16 +1,47 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import useStore from '../../store';
-import exteriorBg from '../../assets/scenes/exterior.jpg';
 import './Background.css';
+import { fetchStoryData } from '../../utils/scene';
+import exteriorBg from '../../assets/scenes/exterior.jpg';
 
 const Background = () => {
     const backgroundRef = useRef<HTMLDivElement>(null);
+    const [backgroundUrl, setBackgroundUrl] = useState<string | null>(null);
 
     // Only use what we need from the store, avoid destructuring properties that cause re-renders
     const setScene = useStore(state => state.setScene);
-    const completeTypingAnimation = useStore(state => state.completeTypingAnimation);
-    const typingInterval = useStore(state => state.typingInterval);
     const sidebarVisible = useStore(state => state.sidebarVisible);
+    const currentScene = useStore(state => state.currentScene);
+    const gameStarted = useStore(state => state.gameStarted);
+
+    // Load the background for the current scene
+    useEffect(() => {
+        // If game hasn't started yet, use the exterior background for the title screen
+        if (!gameStarted) {
+            setBackgroundUrl(exteriorBg);
+            return;
+        }
+
+        const loadBackground = async () => {
+            try {
+                const { scenes } = await fetchStoryData();
+                if (scenes && scenes[currentScene]) {
+                    const scene = scenes[currentScene];
+                    if (scene.background && scene.background.trim() !== '') {
+                        setBackgroundUrl(scene.background);
+                    } else {
+                        // No background specified, will use black background from CSS
+                        setBackgroundUrl(null);
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading background:', error);
+                setBackgroundUrl(null);
+            }
+        };
+
+        loadBackground();
+    }, [currentScene, gameStarted]);
 
     // Set up zoom functionality ONCE on mount
     useEffect(() => {
@@ -45,13 +76,11 @@ const Background = () => {
 
     // Handle click event to advance scene
     const handleClick = () => {
-        if (!sidebarVisible) return;
+        // Only allow navigation when sidebar is visible and game has started
+        if (!sidebarVisible || !gameStarted) return;
 
-        if (typingInterval !== null) {
-            completeTypingAnimation();
-        } else {
-            setScene("next");
-        }
+        // Advance to the next scene on click
+        setScene("next");
     };
 
     return (
@@ -59,7 +88,10 @@ const Background = () => {
             id="background"
             ref={backgroundRef}
             onClick={handleClick}
-            style={{ backgroundImage: `url(${exteriorBg})` }}
+            style={{
+                backgroundImage: backgroundUrl ? `url(${backgroundUrl})` : 'none',
+                backgroundColor: !backgroundUrl ? 'black' : undefined
+            }}
         />
     );
 };

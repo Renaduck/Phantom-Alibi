@@ -36,14 +36,15 @@ const TypedText = memo(({ content, typingSpeed, color = 'whitesmoke', onComplete
             return;
         }
 
-        // Calculate typing speed
-        const speed = Math.max(10, typingSpeed / 50 * 15);
-        let index = 0;
+        // Simple typing speed - base delay in milliseconds
+        // 50 is medium, 20 is fast, 80 is slow
+        const speed = Math.max(20, 100 - typingSpeed);
 
+        let index = 0;
         // Start typing animation
         intervalRef.current = window.setInterval(() => {
             if (index < content.length) {
-                setDisplayedText(prev => prev + content.charAt(index));
+                setDisplayedText(content.substring(0, index + 1));
                 index++;
             } else {
                 // Animation complete
@@ -88,7 +89,6 @@ const TypedText = memo(({ content, typingSpeed, color = 'whitesmoke', onComplete
     return (
         <div className="typed-text" style={{ color }}>
             {displayedText}
-            {!isComplete && <span className="cursor" />}
         </div>
     );
 });
