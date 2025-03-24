@@ -261,11 +261,20 @@
         "scene_26": {
             "character_name": "",
             "character_sprite": "",
-            "background": "",
+            "background": "./assets/common_space.webp",
             "lighting": "",
             "sound": "",
-            "dialogue": "",
-            "type": ""
+            "dialogue": "Click the items on the screen",
+            "type": "dialogue"
         }, 
+        "scene_27": {
+            "character_name": "", 
+            "character_sprite": "", 
+            "background": "./assets/common_space.webp", 
+            "lighting": "", 
+            "sound": "", 
+            "dialogue": "", 
+            "type": "none"
+        }
     }
 }

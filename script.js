@@ -382,7 +382,10 @@ async function setScene(action) {
     textType = scenes[`scene_${currentScene}`][`type`]
     if (textType == "none") {
         dialogueContainer.style.translate = "-100vw"
+    } else {
+        dialogueContainer.style.translate = "0"
     }
+
     // Update the scene based on the scene object
     changeBackground(scenes[`scene_${currentScene}`]['background'], scenes[`scene_${currentScene}`]['type'], scenes[`scene_${currentScene}`]['dialogue']);
 
