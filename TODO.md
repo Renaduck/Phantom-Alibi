@@ -10,3 +10,5 @@
 - Most of gameplay sections not implemented, but structure for how to do it is implemented
 - Have multiple characters on screen at once if they're in the scene, on each side of the screen
 - Sora sprite should only appear in the initial scene, after which sora sprite should not appear as the player is sora
+- Click screen to advance
+- Remove the intro controls screen, add a help button that launches a modal that shows the controls

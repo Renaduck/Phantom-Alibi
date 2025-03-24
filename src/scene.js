@@ -90,6 +90,9 @@ export async function setScene(action) {
         dialogueText.style.color = 'whitesmoke';
     }
 
+    // Add continue marker if needed
+    addContinueMarker(textType);
+
     // Update the environment play area with the background items
     const sceneItems = scenes[`scene_${gameState.currentScene}`]['items'];
 
@@ -109,4 +112,30 @@ export async function setScene(action) {
     sprite2.src = scenes[`scene_${gameState.currentScene}`]['character_sprite'];
     sprite2.classList.add("show");
     typeText(dialogue, dialogueText);
+}
+
+// Helper function to add a continue marker to the dialogue
+function addContinueMarker(textType) {
+    // Remove any existing marker first
+    const existingMarker = document.querySelector('.continue-marker');
+    if (existingMarker) {
+        existingMarker.remove();
+    }
+    
+    // Only add marker for regular dialogue or inner monologue
+    if (textType === 'none' || textType === 'overlay_text') {
+        return;
+    }
+
+    // Create and add the continue marker with iconify
+    const continueMarker = document.createElement('div');
+    continueMarker.className = 'continue-marker';
+    continueMarker.innerHTML = '<iconify-icon icon="mdi:chevron-down" width="30" height="30"></iconify-icon>';
+    
+    // Add click event listener to advance to the next scene
+    continueMarker.addEventListener('click', () => {
+        setScene("next");
+    });
+    
+    dialogueContainer.appendChild(continueMarker);
 } 

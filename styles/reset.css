@@ -1,0 +1,24 @@
+/* Basic reset and common elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+hr {
+    background-color: whitesmoke;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    height: 3px;
+    border: 0px;
+    border-radius: 3px;
+    padding-bottom: 3px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: black;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+} 
