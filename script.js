@@ -34,10 +34,10 @@ const typingSlider = document.getElementById('type-speed-slider');
 const typingLabel = document.getElementById('type-speed-label');
 
 // Audio Constants 
-const pageFlipAudio = new Audio("./audio/page-flip.mp3");
-const backgroundAudio = new Audio("./audio/ominous.mp3");
-const itemAcquiredAudio = new Audio("./audio/item-acquired.mp3");
-const swooshAudio = new Audio("./audio/swoosh.mp3");
+const pageFlipAudio = new Audio("./assets/audio/page-flip.mp3");
+const backgroundAudio = new Audio("./assets/audio/ominous.mp3");
+const itemAcquiredAudio = new Audio("./assets/audio/item-acquired.mp3");
+const swooshAudio = new Audio("./assets/audio/swoosh.mp3");
 
 // Restart Confirmation Constants
 const restartBtn = document.getElementById('restart');
@@ -99,7 +99,7 @@ class Environment {
             itemContainer.setAttribute("class", "carousel-item");
 
             const img = document.createElement('img');
-            img.src = 'character_sprites/pikachu.png';
+            img.src = './assets/character_sprites/pikachu.png';
             itemContainer.appendChild(img);
 
             carouselItems.appendChild(itemContainer);
@@ -363,7 +363,7 @@ function changeBackground(newBackground, sceneType, dialogue) {
 // Method to fetch and update the current scene
 async function setScene(action) {
     // Get Scene metadata from JSON
-    const response = await fetch("assets/story.json");
+    const response = await fetch("./assets/story.json");
     const data = await response.json();
     scenes = data["scenes"];
     itemCatalogue = data["items"];
@@ -377,7 +377,7 @@ async function setScene(action) {
     // Update the dialogue box -- present in parts if dialogue exceeds box word lmit
     dialogueTitle.innerHTML = ' &#x2746; &nbsp; ' + scenes[`scene_${currentScene}`]['character_name'] + ' ';
     dialogue = scenes[`scene_${currentScene}`]['dialogue'];
-    
+
     // Update the current scene to have no dialogue box (if needed) 
     textType = scenes[`scene_${currentScene}`][`type`]
     if (textType == "none") {

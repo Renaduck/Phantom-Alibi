@@ -1,30 +1,36 @@
 {
     "title": "Story Title",
     "items": {
-        "item_1": {
-            "img_src": "character_sprites/pikachu.png",
-            "description": "pikachu collectible 1 this is a super duper duper duper long description",
+        "door_paint": {
+            "img_src": "./assets/character_sprites/pikachu.png",
+            "description": "paint on the door handle",
+            "x": "0",
+            "y": "0"
+        },
+        "door_scratches": {
+            "img_src": "./assets/character_sprites/pikachu.png",
+            "description": "scratches under the door",
+            "x": "0",
+            "y": "0"
+        },
+        "fishing_wire": {
+            "img_src": "./assets/character_sprites/pikachu.png",
+            "description": "fishing wire",
             "x": "30",
             "y": "20"
         },
-        "item_2": {
-            "img_src": "character_sprites/pikachu.png",
-            "description": "pikachu collectible 2",
+        "neck_bruises": {
+            "img_src": "./assets/character_sprites/pikachu.png",
+            "description": "neck bruises",
             "x": "73",
             "y": "37"
-        },
-        "item_3": {
-            "img_src": "character_sprites/pikachu.png",
-            "description": "pikachu collectible 3",
-            "x": "0",
-            "y": "0"
         }
     },
     "scenes": {
         "scene_0": {
             "character_name": "???",
-            "character_sprite": "./character_sprites/sora_talking.PNG",
-            "background": "./assets/exterior.jpg",
+            "character_sprite": "./assets/character_sprites/sora_talking.PNG",
+            "background": "./assets/scenes/exterior.jpg",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Welcome to the game! Pressing 'enter', 'right-arrow' or 'spacebar' will advance the dialogue.",
@@ -44,13 +50,13 @@
             "character_sprite": "",
             "background": "",
             "lighting": "",
-            "sound": "He can’t really be dead… right?",
+            "sound": "He can't really be dead… right?",
             "type": "overlay_text"
         },
         "scene_3": {
             "character_name": "???",
-            "character_sprite": "./character_sprites/sora_talking.PNG",
-            "background": "./assets/exterior.jpg",
+            "character_sprite": "./assets/character_sprites/sora_talking.PNG",
+            "background": "./assets/scenes/exterior.jpg",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Huff... huff... Looks like I finally made it. Just a train, two buses, and a scenic hike through nowhere.",
@@ -62,8 +68,8 @@
         },
         "scene_4": {
             "character_name": "???",
-            "character_sprite": "./character_sprites/sora_talking.PNG",
-            "background": "./assets/exterior.jpg",
+            "character_sprite": "./assets/character_sprites/sora_talking.PNG",
+            "background": "./assets/scenes/exterior.jpg",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "I don't know why Rina picked her summer cabin of all places for a birthday party. Kind of a pain making everyone commute all the way out here. ",
@@ -71,8 +77,8 @@
         },
         "scene_5": {
             "character_name": "???",
-            "character_sprite": "./character_sprites/sora_talking.PNG",
-            "background": "./assets/exterior.jpg",
+            "character_sprite": "./assets/character_sprites/sora_talking.PNG",
+            "background": "./assets/scenes/exterior.jpg",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "But I guess I'll never understand rich people....",
@@ -81,7 +87,7 @@
         "scene_6": {
             "character_name": "???",
             "character_sprite": "",
-            "background": "./assets/entrance.png",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Sora! Right on brand—last one here, as always.",
@@ -90,7 +96,7 @@
         "scene_7": {
             "character_name": "Sora",
             "character_sprite": "",
-            "background": "./assets/entrance.png",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "There she is—Rina. Once my quiet childhood friend, now a social butterfly who throws parties in the middle of the woods.",
@@ -98,8 +104,8 @@
         },
         "scene_8": {
             "character_name": "Sora",
-            "character_sprite": "./character_sprites/sora_talking.PNG",
-            "background": "./assets/entrance.png",
+            "character_sprite": "./assets/character_sprites/sora_talking.PNG",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Oh yeah, thanks for the warm and totally not sarcastic welcome.",
@@ -107,8 +113,8 @@
         },
         "scene_9": {
             "character_name": "Rina",
-            "character_sprite": "./character_sprites/rina_scared.PNG",
-            "background": "./assets/entrance.png",
+            "character_sprite": "./assets/character_sprites/rina_scared.PNG",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Come on, let me introduce you to everyone! She gestures toward a grumpy-looking girl who clearly didn't want to be here.",
@@ -116,8 +122,8 @@
         },
         "scene_10": {
             "character_name": "Rina",
-            "character_sprite": "./character_sprites/rina_scared.PNG",
-            "background": "./assets/entrance.png",
+            "character_sprite": "./assets/character_sprites/rina_scared.PNG",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "This is Hana!",
@@ -125,8 +131,8 @@
         },
         "scene_11": {
             "character_name": "Hana",
-            "character_sprite": "./character_sprites/hana_normal.png",
-            "background": "./assets/entrance.png",
+            "character_sprite": "./assets/character_sprites/hana_normal.png",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(arms crossed, unimpressed) Nice to meet you. Rina talks about you all the time. I've even heard some of your bathtime stories.",
@@ -134,8 +140,8 @@
         },
         "scene_12": {
             "character_name": "Sora",
-            "character_sprite": "./character_sprites/sora_talking.png",
-            "background": "./assets/entrance.png",
+            "character_sprite": "./assets/character_sprites/sora_talking.png",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Wow. Fantastic. Just what I wanted to hear.",
@@ -143,8 +149,8 @@
         },
         "scene_13": {
             "character_name": "Rina",
-            "character_sprite": "./character_sprites/rina_evil.png",
-            "background": "./assets/entrance.png",
+            "character_sprite": "./assets/character_sprites/rina_evil.png",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(grinning) Oh, come on, you used to be so cute back then! Back when you weren't such a buzzkill. If I knew this party was going to be a roast, I would've stayed home. I shift my gaze to the corner of the room, where a studious-looking guy stands stiffly. Didn't peg Rina for the type to date bookworms, but we haven't talked in a year. Ever since she transferred to that fancy private school, we kind of… fell apart.",
@@ -152,8 +158,8 @@
         },
         "scene_14": {
             "character_name": "Rina",
-            "character_sprite": "./character_sprites/rina_evil.png",
-            "background": "./assets/entrance.png",
+            "character_sprite": "./assets/character_sprites/rina_evil.png",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Oh! That's Ken, our class president. If you're ever in trouble, he's the guy to go to.",
@@ -161,8 +167,8 @@
         },
         "scene_15": {
             "character_name": "Sora",
-            "character_sprite": "./character_sprites/sora_talking.PNG",
-            "background": "./assets/entrance.png",
+            "character_sprite": "./assets/character_sprites/sora_talking.PNG",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Noted. Standing next to him is… trouble. The kind of guy your parents warn you about.",
@@ -170,8 +176,8 @@
         },
         "scene_16": {
             "character_name": "???",
-            "character_sprite": "./character_sprites/ren_normal.png",
-            "background": "./assets/entrance.png",
+            "character_sprite": "./assets/character_sprites/ren_normal.png",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(smirks) Hey there, sweetheart. You can just ask me out instead of staring.",
@@ -179,8 +185,8 @@
         },
         "scene_17": {
             "character_name": "Ken",
-            "character_sprite": "./character_sprites/ken_talking.PNG",
-            "background": "./assets/entrance.png",
+            "character_sprite": "./assets/character_sprites/ken_talking.PNG",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(sighs, already exhausted) Ren, for the love of everything decent, please stop harassing people.",
@@ -188,8 +194,8 @@
         },
         "scene_18": {
             "character_name": "Ren",
-            "character_sprite": "./character_sprites/ren_normal.PNG",
-            "background": "./assets/entrance.png",
+            "character_sprite": "./assets/character_sprites/ren_normal.PNG",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(grinning, clearly not sorry) What? It's called charisma. Yeah. This is gonna be a long night.",
@@ -197,8 +203,8 @@
         },
         "scene_19": {
             "character_name": "Rina",
-            "character_sprite": "./character_sprites/rina_scared.PNG",
-            "background": "./assets/entrance.png",
+            "character_sprite": "./assets/character_sprites/rina_scared.PNG",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(hands on hips, teasing smirk) Oh, you boys. Behave, or I'll feed you to the wolves. They'd be happy to eat a meathead like Ren.",
@@ -206,8 +212,8 @@
         },
         "scene_20": {
             "character_name": "Ren",
-            "character_sprite": "./character_sprites/ren_normal.PNG",
-            "background": "./assets/entrance.png",
+            "character_sprite": "./assets/character_sprites/ren_normal.PNG",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(grinning) Bold of you to assume they'd pick me first.",
@@ -215,8 +221,8 @@
         },
         "scene_21": {
             "character_name": "Ken",
-            "character_sprite": "./character_sprites/ken_talking.PNG",
-            "background": "./assets/entrance.png",
+            "character_sprite": "./assets/character_sprites/ken_talking.PNG",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(sighs) They would. No contest.",
@@ -224,8 +230,8 @@
         },
         "scene_22": {
             "character_name": "Rina",
-            "character_sprite": "./character_sprites/rina_evil.PNG",
-            "background": "./assets/entrance.png",
+            "character_sprite": "./assets/character_sprites/rina_evil.PNG",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "(ignoring them, turning to Sora) Come on, let me show you to your room before you get sucked into their nonsense.",
@@ -233,8 +239,8 @@
         },
         "scene_23": {
             "character_name": "Rina",
-            "character_sprite": "./character_sprites/rina_evil.PNG",
-            "background": "./assets/entrance.png",
+            "character_sprite": "./assets/character_sprites/rina_evil.PNG",
+            "background": "./assets/scenes/entrance.png",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "“This one's yours! Get comfy—dinner's in 30 minutes, so take your time.”",
@@ -243,7 +249,7 @@
         "scene_24": {
             "character_name": "Sora",
             "character_sprite": "",
-            "background": "./assets/bedroom.jpg",
+            "background": "./assets/scenes/bedroom.jpg",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "The door clicks shut behind her, and I take a look around. Pretty plain. Not what I expected from a mansion, but at least it’s quiet.",
@@ -252,7 +258,7 @@
         "scene_25": {
             "character_name": "Sora",
             "character_sprite": "",
-            "background": "./assets/common_space.webp",
+            "background": "./assets/scenes/common_space.webp",
             "lighting": "dim/bright/halo/normal/none",
             "sound": "sound.mp3",
             "dialogue": "Guess I should explore a bit...",
@@ -261,19 +267,19 @@
         "scene_26": {
             "character_name": "",
             "character_sprite": "",
-            "background": "./assets/common_space.webp",
+            "background": "./assets/scenes/common_space.webp",
             "lighting": "",
             "sound": "",
             "dialogue": "Click the items on the screen",
             "type": "dialogue"
-        }, 
+        },
         "scene_27": {
-            "character_name": "", 
-            "character_sprite": "", 
-            "background": "./assets/common_space.webp", 
-            "lighting": "", 
-            "sound": "", 
-            "dialogue": "", 
+            "character_name": "",
+            "character_sprite": "",
+            "background": "./assets/scenes/common_space.webp",
+            "lighting": "",
+            "sound": "",
+            "dialogue": "",
             "type": "none"
         }
     }

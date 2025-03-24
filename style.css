@@ -311,7 +311,7 @@ body {
 /* Source: https://stackoverflow.com/questions/22609247/how-to-zoom-in-to-a-specific-point-smoothly-with-css */
 /* Zoom into a point */
 #background {
-    background-image: url('./assets/exterior.jpg');
+    background-image: url('./assets/scenes/exterior.jpg');
     background-size: 100%;
     background-position: center;
     transition: all 1s ease;
