@@ -1,0 +1,85 @@
+/* Settings Menu */
+#settings-menu {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(116, 137, 147);
+    border-radius: 10px;
+    padding: 20px 30px;
+    color: white;
+    z-index: 1001;
+    width: 400px;
+}
+
+#settings-menu.show {
+    display: block;
+}
+
+/* Modal Header */
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.settings-header h2 {
+    font-size: 22px;
+    margin: 0;
+}
+
+#close-settings-btn {
+    cursor: pointer;
+    color: whitesmoke;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+#close-settings-btn:hover {
+    opacity: 1;
+}
+
+/* Settings Controls */
+.settings-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.setting-item label {
+    font-size: 18px;
+}
+
+/* Range slider styling */
+.slider {
+    width: 150px;
+    height: 8px;
+    background: #d3d3d3;
+    outline: none;
+    border-radius: 4px;
+}
+
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: whitesmoke;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: whitesmoke;
+    cursor: pointer;
+}

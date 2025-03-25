@@ -1,0 +1,168 @@
+/* Save/Load Menu Styling */
+
+/* Save/Load buttons in sidebar - inherits styles from sidebar */
+#save-game, #load-game, #load-menu {
+  /* These buttons should use the exact same styling as other sidebar menu items */
+}
+
+/* Save list modal */
+#save-list-menu {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.95);
+  border: 2px solid #555;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh;
+  z-index: 1001;
+  color: white;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+#save-list-menu.show {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+#save-list-menu h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #fff;
+  font-size: 24px;
+  border-bottom: 1px solid #555;
+  padding-bottom: 10px;
+}
+
+#save-list-container {
+  max-height: 50vh;
+  overflow-y: auto;
+  padding: 10px 0;
+  margin-bottom: 15px;
+}
+
+.save-item {
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: rgba(40, 40, 40, 0.7);
+}
+
+.save-item:hover {
+  background-color: rgba(60, 60, 60, 0.9);
+  transform: translateY(-2px);
+}
+
+.save-item.selected {
+  border-color: #7289da;
+  background-color: rgba(70, 70, 100, 0.8);
+  box-shadow: 0 0 8px rgba(114, 137, 218, 0.5);
+}
+
+.save-timestamp {
+  font-weight: bold;
+  color: #aaa;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.save-preview {
+  color: #ccc;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.no-saves {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+  font-style: italic;
+}
+
+#save-list-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+#save-list-buttons button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #444;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 16px;
+}
+
+#save-list-buttons button:hover {
+  background-color: #555;
+}
+
+#load-selected-btn {
+  background-color: #4a6da7 !important;
+}
+
+#load-selected-btn:hover {
+  background-color: #5d80ba !important;
+}
+
+#load-selected-btn:disabled {
+  background-color: #3a3a3a !important;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+#delete-save-btn {
+  background-color: #a74a4a !important;
+}
+
+#delete-save-btn:hover {
+  background-color: #ba5d5d !important;
+}
+
+.save-confirmation {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(30, 30, 30, 0.9);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 4px;
+  z-index: 2000;
+  animation: slideIn 0.3s ease;
+  border-left: 4px solid #4CAF50;
+}
+
+.save-confirmation.fade-out {
+  animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,27 @@
+/* Credits Menu Styling */
+#credits-menu {
+    flex-direction: column;
+    gap: 10px;
+}
+
+#credits-menu.show {
+    display: flex;
+}
+
+#credits-menu hr {
+    margin-bottom: 5px;
+}
+
+#credits-menu span {
+    font-weight: bolder;
+}
+
+#credits-menu span a {
+    color: whitesmoke;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+#credits-menu span a:hover {
+    color: rgb(119, 196, 255);
+}

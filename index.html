@@ -1,104 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Adventure & Click</title>
-    <link rel="icon" href="./assets/character_sprites/pikachu.png" type="image/png">
-    <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phantom Alibi</title>
+    <link rel="icon" href="/src/assets/character_sprites/pikachu.png" type="image/png">
   </head>
   <body>
-    <div id="container">
-      <div id="background"></div>
-      <div id="sidebar">
-        <div id="side-container">
-          <h2>Adventure & Click</h2>
-          <div id="play-game">Start Game</div>
-          <div id="restart" hidden>Restart</div>
-          <div id="credits">Credits</div>
-          <div id="settings">Settings</div>
-        </div>
-      </div>
-      <div id="sprite-container">
-        <div><img id="sprite-1" src=""/></div>
-        <div><img id="sprite-2" src=""/></div>
-        <div><img id="sprite-3" src=""/></div>
-      </div>
-        
-      </div>
-      <div id="dialogue-container">
-        <div id="dialogue-title"></div>
-        <div id="dialogue-text"></div>
-        <div id="dialogue-options">
-          <div id="next-btn" onclick="setScene('next')">Next</div>
-          <div id="inventory-btn">Inventory</div>
-          <div id="prev-btn" onclick="setScene('prev')">Prev</div>
-
-        </div>
-      </div>
-      <!-- Carousel is hidden by default -->
-      <div id="carousel">
-        <span id="carousel-left">&#10094;</span>
-        <div id="carousel-items">
-          <!-- carousel image divs are inserted here -->
-        </div>
-        <span id="carousel-right">&#10095;</span>
-      </div>
-      <div id="overlay"></div>
-      <div id="credits-menu">
-        <h2>Credits</h2><hr>
-        <span>Created by: <a href="" target="_blank">Not Real Studio</a></span>
-        <span>Story & Artwork: <a href="https://github.com/Renaduck" target="_blank">Effy</a></span>
-        <span>Sound Effects: <a href="https://github.com/jfeenfalcon" target="_blank">Jake, </a><a href="" target="_blank">Jayden, </a><a href="" target="_blank">Mauricio</a></span>
-        <span>Game Developers: <a href="https://github.com/jfeenfalcon" target="_blank">Jake, </a><a href="" target="_blank">Jayden, </a><a href="" target="_blank">Mauricio</a></span>
-        <button id="close-credits-btn">Close</button>
-      </div>
-      <div id="settings-menu">
-        <h2>Settings</h2>
-        <div id="volume-container">
-          <label for="volume-slider">Background Music: </label>
-          <input type="range" id="volume-slider" min="0" max="100" value="80">
-          <span id="volume-label">80%</span>
-        </div>
-        <div id="sound-effects-container">
-          <label for="sound-effects-slider">Sound Effects: </label>
-          <input type="range" id="sound-effects-slider" min="0" max="100" value="70">
-          <span id="sound-effects-label">70%</span>
-        </div>
-        <div id="type-speed-container">
-          <label for="type-speed-slider">Typing Speed: </label>
-          <input type="range" id="type-speed-slider" min="0" max="100" value="50">
-          <span id="type-speed-label">50%</span>
-        </div>
-          <h3 style="margin-bottom: 10px;">Controls</h3>
-          <hr>
-          <div class="keybinding">
-            <span>Inventory :</span>
-            <span>i</span>
-          </div>
-          <div class="keybinding">
-            <span>Toggle Sidebar :</span>
-            <span>Escape</span>
-          </div>
-          <div class="keybinding">
-            <span>Next Dialogue :</span>
-            <span>Space / Right-Arrow / Enter</span>
-          </div>
-          <hr>
-          <div id="settings-buttons">
-            <button id="close-settings-btn">Close</button>
-            <button id="save-settings-btn" onclick="updateSettings()">Save</button>
-          </div>
-      </div>
-      <div id="restart-confirmation">
-        <h2>Are you sure you want to restart the game?</h2>
-        <div>
-          <button id="no-restart">Back</button>
-          <button id="yes-restart">Yes</button>
-        </div>
-      </div>
-    </div>
-    <script src="script.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

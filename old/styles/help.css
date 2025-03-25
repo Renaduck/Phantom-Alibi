@@ -1,0 +1,75 @@
+/* Help Button */
+#help-btn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(116, 137, 147);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 9998;
+    color: whitesmoke;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+    opacity: 0;
+}
+
+#help-btn:hover {
+    background: rgb(95, 109, 122);
+    transform: scale(1.1);
+}
+
+#help-btn iconify-icon {
+    color: whitesmoke;
+}
+
+/* Help Modal */
+#help-menu {
+    display: none;
+    position: fixed;
+    min-width: 300px;
+    width: 32%;
+    padding: 20px 30px;
+    left: 50%;
+    top: 50%;
+    text-align: left;
+    border-radius: 10px;
+    background: rgb(116, 137, 147);
+    color: whitesmoke;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease;
+    z-index: 9999;
+}
+
+#help-menu.show {
+    display: block;
+    opacity: 1;
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.modal-header h2 {
+    font-size: 22px;
+    margin: 0;
+}
+
+#close-help-btn {
+    cursor: pointer;
+    color: whitesmoke;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+#close-help-btn:hover {
+    opacity: 1;
+} 

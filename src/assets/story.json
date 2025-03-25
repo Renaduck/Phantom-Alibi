@@ -1,0 +1,6 @@
+{
+    "title": "DEPRECATED - NOW USING MODULAR FORMAT",
+    "description": "This file has been refactored into multiple TypeScript files in the src/assets/story/ directory. See src/assets/story/main.ts for the entry point.",
+    "scenes": [],
+    "items": {}
+}
