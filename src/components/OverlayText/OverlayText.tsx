@@ -1,8 +1,8 @@
 import { memo, useState, useCallback } from 'react';
 import useStore from '../../store';
 import TypedText from '../TypedText';
+import ContinueMarker from '../ContinueMarker';
 import './OverlayText.css';
-import { IconChevronDown } from '@tabler/icons-react';
 
 interface OverlayTextProps {
     content: string;
@@ -47,9 +47,10 @@ const OverlayText = memo(({ content, onComplete }: OverlayTextProps) => {
                 />
 
                 {isTypingComplete && (
-                    <div className="continue-marker">
-                        <IconChevronDown size={24} stroke={2} color="whitesmoke" className="bounce" />
-                    </div>
+                    <ContinueMarker
+                        onClick={handleClick}
+                        color="whitesmoke"
+                    />
                 )}
             </div>
         </div>

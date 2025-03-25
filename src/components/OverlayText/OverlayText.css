@@ -24,23 +24,6 @@
     line-height: 1.4;
 }
 
-.continue-marker {
-    position: absolute;
-    bottom: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 15px;
-    height: 24px;
-    width: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.bounce {
-    animation: bounce 1s infinite;
-}
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -49,15 +32,6 @@
     to {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(5px);
     }
 }
 

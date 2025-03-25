@@ -1,12 +1,7 @@
 /* Import global CSS */
 @import './global.css';
 
-/* Continue marker for overlay scenes (specific to App component) */
-.continue-marker {
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-}
+/* Continue marker styles moved to ContinueMarker.css */
 
 #root {
   margin: 0;

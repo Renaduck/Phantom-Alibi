@@ -64,43 +64,4 @@
     cursor: pointer;
 }
 
-/* Continue marker styling */
-.continue-marker {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30px;
-    height: 20px;
-    cursor: pointer;
-    bottom: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.bounce {
-    animation: bounce 1s infinite;
-}
-
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(5px);
-    }
-}
-
-/* Continue marker inside dialogue container */
-#dialogue-container .continue-marker {
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-/* Continue marker for overlay text scenes - updated for React root */
-#root > .continue-marker {
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-} 
+/* Continue marker styling removed - now in ContinueMarker.css */ 

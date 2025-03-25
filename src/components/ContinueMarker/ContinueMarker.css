@@ -1,0 +1,36 @@
+.continue-marker.component-continue-marker {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+/* Specific positioning for dialogue container */
+#dialogue-container .continue-marker.component-continue-marker {
+    bottom: 40px;
+}
+
+/* Specific positioning for overlay text content */
+.overlay-text-content .continue-marker.component-continue-marker {
+    bottom: 10px;
+}
+
+.continue-marker.component-continue-marker .bounce {
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+} 

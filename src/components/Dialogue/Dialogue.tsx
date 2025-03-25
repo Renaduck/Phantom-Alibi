@@ -3,8 +3,8 @@ import useStore from '../../store';
 import { fetchStoryData } from '../../utils/scene';
 import { Scene } from '../../types';
 import TypedText from '../TypedText';
+import ContinueMarker from '../ContinueMarker';
 import './Dialogue.css';
-import { IconChevronDown } from '@tabler/icons-react';
 
 // Use memo to prevent unnecessary re-renders
 const Dialogue = memo(() => {
@@ -152,14 +152,10 @@ const Dialogue = memo(() => {
             </div>
 
             {isTypingComplete && (
-                <div className="continue-marker">
-                    <IconChevronDown
-                        size={18}
-                        stroke={2}
-                        className="bounce"
-                        color={dialogueType === 'inner_monologue' ? 'rgb(144, 238, 144)' : 'whitesmoke'}
-                    />
-                </div>
+                <ContinueMarker
+                    onClick={handleNextClick}
+                    color={dialogueType === 'inner_monologue' ? 'rgb(144, 238, 144)' : 'whitesmoke'}
+                />
             )}
 
             <div id="dialogue-options">
