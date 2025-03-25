@@ -30,7 +30,7 @@ const tutorialScenes: Scene[] = [
             "window",
             "chair",
             "bookshelf",
-            "pillow"
+            "weird_note"
         ]
     },
     {

@@ -30,6 +30,13 @@ import tomoAngry from '../assets/character_sprites/tomo_angry.png';
 import tomoScared from '../assets/character_sprites/tomo_scared.png';
 import tomoTalking from '../assets/character_sprites/tomo_talking.png';
 
+// Import clue/item images
+import doorPaint from '../assets/clues/door_paint.png';
+import doorScratches from '../assets/clues/door_scratches.png';
+import fishingWire from '../assets/clues/fishing_wire.png';
+import neckBruises from '../assets/clues/neck_bruises.jpg';
+import weirdNote from '../assets/clues/weird_note.png';
+
 // Log all sprite imports to verify they loaded
 console.log('Sprite imports check:');
 console.log('soraTalking:', soraTalking);
@@ -71,7 +78,18 @@ export const sprites: AssetMap = {
     'sora_talking.png': soraTalking,
     'tomo_angry.png': tomoAngry,
     'tomo_scared.png': tomoScared,
-    'tomo_talking.png': tomoTalking
+    'tomo_talking.png': tomoTalking,
+
+    // Clue/item images
+    'door_paint.png': doorPaint,
+    'door_scratches.png': doorScratches,
+    'fishing_wire.png': fishingWire,
+    'neck_bruises.jpg': neckBruises,
+    'weird_note.png': weirdNote,
+
+    // Map alternate names to the same assets
+    'note.png': weirdNote,
+    'strange_note.png': weirdNote
 };
 
 // Helper function to get just the filename from any path

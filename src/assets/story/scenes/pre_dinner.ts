@@ -6,7 +6,7 @@ const preDinnerScenes: Scene[] = [
         character_name: "",
         character_sprite: "",
         background: "bedroom.jpg",
-        dialogue: "[Weird Note has been added to your Inventory.] [Inventory Menu Appears.] (Press [Key] to open your inventory. Select an item to examine it closer.)",
+        dialogue: "You've found a strange note. It has been added to your inventory. (Press the 'I' key anytime to view your inventory items.)",
         type: SCENE_TYPES.DIALOGUE,
         items: ["weird_note"]
     },

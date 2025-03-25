@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import useStore from '../../core/store';
 import { fetchStoryData } from '../../services/scene';
 import { getAsset } from '../../common/assets';
+import { SCENE_TYPES } from '../../common/constants';
 import './InteractiveItems.css';
 
 // Types for interactive items
@@ -30,11 +31,18 @@ const InteractiveItems: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
     const [dialogueMessage, setDialogueMessage] = useState<string | null>(null);
+    const [clickedItems, setClickedItems] = useState<Set<string>>(new Set());
 
     const currentScene = useStore(state => state.currentScene);
     const addToInventory = useStore(state => state.addToInventory);
     const playItemAcquiredSound = useStore(state => state.playItemAcquiredSound);
     const playPageFlipSound = useStore(state => state.playPageFlipSound);
+    const setScene = useStore(state => state.setScene);
+
+    // Reset clicked items when scene changes
+    useEffect(() => {
+        setClickedItems(new Set());
+    }, [currentScene]);
 
     // Load items for the current scene
     useEffect(() => {
@@ -99,6 +107,65 @@ const InteractiveItems: React.FC = () => {
         loadItems();
     }, [currentScene]);
 
+    // Check if all items have been clicked and advance scene if needed
+    useEffect(() => {
+        if (items.length > 0 && clickedItems.size === items.length) {
+            // All items have been clicked, schedule advancement to next scene
+            const timer = setTimeout(() => {
+                console.log('All items clicked, advancing to next scene');
+
+                // Skip past item dialogue scenes to the next key scene
+                const skipRedundantDialogues = async () => {
+                    try {
+                        const storyData = await fetchStoryData();
+                        if (!storyData || !storyData.scenes) {
+                            setScene('next');
+                            return;
+                        }
+
+                        // Count how many items were in the current interactive scene
+                        const currentSceneData = storyData.scenes[currentScene];
+                        const itemCount = currentSceneData?.items?.length || 0;
+
+                        if (itemCount > 0) {
+                            // Find the next scene that isn't related to individual item dialogues
+                            // We want to find the scene after all the redundant dialogue scenes
+                            let targetSceneIndex = currentScene + 1;
+
+                            // In tutorial.ts, we should skip to the scene that shows "Don't fall asleep in this room"
+                            // This is an overlay text scene (scene index 9)
+                            const maxIndex = Math.min(currentScene + 10, storyData.scenes.length - 1);
+
+                            for (let i = currentScene + 1; i <= maxIndex; i++) {
+                                const scene = storyData.scenes[i];
+
+                                // Look for a scene that's an overlay text or a scene after several dialogues
+                                if (scene.type === SCENE_TYPES.OVERLAY_TEXT ||
+                                    (i >= currentScene + itemCount + 2 && scene.type === SCENE_TYPES.INNER_MONOLOGUE)) {
+                                    targetSceneIndex = i;
+                                    break;
+                                }
+                            }
+
+                            console.log(`Skipping to scene ${targetSceneIndex} from ${currentScene}`);
+                            useStore.setState({ currentScene: targetSceneIndex });
+                        } else {
+                            // Just move to next scene if not an interactive scene
+                            setScene('next');
+                        }
+                    } catch (err) {
+                        console.error('Error advancing scene:', err);
+                        setScene('next'); // Fallback
+                    }
+                };
+
+                skipRedundantDialogues();
+            }, 2000); // Wait 2 seconds before advancing
+
+            return () => clearTimeout(timer);
+        }
+    }, [clickedItems, items, currentScene, setScene]);
+
     // Hide dialogue message after a delay
     useEffect(() => {
         if (dialogueMessage) {
@@ -112,6 +179,13 @@ const InteractiveItems: React.FC = () => {
     // Handle item click
     const handleItemClick = useCallback((item: ItemPosition) => {
         console.log('Item clicked:', item);
+
+        // Add to clicked items set
+        setClickedItems(prev => {
+            const newSet = new Set(prev);
+            newSet.add(item.id);
+            return newSet;
+        });
 
         // Handle based on item type
         if (item.itemType === 'dialogue') {
@@ -148,7 +222,7 @@ const InteractiveItems: React.FC = () => {
                 }, 3000);
             }
         }
-    }, [addToInventory, playItemAcquiredSound, playPageFlipSound]);
+    }, [addToInventory, playItemAcquiredSound, playPageFlipSound, setClickedItems]);
 
     if (loading) {
         return null;
@@ -167,7 +241,7 @@ const InteractiveItems: React.FC = () => {
             {items.map((item) => (
                 <div
                     key={item.id}
-                    className={`interactive-item ${item.itemType === 'dialogue' ? 'dialogue-hotspot' : 'inventory-hotspot'}`}
+                    className={`interactive-item ${item.itemType === 'dialogue' ? 'dialogue-hotspot' : 'inventory-hotspot'} ${clickedItems.has(item.id) ? 'clicked' : ''}`}
                     style={{
                         left: `${item.x}%`,
                         top: `${item.y}%`,
@@ -175,7 +249,9 @@ const InteractiveItems: React.FC = () => {
                     onClick={() => handleItemClick(item)}
                 >
                     <div className="item-hotspot"></div>
-                    <div className="item-label">{item.description}</div>
+                    <div className={`item-label ${clickedItems.has(item.id) ? 'visible' : ''}`}>
+                        {item.description}
+                    </div>
                 </div>
             ))}
 

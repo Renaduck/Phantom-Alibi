@@ -79,25 +79,18 @@ const items: Record<string, Item & {
     },
 
     // Inventory items
-    pillow: {
-        img_src: "door_paint.png", // Temporarily using an existing image for testing
-        description: "Pillow with a strange note",
-        x: 62,
-        y: 55,
-        itemType: 'inventory'
-    },
     strange_note: {
-        img_src: "fishing_wire.png", // Temporarily using an existing image for testing
+        img_src: "weird_note.png",
         description: "A strange warning note",
         x: 62,
         y: 55,
         itemType: 'inventory'
     },
     weird_note: {
-        img_src: "note.png",
-        description: "A slightly damp note with cryptic writing. No signature.",
-        x: 0,
-        y: 0,
+        img_src: "weird_note.png",
+        description: "The note reads \"don't sleep here...\"",
+        x: 62,
+        y: 55,
         itemType: 'inventory'
     }
 };
