@@ -13,17 +13,30 @@ This project uses Vite as a build tool and development server.
 
 #### Installing Node.js and npm on Windows
 
-1. Download the Node.js installer:
-   - Visit [nodejs.org](https://nodejs.org/)
-   - Download the LTS (Long Term Support) version
-   
-2. Run the installer:
-   - Double-click the downloaded file (e.g., `node-v16.x.x-x64.msi`)
-   - Follow the installation wizard prompts
-   - Leave all default options selected unless you have specific requirements
+1. Install Chocolatey package manager:
+   - Open PowerShell as Administrator
+   - Run the following command:
+     ```
+     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+     ```
+   - Close and reopen PowerShell
 
-3. Verify installation:
-   - Open Command Prompt or PowerShell
+2. Install Node Version Manager (nvm):
+   ```
+   choco install nvm
+   ```
+
+3. Install the latest LTS version of Node.js:
+   ```
+   nvm install lts
+   ```
+
+4. Use the installed Node.js version (replace xx.xx.xx with the version number displayed after installation):
+   ```
+   nvm use xx.xx.xx
+   ```
+
+5. Verify installation:
    - Run `node -v` to verify Node.js installation
    - Run `npm -v` to verify npm installation
 
