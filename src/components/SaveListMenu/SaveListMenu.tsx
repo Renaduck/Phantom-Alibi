@@ -1,6 +1,6 @@
-import { useEffect, useState, memo } from 'react';
-import useStore from '../../store';
-import { SaveData } from '../../types';
+import { useState, useEffect, memo } from 'react';
+import useStore from '../../core/store';
+import { SaveData } from '../../common/types';
 
 import './SaveListMenu.css';
 

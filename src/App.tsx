@@ -1,5 +1,5 @@
-import { useEffect, Fragment } from 'react'
-import useStore from './store'
+import { useEffect, Fragment, useState, useCallback } from 'react'
+import useStore from './core/store'
 import Background from './components/Background'
 import Sidebar from './components/Sidebar'
 import Dialogue from './components/Dialogue'
@@ -14,12 +14,12 @@ import HelpMenu from './components/HelpMenu'
 import HelpButton from './components/HelpButton'
 import RestartConfirmation from './components/RestartConfimation'
 import Carousel from './components/Carousel'
-import { useState, useCallback } from 'react'
-import { fetchStoryData } from './utils/scene'
+import { fetchStoryData } from './services/scene'
+import { SCENE_TYPES } from './common/constants'
 
 import './App.css'
 
-// Immediately log when the App module loads>
+// Immediately log when the App module loads
 console.log('App module loaded');
 
 function App() {
@@ -69,8 +69,8 @@ function App() {
                         console.log('Split scene types:', types);
 
                         // If it contains overlay_text, prioritize that
-                        if (types.includes('overlay_text')) {
-                            type = 'overlay_text';
+                        if (types.includes(SCENE_TYPES.OVERLAY_TEXT)) {
+                            type = SCENE_TYPES.OVERLAY_TEXT;
                         }
                         // Otherwise use the first type
                         else {
@@ -82,7 +82,7 @@ function App() {
                     setSceneType(type);
 
                     // Check if this is an overlay text scene
-                    const isOverlay = type === 'overlay_text';
+                    const isOverlay = type === SCENE_TYPES.OVERLAY_TEXT;
                     setIsOverlayTextScene(isOverlay);
 
                     if (isOverlay) {

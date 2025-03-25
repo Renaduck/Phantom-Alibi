@@ -1,7 +1,7 @@
 import React, { useState, useEffect, memo } from 'react';
-import useStore from '../../store';
-import { fetchStoryData } from '../../utils/scene';
-import { getAsset } from '../../utils/assets';
+import useStore from '../../core/store';
+import { fetchStoryData } from '../../services/scene';
+import { getAsset } from '../../common/assets';
 import './Sprites.css'; // Component-specific CSS
 
 // Immediately log when the module is loaded

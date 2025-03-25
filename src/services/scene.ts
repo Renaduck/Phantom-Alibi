@@ -1,4 +1,5 @@
-import { Scene } from '../types';
+import { Scene } from '../common/types';
+import { SCENE_TYPES } from '../common/constants';
 import exteriorBg from '../assets/scenes/exterior.jpg';
 import storyJson from '../assets/story.json';
 
@@ -50,7 +51,7 @@ export function changeBackground(
         existingOverlayText.remove();
     }
 
-    if (sceneType === 'overlay_text') {
+    if (sceneType === SCENE_TYPES.OVERLAY_TEXT) {
         // Set up overlay text mode
         background.style.filter = 'brightness(0)';
         spriteContainer.style.display = "none";
@@ -112,9 +113,9 @@ export function addContinueMarker(
     continueMarker.addEventListener('click', onContinue);
 
     // Determine where to add the marker based on scene type
-    if (textType === 'overlay_text') {
+    if (textType === SCENE_TYPES.OVERLAY_TEXT) {
         container.appendChild(continueMarker);
-    } else if (textType !== 'none') {
+    } else if (textType !== SCENE_TYPES.NONE) {
         dialogueContainer.appendChild(continueMarker);
     }
 } 

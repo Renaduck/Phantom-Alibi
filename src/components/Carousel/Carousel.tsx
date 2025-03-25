@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState, useRef, memo } from 'react';
-import useStore from '../../store';
+import useStore from '../../core/store';
 
 import './Carousel.css';
 

@@ -1,7 +1,7 @@
 import { useState, useCallback, memo, useEffect } from 'react';
-import useStore from '../../store';
-import { fetchStoryData } from '../../utils/scene';
-import { Scene } from '../../types';
+import useStore from '../../core/store';
+import { fetchStoryData } from '../../services/scene';
+import { Scene } from '../../common/types';
 import TypedText from '../TypedText';
 import ContinueMarker from '../ContinueMarker';
 import './Dialogue.css';

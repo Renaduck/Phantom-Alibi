@@ -1,7 +1,9 @@
 import { create } from 'zustand';
-import { GameState, SaveGames } from './types';
-import { playPageFlipSound, playSwooshSound, playBackgroundMusic, playItemAcquiredSound } from './utils/audio';
-import { fetchStoryData } from './utils/scene';
+import { GameState, SaveGames } from '../common/types';
+import { playPageFlipSound, playSwooshSound, playBackgroundMusic, playItemAcquiredSound } from '../services/audio';
+import { fetchStoryData } from '../services/scene';
+import { saveGame, getSavedGames, loadSave, deleteSave, hasSavedGames } from '../services/storage';
+import { DEFAULT_TYPING_SPEED, DEFAULT_VOLUME, DEFAULT_SOUND_EFFECTS } from '../common/constants';
 
 interface EnvironmentState {
     inventory: string[];
@@ -80,9 +82,9 @@ interface StoreState extends GameState, EnvironmentState, SaveLoadState, UIState
 const useStore = create<StoreState>((set, get) => ({
     // Game state
     currentScene: 0,
-    currentTypingSpeed: 50,
-    currentVolume: 80,
-    currentSoundEffects: 70,
+    currentTypingSpeed: DEFAULT_TYPING_SPEED,
+    currentVolume: DEFAULT_VOLUME,
+    currentSoundEffects: DEFAULT_SOUND_EFFECTS,
     loadingStory: false,
     gameStarted: false,
 
@@ -135,46 +137,23 @@ const useStore = create<StoreState>((set, get) => ({
         get().playSwooshSound();
     },
 
-    // Save/Load methods
+    // Save/Load methods using storage service
     saveGame: () => {
-        // Get current saved games
-        const savedGames = get().getSavedGames();
+        const { currentScene, currentTypingSpeed, currentVolume, currentSoundEffects, inventory } = get();
 
-        // Create unique save ID using timestamp
-        const saveId = Date.now().toString();
-        const date = new Date();
-        const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-
-        // Create save data object
-        const saveData = {
-            id: saveId,
-            timestamp: formattedDate,
-            gameState: {
-                currentScene: get().currentScene,
-                currentTypingSpeed: get().currentTypingSpeed,
-                currentVolume: get().currentVolume,
-                currentSoundEffects: get().currentSoundEffects,
-            },
-            inventory: get().inventory,
-            // Preview of current scene text
-            preview: 'New game'
-        };
-
-        // Add new save to saved games
-        savedGames[saveId] = saveData;
-
-        // Save to local storage
-        localStorage.setItem('adventureClickSaves', JSON.stringify(savedGames));
-
-        return saveId;
+        return saveGame(
+            currentScene,
+            currentTypingSpeed,
+            currentVolume,
+            currentSoundEffects,
+            inventory
+        );
     },
 
     loadGame: (saveId) => {
-        const savedGames = get().getSavedGames();
-        const saveData = savedGames[saveId];
+        const saveData = loadSave(saveId);
 
         if (!saveData) {
-            console.error('Save not found:', saveId);
             return false;
         }
 
@@ -197,28 +176,11 @@ const useStore = create<StoreState>((set, get) => ({
     },
 
     getSavedGames: () => {
-        try {
-            const savedGamesJson = localStorage.getItem('adventureClickSaves');
-            return savedGamesJson ? JSON.parse(savedGamesJson) : {};
-        } catch (error) {
-            console.error("Error getting saved games:", error);
-            return {};
-        }
+        return getSavedGames();
     },
 
     deleteSave: (saveId) => {
-        try {
-            const savedGames = get().getSavedGames();
-            if (savedGames[saveId]) {
-                delete savedGames[saveId];
-                localStorage.setItem('adventureClickSaves', JSON.stringify(savedGames));
-                return true;
-            }
-            return false;
-        } catch (error) {
-            console.error("Error deleting save:", error);
-            return false;
-        }
+        return deleteSave(saveId);
     },
 
     showSaveList: (mode = 'load') => {
@@ -234,16 +196,7 @@ const useStore = create<StoreState>((set, get) => ({
     },
 
     updateLoadButtonState: () => {
-        try {
-            const savedGames = get().getSavedGames();
-            const hasSavedGames = Object.keys(savedGames).length > 0;
-
-            // Return whether there are saved games
-            return hasSavedGames;
-        } catch (error) {
-            console.error("Error checking saved games:", error);
-            return false;
-        }
+        return hasSavedGames();
     },
 
     // UI state methods

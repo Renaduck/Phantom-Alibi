@@ -1,5 +1,5 @@
 import { memo, useState, useCallback } from 'react';
-import useStore from '../../store';
+import useStore from '../../core/store';
 import TypedText from '../TypedText';
 import ContinueMarker from '../ContinueMarker';
 import './OverlayText.css';

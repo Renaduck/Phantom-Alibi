@@ -1,5 +1,5 @@
 import { useState, useCallback, memo } from 'react';
-import useStore from '../../store';
+import useStore from '../../core/store';
 
 import './ClickToPlay.css';
 

@@ -1,8 +1,8 @@
 import { useRef, useEffect, useState, memo } from 'react';
-import useStore from '../../store';
+import useStore from '../../core/store';
 import './Background.css';
-import { fetchStoryData } from '../../utils/scene';
-import { getAsset } from '../../utils/assets';
+import { fetchStoryData } from '../../services/scene';
+import { getAsset } from '../../common/assets';
 
 const Background = memo(() => {
     const backgroundRef = useRef<HTMLDivElement>(null);

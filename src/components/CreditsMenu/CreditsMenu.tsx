@@ -1,5 +1,5 @@
 import { memo, useCallback } from 'react';
-import useStore from '../../store';
+import useStore from '../../core/store';
 
 import './CreditsMenu.css';
 

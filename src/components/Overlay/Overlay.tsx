@@ -1,5 +1,5 @@
 import { useCallback, memo } from 'react';
-import useStore from '../../store';
+import useStore from '../../core/store';
 import './Overlay.css';
 
 // Using memo to prevent unnecessary re-renders

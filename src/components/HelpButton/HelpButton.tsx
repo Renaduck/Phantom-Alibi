@@ -1,6 +1,6 @@
 import { memo, useCallback, useEffect } from 'react';
 import { IconHelpCircle } from '@tabler/icons-react';
-import useStore from '../../store';
+import useStore from '../../core/store';
 import './HelpButton.css';
 
 const HelpButton = memo(() => {
