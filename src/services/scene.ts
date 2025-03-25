@@ -1,7 +1,7 @@
 import { Scene } from '../common/types';
 import { SCENE_TYPES } from '../common/constants';
 import exteriorBg from '../assets/scenes/exterior.jpg';
-import storyJson from '../assets/story.json';
+import storyData from '../assets/story/main';
 
 // Interface for story data
 interface StoryData {
@@ -9,12 +9,12 @@ interface StoryData {
     items: Record<string, unknown>;
 }
 
-// Fallback data to use if story.json fetch fails
+// Fallback data to use if story data import fails
 const fallbackData: StoryData = {
     scenes: [
         {
             character_name: "Narrator",
-            dialogue: "Failed to load story data. Please check if story.json exists in the assets directory.",
+            dialogue: "Failed to load story data. Please check if story files exist in the assets directory.",
             background: exteriorBg,
             type: "inner_monologue",
             character_sprite: "",
@@ -27,7 +27,21 @@ const fallbackData: StoryData = {
 // Get story data using direct import instead of fetch
 export async function fetchStoryData(): Promise<StoryData> {
     try {
-        return storyJson as StoryData;
+        console.log('Fetching story data from modular format');
+
+        // Add validation to ensure storyData has the expected structure
+        if (!storyData) {
+            console.error('storyData is undefined or null');
+            return fallbackData;
+        }
+
+        if (!storyData.scenes || !Array.isArray(storyData.scenes)) {
+            console.error('storyData.scenes is missing or not an array:', storyData);
+            return fallbackData;
+        }
+
+        console.log(`Successfully loaded story data with ${storyData.scenes.length} scenes`);
+        return storyData as StoryData;
     } catch (error) {
         console.error("Error loading story data:", error);
         return fallbackData;
@@ -83,6 +97,7 @@ export function changeBackground(
     // Update background image - make sure the path is correct for Vite
     try {
         background.style.backgroundImage = `url(${newBackgroundUrl})`;
+        console.log('Successfully set background image:', newBackgroundUrl);
     } catch (error) {
         console.error('Error setting background image:', error);
         // Use fallback
@@ -115,7 +130,11 @@ export function addContinueMarker(
     // Determine where to add the marker based on scene type
     if (textType === SCENE_TYPES.OVERLAY_TEXT) {
         container.appendChild(continueMarker);
+        console.log('Added continue marker to overlay text container');
     } else if (textType !== SCENE_TYPES.NONE) {
         dialogueContainer.appendChild(continueMarker);
+        console.log('Added continue marker to dialogue container');
+    } else {
+        console.log('No continue marker added for scene type:', textType);
     }
 } 

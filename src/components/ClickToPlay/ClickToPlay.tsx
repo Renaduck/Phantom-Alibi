@@ -21,7 +21,7 @@ const ClickToPlay = memo(() => {
     }
 
     return (
-        <div id="click-to-play-overlay" onClick={handleClick}>
+        <div id="click-to-play" onClick={handleClick}>
             <div className="click-to-play-content">
                 <h2>PLAY GAME</h2>
                 <p>Click to start</p>

@@ -1,12 +1,16 @@
 import { useCallback, useEffect, useState, useRef, memo } from 'react';
 import useStore from '../../core/store';
-
+import { InventoryItem } from '../../core/store';
 import './Carousel.css';
+
+// Default image to use as fallback
+const DEFAULT_ITEM_IMAGE = '/src/assets/character_sprites/pikachu.png';
 
 // Using memo to prevent unnecessary rerenders
 const Carousel = memo(() => {
     const carouselVisible = useStore(state => state.carouselVisible);
     const inventory = useStore(state => state.inventory);
+    const [selectedItem, setSelectedItem] = useState<InventoryItem | null>(null);
 
     // Track placeholders in local state instead of DOM manipulation
     const [placeholderCount, setPlaceholderCount] = useState(0);
@@ -56,6 +60,16 @@ const Carousel = memo(() => {
         }
     }, []);
 
+    // Handle item click to show details
+    const handleItemClick = useCallback((item: InventoryItem) => {
+        setSelectedItem(item === selectedItem ? null : item);
+    }, [selectedItem]);
+
+    // Close item details modal
+    const closeItemDetails = useCallback(() => {
+        setSelectedItem(null);
+    }, []);
+
     // Early return if carousel isn't visible
     if (!carouselVisible) {
         return null;
@@ -66,28 +80,58 @@ const Carousel = memo(() => {
         <div key={`placeholder-${index}`} className="carousel-placeholder" />
     ));
 
-    // Default placeholder image path
-    const defaultItemImagePath = "./assets/items/default-item.png";
-
     return (
-        <div id="carousel" className="show">
-            <span id="carousel-left" onClick={handleScrollLeft}>&#10094;</span>
-            <div id="carousel-items" ref={carouselItemsRef}>
-                {/* Inventory items */}
-                {inventory.map((itemName) => (
-                    <div key={itemName} className="carousel-item">
-                        <img
-                            src={defaultItemImagePath}
-                            alt={itemName}
-                        />
-                        <div className="item-description">{itemName}</div>
-                    </div>
-                ))}
-                {/* Placeholders */}
-                {placeholders}
+        <>
+            <div id="carousel" className="show">
+                <span id="carousel-left" onClick={handleScrollLeft}>&#10094;</span>
+                <div id="carousel-items" ref={carouselItemsRef}>
+                    {/* Inventory items */}
+                    {inventory.map((item) => (
+                        <div
+                            key={item.id}
+                            className="carousel-item"
+                            onClick={() => handleItemClick(item)}
+                        >
+                            <img
+                                src={item.img_src || DEFAULT_ITEM_IMAGE}
+                                alt={item.name}
+                                onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.src = DEFAULT_ITEM_IMAGE;
+                                }}
+                            />
+                            <div className="item-name">{item.name}</div>
+                        </div>
+                    ))}
+                    {/* Placeholders */}
+                    {placeholders}
+                </div>
+                <span id="carousel-right" onClick={handleScrollRight}>&#10095;</span>
             </div>
-            <span id="carousel-right" onClick={handleScrollRight}>&#10095;</span>
-        </div>
+
+            {/* Item details modal */}
+            {selectedItem && (
+                <div className="item-details-modal" onClick={closeItemDetails}>
+                    <div className="item-details-content" onClick={(e) => e.stopPropagation()}>
+                        <div className="item-details-image-container">
+                            <img
+                                src={selectedItem.img_src || DEFAULT_ITEM_IMAGE}
+                                alt={selectedItem.name}
+                                onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.src = DEFAULT_ITEM_IMAGE;
+                                }}
+                            />
+                        </div>
+                        <div className="item-details-info">
+                            <h3>{selectedItem.name}</h3>
+                            <p>{selectedItem.description}</p>
+                        </div>
+                        <button className="item-details-close" onClick={closeItemDetails}>×</button>
+                    </div>
+                </div>
+            )}
+        </>
     );
 });
 

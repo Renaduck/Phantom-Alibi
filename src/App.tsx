@@ -14,6 +14,7 @@ import HelpMenu from './components/HelpMenu'
 import HelpButton from './components/HelpButton'
 import RestartConfirmation from './components/RestartConfimation'
 import Carousel from './components/Carousel'
+import InteractiveItems from './components/InteractiveItems'
 import { fetchStoryData } from './services/scene'
 import { SCENE_TYPES } from './common/constants'
 
@@ -29,11 +30,20 @@ function App() {
     const cleanupKeyboardListeners = useStore(state => state.cleanupKeyboardListeners);
     const currentScene = useStore(state => state.currentScene);
     const gameStarted = useStore(state => state.gameStarted);
+    const sidebarVisible = useStore(state => state.sidebarVisible);
+
+    // debug logging
+    console.log('Initial state:', {
+        gameStarted,
+        sidebarVisible,
+        currentScene
+    });
 
     const [isOverlayTextScene, setIsOverlayTextScene] = useState(false);
     const [overlayTextContent, setOverlayTextContent] = useState('');
     const [sceneType, setSceneType] = useState<string>('');
     const [hasCharacterSprite, setHasCharacterSprite] = useState(false);
+    const [hasInteractiveItems, setHasInteractiveItems] = useState(false);
 
     // Check if current scene is an overlay text scene
     useEffect(() => {
@@ -43,6 +53,7 @@ function App() {
             setOverlayTextContent('');
             setSceneType('');
             setHasCharacterSprite(false);
+            setHasInteractiveItems(false);
             return;
         }
 
@@ -60,6 +71,10 @@ function App() {
                     // Check if scene has character sprite
                     const hasSprite = !!(scene.character_sprite && scene.character_sprite.trim());
                     setHasCharacterSprite(hasSprite);
+
+                    // Check if scene has interactive items
+                    const hasItems = !!(scene.items && scene.items.length > 0);
+                    setHasInteractiveItems(hasItems);
 
                     // Properly handle multi-type formats like "overlay_text / dialogue / inner_monologue"
                     // This logic is kept in case we encounter slash-delimited types in the future
@@ -126,12 +141,14 @@ function App() {
         'isOverlayTextScene:', isOverlayTextScene,
         'sceneType:', sceneType,
         'hasCharacterSprite:', hasCharacterSprite,
+        'hasInteractiveItems:', hasInteractiveItems,
         'shouldShowSprites:', shouldShowSprites);
 
     // Track what components are being rendered
     console.log('Rendering components:',
         gameStarted ? 'Game Started - ' : 'Game Not Started - ',
         shouldShowSprites ? 'Sprites - ' : 'No Sprites - ',
+        hasInteractiveItems ? 'Interactive Items - ' : 'No Interactive Items - ',
         !isOverlayTextScene && gameStarted ? 'Dialogue' : 'No Dialogue'
     );
 
@@ -139,10 +156,11 @@ function App() {
     return (
         <Fragment>
             <Background />
-            <Sidebar />
+            {!gameStarted && <Sidebar />}
             <HelpButton />
             {shouldShowSprites && <Sprites />}
             {gameStarted && !isOverlayTextScene && <Dialogue />}
+            {gameStarted && hasInteractiveItems && <InteractiveItems />}
             {gameStarted && isOverlayTextScene && (
                 <OverlayText
                     content={overlayTextContent}

@@ -9,6 +9,8 @@ export interface Item {
     x: number;
     y: number;
     description: string;
+    itemType?: 'inventory' | 'dialogue';
+    dialogueText?: string;
 }
 
 export interface Scene {
@@ -17,6 +19,8 @@ export interface Scene {
     background: string;
     type: 'none' | 'inner_monologue' | 'overlay_text' | 'dialogue' | string;
     character_sprite: string;
+    lighting?: string;
+    sound?: string;
     items: string[];
 }
 

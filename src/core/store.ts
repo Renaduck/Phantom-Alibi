@@ -5,10 +5,21 @@ import { fetchStoryData } from '../services/scene';
 import { saveGame, getSavedGames, loadSave, deleteSave, hasSavedGames } from '../services/storage';
 import { DEFAULT_TYPING_SPEED, DEFAULT_VOLUME, DEFAULT_SOUND_EFFECTS } from '../common/constants';
 
+// Define the inventory item interface
+export interface InventoryItem {
+    id: string;
+    name: string;
+    description: string;
+    img_src: string;
+}
+
 interface EnvironmentState {
-    inventory: string[];
+    inventory: InventoryItem[];
     addItem: (name: string) => void;
-    clearItems: () => void;
+    addToInventory: (item: InventoryItem) => void;
+    removeFromInventory: (itemId: string) => void;
+    clearInventory: () => void;
+    hasItem: (itemId: string) => boolean;
     toggleCarousel: () => void;
     showCarousel: () => void;
     hideCarousel: () => void;
@@ -104,16 +115,49 @@ const useStore = create<StoreState>((set, get) => ({
     currentSaveMode: 'load',
 
     // Methods for environment
-    addItem: (name) => {
+    addItem: (name: string) => {
+        // Legacy method kept for compatibility
         set(state => ({
-            inventory: [...state.inventory, name]
+            inventory: [...state.inventory, { id: name, name, description: name, img_src: '' }]
         }));
         // Play sound effect
         get().playItemAcquiredSound();
     },
 
+    addToInventory: (item) => {
+        // Check if item already exists
+        if (get().hasItem(item.id)) {
+            console.log(`Item ${item.id} already in inventory`);
+            return;
+        }
+
+        console.log(`Adding item to inventory: ${item.id}`);
+        set(state => ({
+            inventory: [...state.inventory, item]
+        }));
+        // Play sound effect
+        get().playItemAcquiredSound();
+    },
+
+    removeFromInventory: (itemId) => {
+        console.log(`Removing item from inventory: ${itemId}`);
+        set(state => ({
+            inventory: state.inventory.filter(item => item.id !== itemId)
+        }));
+    },
+
+    hasItem: (itemId) => {
+        return get().inventory.some(item => item.id === itemId);
+    },
+
+    clearInventory: () => {
+        console.log('Clearing inventory');
+        set({ inventory: [] });
+    },
+
     clearItems: () => {
-        // Will be implemented when we create the Environment component
+        // Keep for backward compatibility
+        get().clearInventory();
     },
 
     toggleCarousel: () => {
@@ -141,12 +185,13 @@ const useStore = create<StoreState>((set, get) => ({
     saveGame: () => {
         const { currentScene, currentTypingSpeed, currentVolume, currentSoundEffects, inventory } = get();
 
+        // Cast inventory to proper type for storage service
         return saveGame(
             currentScene,
             currentTypingSpeed,
             currentVolume,
             currentSoundEffects,
-            inventory
+            inventory as unknown as string[]
         );
     },
 
@@ -163,7 +208,8 @@ const useStore = create<StoreState>((set, get) => ({
             currentTypingSpeed: saveData.gameState.currentTypingSpeed,
             currentVolume: saveData.gameState.currentVolume,
             currentSoundEffects: saveData.gameState.currentSoundEffects,
-            inventory: saveData.inventory || []
+            // Cast inventory data to proper type
+            inventory: (saveData.inventory || []) as unknown as InventoryItem[]
         });
 
         // Update scene
@@ -264,128 +310,164 @@ const useStore = create<StoreState>((set, get) => ({
         playSwooshSound(get().currentSoundEffects);
     },
 
-    // Scene methods
-    setScene: async (action) => {
-        const { currentScene } = get();
-
-        set({ loadingStory: true });
-
-        try {
-            const { scenes } = await fetchStoryData();
-
-            let newSceneIndex = currentScene;
-
-            if (action === 'next' && currentScene < scenes.length - 1) {
-                newSceneIndex = currentScene + 1;
-            } else if (action === 'prev' && currentScene > 0) {
-                newSceneIndex = currentScene - 1;
+    // Scene functions
+    setScene: (action) => {
+        set(state => {
+            // Check if we're in a loading state to prevent multiple transitions
+            if (state.loadingStory) {
+                return state;
             }
 
-            set({ currentScene: newSceneIndex, loadingStory: false });
+            // Set loading state
+            set({ loadingStory: true });
 
-            // Additional scene loading logic will be added when we create Scene component
-        } catch (error) {
-            console.error('Error loading scene:', error);
-            set({ loadingStory: false });
-        }
+            let nextScene = state.currentScene;
+
+            if (action === 'next') {
+                nextScene = state.currentScene + 1;
+            } else if (action === 'prev') {
+                nextScene = Math.max(0, state.currentScene - 1);
+            }
+
+            // Asynchronously fetch the story data to check if scene exists
+            fetchStoryData().then(storyData => {
+                if (storyData.scenes && nextScene >= 0 && nextScene < storyData.scenes.length) {
+                    // Scene exists, update state with new scene
+                    set({
+                        currentScene: nextScene,
+                        loadingStory: false
+                    });
+                } else {
+                    // Scene doesn't exist or index out of bounds
+                    console.error(`Scene index ${nextScene} is out of bounds. Total scenes: ${storyData.scenes?.length || 0}`);
+                    set({ loadingStory: false });
+                }
+            }).catch(error => {
+                console.error('Error fetching story data:', error);
+                set({ loadingStory: false });
+            });
+
+            return state;
+        });
     },
 
     zoomIn: () => {
-        // Implementation is set dynamically in Background component
+        // Will be implemented when we create the Scene component
     },
 
     zoomOut: () => {
-        // Implementation is set dynamically in Background component 
+        // Will be implemented when we create the Scene component
     },
 
     toggleZoom: () => {
-        // Implementation is set dynamically in Background component
+        // Will be implemented when we create the Scene component
     },
 
-    // Event handling methods
+    // Event handlers
     setupKeyboardListeners: () => {
-        // Add keyboard event listener for game controls
-        document.addEventListener('keydown', get().handleKeyDown);
+        window.addEventListener('keydown', get().handleKeyDown);
     },
 
     cleanupKeyboardListeners: () => {
-        // Remove keyboard event listener
-        document.removeEventListener('keydown', get().handleKeyDown);
+        window.removeEventListener('keydown', get().handleKeyDown);
     },
 
     handleKeyDown: (event) => {
-        const state = get();
+        const {
+            carouselVisible,
+            overlayVisible,
+            saveListMenuVisible,
+            settingsMenuVisible,
+            creditsMenuVisible,
+            helpMenuVisible,
+            gameStarted
+        } = get();
 
-        // Return early if sidebar is in view or we're in an overlay
-        const isInSidebar = !state.sidebarVisible && !state.gameStarted;
-        const isInOverlay = state.overlayVisible;
-
-        if (isInSidebar || isInOverlay) {
-            // Exit overlay if overlay is displayed and escape is pressed
-            if (isInOverlay && event.key === "Escape") {
-                // Close all overlays
-                set({
-                    overlayVisible: false,
-                    carouselVisible: false,
-                    settingsMenuVisible: false,
-                    creditsMenuVisible: false,
-                    helpMenuVisible: false,
-                    restartConfirmationVisible: false,
-                    saveListMenuVisible: false
-                });
-            }
+        // Ignore key events if any menu is open
+        if (saveListMenuVisible || settingsMenuVisible || creditsMenuVisible || helpMenuVisible) {
             return;
         }
 
-        // Only handle carousel events if carousel is showing but we're not in sidebar
-        if (!isInSidebar && state.carouselVisible) {
-            // Handle carousel keyboard events
-            if (event.key === "Escape" || event.key === "i") {
-                state.hideCarousel();
-            }
-            return;
-        }
-
-        // Game controls
-        switch (event.key) {
-            case "Escape":
-                state.toggleSidebar();
+        switch (event.code) {
+            case 'KeyI':
+                // Toggle inventory
+                get().toggleCarousel();
                 break;
-            case "ArrowLeft":
-                if (!state.sidebarVisible) return;
-                state.playPageFlipSound();
-                state.setScene("prev");
+            case 'Space':
+            case 'Enter':
+            case 'KeyN':
+                // Next scene if game has started
+                if (gameStarted && !carouselVisible) {
+                    get().playPageFlipSound();
+                    get().setScene('next');
+                } else if (!gameStarted) {
+                    // Start game if not started
+                    get().startGame();
+                }
                 break;
-            case "Enter":
-            case "ArrowRight":
-            case " ":
-                if (!state.sidebarVisible) return;
-                state.playPageFlipSound();
-                state.setScene("next");
+            case 'KeyP':
+            case 'ArrowLeft':
+                // Previous scene
+                if (gameStarted && !carouselVisible) {
+                    get().playPageFlipSound();
+                    get().setScene('prev');
+                }
                 break;
-            case "i":
-                state.toggleCarousel();
+            case 'Escape':
+                // Close carousel if open
+                if (carouselVisible) {
+                    get().hideCarousel();
+                } else if (overlayVisible) {
+                    // If other overlay is open, close it
+                    get().hideOverlay();
+                } else {
+                    // Otherwise toggle settings menu
+                    get().showSettings();
+                }
+                break;
+            case 'KeyS':
+                // Quick save
+                if (gameStarted && !overlayVisible) {
+                    get().showSaveList('save');
+                }
+                break;
+            case 'KeyL':
+                // Quick load
+                if (gameStarted && !overlayVisible) {
+                    get().showSaveList('load');
+                }
+                break;
+            case 'KeyH':
+                // Toggle help
+                get().showHelp();
                 break;
             default:
                 break;
         }
     },
 
+    // Game state methods
     startGame: () => {
-        set({ gameStarted: true });
-        get().toggleSidebar();
-        get().zoomIn();
-        get().setScene("curr");
-        get().playSwooshSound();
+        console.log('Starting game, hiding sidebar');
+        set({
+            gameStarted: true,
+            dialogueVisible: true,
+            sidebarVisible: false
+        });
+        // Play sound effect
+        get().playBackgroundMusic();
     },
 
     restartGame: () => {
         set({
             currentScene: 0,
-            gameStarted: false,
-            inventory: []
+            gameStarted: true,
+            dialogueVisible: true,
+            inventory: [],
+            restartConfirmationVisible: false,
+            overlayVisible: false
         });
-        get().hideRestartConfirmation();
+        get().setScene('curr');
     },
 
     updateSettings: (volume, typingSpeed, soundEffects) => {

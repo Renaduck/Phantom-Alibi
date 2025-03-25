@@ -19,6 +19,9 @@ const Sidebar = memo(() => {
     const startGame = useStore(state => state.startGame);
     const getSavedGames = useStore(state => state.getSavedGames);
 
+    // Debug logging
+    console.log('Sidebar render - sidebarVisible:', sidebarVisible, 'gameStarted:', gameStarted);
+
     // Check for saved games without modifying store state
     const checkSavedGames = useCallback(() => {
         try {

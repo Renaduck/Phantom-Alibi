@@ -1,7 +1,6 @@
 import { useState, useCallback, memo, useEffect } from 'react';
 import useStore from '../../core/store';
 import { fetchStoryData } from '../../services/scene';
-import { Scene } from '../../common/types';
 import TypedText from '../TypedText';
 import ContinueMarker from '../ContinueMarker';
 import './Dialogue.css';
@@ -22,54 +21,58 @@ const Dialogue = memo(() => {
     const [dialogueType, setDialogueType] = useState('');
     const [shouldCompleteTyping, setShouldCompleteTyping] = useState(false);
     const [isTypingComplete, setIsTypingComplete] = useState(false);
-
-    // Cache story data to prevent multiple fetches
-    const [cachedScenes, setCachedScenes] = useState<Scene[]>([]);
-
-    // Fetch story data once and cache it
-    useEffect(() => {
-        let isMounted = true;
-
-        const loadStoryData = async () => {
-            try {
-                if (cachedScenes.length === 0) {
-                    const { scenes } = await fetchStoryData();
-                    if (isMounted && scenes) {
-                        setCachedScenes(scenes);
-                    }
-                }
-            } catch (error) {
-                console.error('Error loading story data:', error);
-            }
-        };
-
-        loadStoryData();
-
-        return () => {
-            isMounted = false;
-        };
-    }, [cachedScenes.length]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     // Update scene data when current scene changes
     useEffect(() => {
-        // Only proceed if we have cached scenes
-        if (!cachedScenes || !cachedScenes[currentScene]) return;
+        console.log(`Dialogue: Loading data for scene ${currentScene}`);
+        setIsLoading(true);
+        setError(null);
 
-        const scene = cachedScenes[currentScene];
+        const loadSceneData = async () => {
+            try {
+                const storyData = await fetchStoryData();
 
-        // Reset typing state
-        setShouldCompleteTyping(false);
-        setIsTypingComplete(false);
+                if (!storyData || !storyData.scenes) {
+                    console.error('No story data or scenes available');
+                    setError('Failed to load story data');
+                    setIsLoading(false);
+                    return;
+                }
 
-        // Update state with scene data
-        setCharacterName(scene.character_name || '');
-        setDialogueContent(scene.dialogue || '');
-        setDialogueType(scene.type || '');
+                if (!storyData.scenes[currentScene]) {
+                    console.error(`Scene ${currentScene} not found (max: ${storyData.scenes.length - 1})`);
+                    setError(`Scene ${currentScene} not found`);
+                    setIsLoading(false);
+                    return;
+                }
 
-    }, [currentScene, cachedScenes]);
+                const scene = storyData.scenes[currentScene];
+                console.log(`Dialogue: Loaded scene ${currentScene}:`, scene);
+
+                // Reset typing state
+                setShouldCompleteTyping(false);
+                setIsTypingComplete(false);
+
+                // Update state with scene data
+                setCharacterName(scene.character_name || '');
+                setDialogueContent(scene.dialogue || '');
+                setDialogueType(scene.type || '');
+                setIsLoading(false);
+            } catch (err) {
+                console.error('Error loading scene data:', err);
+                setError('Error loading scene data');
+                setIsLoading(false);
+            }
+        };
+
+        loadSceneData();
+    }, [currentScene]);
 
     // Handle typing completion
     const handleTypingComplete = useCallback(() => {
+        console.log('Dialogue: Typing complete');
         setIsTypingComplete(true);
     }, []);
 
@@ -86,8 +89,10 @@ const Dialogue = memo(() => {
 
         // If text is still typing, complete it immediately
         if (!isTypingComplete) {
+            console.log('Dialogue: Completing typing on click');
             setShouldCompleteTyping(true);
         } else {
+            console.log('Dialogue: Advancing to next scene on click');
             playPageFlipSound();
             setScene('next');
         }
@@ -98,8 +103,10 @@ const Dialogue = memo(() => {
         if (!dialogueVisible) return;
 
         if (!isTypingComplete) {
+            console.log('Dialogue: Completing typing on next button');
             setShouldCompleteTyping(true);
         } else {
+            console.log('Dialogue: Advancing to next scene on next button');
             playPageFlipSound();
             setScene('next');
         }
@@ -108,18 +115,25 @@ const Dialogue = memo(() => {
     // Handle prev button click
     const handlePrevClick = useCallback(() => {
         if (!dialogueVisible) return;
+        console.log('Dialogue: Going to previous scene');
         playPageFlipSound();
         setScene('prev');
     }, [dialogueVisible, playPageFlipSound, setScene]);
 
     // Handle inventory button click
     const handleInventoryClick = useCallback(() => {
+        console.log('Dialogue: Toggling inventory');
         toggleCarousel();
     }, [toggleCarousel]);
 
-    // If no scenes are loaded yet
-    if (cachedScenes.length === 0) {
-        return <div>Loading...</div>;
+    // If still loading
+    if (isLoading) {
+        return <div className="dialogue-loading">Loading...</div>;
+    }
+
+    // If error occurred
+    if (error) {
+        return <div className="dialogue-error">{error}</div>;
     }
 
     return (

@@ -29,51 +29,62 @@ const Sprites = memo(() => {
 
         const loadSprite = async () => {
             try {
-                console.log('Loading sprite data from story.json');
-                const { scenes } = await fetchStoryData();
-                if (scenes && scenes[currentScene]) {
-                    const scene = scenes[currentScene];
-                    console.log('Loading sprite from scene:', scene);
+                console.log('Loading sprite data using fetchStoryData()');
+                const storyData = await fetchStoryData();
 
-                    // Check if this is a scene type that should show sprites
-                    const sceneType = scene.type || '';
-                    if (sceneType === 'overlay_text' || sceneType.includes('overlay_text')) {
-                        console.log('Overlay text scene, not showing sprite');
+                if (!storyData.scenes) {
+                    console.error('No scenes found in story data');
+                    setError('No scenes found in story data');
+                    return;
+                }
+
+                if (!storyData.scenes[currentScene]) {
+                    console.error(`Scene index ${currentScene} not found in story data (max: ${storyData.scenes.length - 1})`);
+                    setError(`Scene index ${currentScene} not found (max: ${storyData.scenes.length - 1})`);
+                    return;
+                }
+
+                const scene = storyData.scenes[currentScene];
+                console.log('Loading sprite from scene:', scene);
+
+                // Check if this is a scene type that should show sprites
+                const sceneType = scene.type || '';
+                if (sceneType === 'overlay_text' || sceneType.includes('overlay_text')) {
+                    console.log('Overlay text scene, not showing sprite');
+                    setCharacterSprite(null);
+                    return;
+                }
+
+                // Set character name
+                setCharacterName(scene.character_name || null);
+
+                // Set character sprite if available
+                if (scene.character_sprite && scene.character_sprite.trim() !== '') {
+                    const spritePath = scene.character_sprite;
+                    console.log('Character sprite path:', spritePath);
+
+                    const spriteAsset = getAsset(spritePath, 'sprite');
+                    console.log('Resolved sprite asset:', spriteAsset);
+
+                    if (!spriteAsset) {
+                        console.error('Failed to resolve sprite:', spritePath);
+                        setError(`Could not resolve sprite: ${spritePath}`);
                         setCharacterSprite(null);
-                        return;
-                    }
+                    } else {
+                        console.log('Setting character sprite:', spriteAsset);
 
-                    // Set character name
-                    setCharacterName(scene.character_name || null);
-
-                    // Set character sprite if available
-                    if (scene.character_sprite && scene.character_sprite.trim() !== '') {
-                        const spritePath = scene.character_sprite;
-                        console.log('Character sprite path:', spritePath);
-
-                        const spriteAsset = getAsset(spritePath, 'sprite');
-                        console.log('Resolved sprite asset:', spriteAsset);
-
-                        if (!spriteAsset) {
-                            console.error('Failed to resolve sprite:', spritePath);
-                            setError(`Could not resolve sprite: ${spritePath}`);
+                        // Ensure we're using the full URL, not just a filename
+                        if (spriteAsset && !spriteAsset.startsWith('/')) {
+                            console.error('Asset URL not properly resolved, got:', spriteAsset);
+                            setError(`Invalid asset URL: ${spriteAsset}`);
                             setCharacterSprite(null);
                         } else {
-                            console.log('Setting character sprite:', spriteAsset);
-
-                            // Ensure we're using the full URL, not just a filename
-                            if (spriteAsset && !spriteAsset.startsWith('/')) {
-                                console.error('Asset URL not properly resolved, got:', spriteAsset);
-                                setError(`Invalid asset URL: ${spriteAsset}`);
-                                setCharacterSprite(null);
-                            } else {
-                                setCharacterSprite(spriteAsset);
-                            }
+                            setCharacterSprite(spriteAsset);
                         }
-                    } else {
-                        console.log('No character sprite in scene data');
-                        setCharacterSprite(null);
                     }
+                } else {
+                    console.log('No character sprite in scene data');
+                    setCharacterSprite(null);
                 }
             } catch (error) {
                 const errorMessage = error instanceof Error ? error.message : String(error);
