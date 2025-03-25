@@ -11,6 +11,22 @@ This project uses Vite as a build tool and development server.
 - Node.js (latest LTS version recommended)
 - npm (comes with Node.js)
 
+#### Installing Node.js and npm on Windows
+
+1. Download the Node.js installer:
+   - Visit [nodejs.org](https://nodejs.org/)
+   - Download the LTS (Long Term Support) version
+   
+2. Run the installer:
+   - Double-click the downloaded file (e.g., `node-v16.x.x-x64.msi`)
+   - Follow the installation wizard prompts
+   - Leave all default options selected unless you have specific requirements
+
+3. Verify installation:
+   - Open Command Prompt or PowerShell
+   - Run `node -v` to verify Node.js installation
+   - Run `npm -v` to verify npm installation
+
 ### Development
 
 1. Install dependencies:
